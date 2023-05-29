@@ -1,0 +1,22 @@
+SMAP
+about_jsp.java
+JSP
+*S JSP
+*F
++ 0 about.jsp
+about.jsp
++ 1 header.jsp
+include/header.jsp
++ 2 about_form.jsp
+include/about_form.jsp
++ 3 footer.jsp
+include/footer.jsp
+*L
+5,4:51
+5#1,108:54
+8#0:161
+5#2,174:162
+9#0:335
+5#3,92:336
+10#0:427
+*E
