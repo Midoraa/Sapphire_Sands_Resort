@@ -51,18 +51,19 @@ create table Room(
     roomType char(10),
     roomPrice decimal(10, 0),
     roomStatus bit,
-	bed int,
-    bathroom int
+    roomDescipt nvarchar(500),
+    roomArea double,
+    bedroom nvarchar(500),
+    bathroom nvarchar(500),
+    room_direction nvarchar(100)
 );
-create table RoomPriceChange(
-	roomID char(10) primary key,
-    dayApply date,
+create table HistoryPrice(	
+    roomID char(10),
     empID char(10),
-    percentSale decimal(2,2),
-    constraint fk_roomPrice foreign key(roomID) references Room(roomID),
-    constraint fk_empRoomPrice foreign key(empID) references Employee(empID)
+	timeChange datetime,
+	historyPriceRoom decimal(10,0),
+    constraint fk_roomHistory foreign key(roomID) references Room(roomID)
 );
-
 
 create table Food(
 	foodID char(10),
@@ -84,6 +85,7 @@ create table ContractDetail(
     orderID char(10),
     timeIn datetime,
     timOut datetime,
+    timeRegister datetime,
     constraint fk_order foreign key(orderID) references `Order`(orderID),
     constraint fk_room foreign key(roomID) references Room(roomID),
     constraint pk_contract primary key (roomID, orderID)
