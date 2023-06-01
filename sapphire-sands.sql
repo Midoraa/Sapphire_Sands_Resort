@@ -33,7 +33,11 @@ create table Employee(
     constraint fk_empId foreign key(empID) references Account(accountID)
 );
 
-
+create table WorkSchedule(
+	empID char(10) primary key,
+    dayWork datetime,
+    slot int  
+);
 
 create table `Order`(
 	orderID char(10) primary key,
@@ -81,14 +85,14 @@ create table Service(
 ALTER TABLE Room ADD INDEX idx_room_id (roomID);
 
 create table ContractDetail(
+	contractID char(10) primary key,
 	roomID char(10),
     orderID char(10),
     timeIn datetime,
     timOut datetime,
     timeRegister datetime,
     constraint fk_order foreign key(orderID) references `Order`(orderID),
-    constraint fk_room foreign key(roomID) references Room(roomID),
-    constraint pk_contract primary key (roomID, orderID)
+    constraint fk_room foreign key(roomID) references Room(roomID)
 );
 
 
