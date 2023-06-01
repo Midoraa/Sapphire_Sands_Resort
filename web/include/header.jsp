@@ -1,7 +1,5 @@
 <%-- 
-    Document   : header
-    Created on : May 18, 2023, 4:57:43 PM
-    Author     : TRUNG
+
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -66,15 +64,15 @@
                             </div>
                             <div class="h-100 d-inline-flex align-items-center py-2">
                                 <i class="fa fa-phone-alt text-primary me-2"></i>
-                                <p class="mb-0">+012 345 6789</p>
+                                <p class="mb-0">+0236 7300 999</p>
                             </div>
                         </div>
                         <div class="col-lg-5 px-5 text-end">
                             <div class="d-inline-flex align-items-center py-2">
-                                <a class="me-3" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="me-3" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="me-3" href=""><i class="fab fa-linkedin-in"></i></a>
-                                <a class="me-3" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="me-3" href="https://www.facebook.com/daihocfptdanang"><i class="fab fa-facebook-f"></i></a>
+                                <a class="me-3" href="#"><i class="fab fa-twitter"></i></a>
+                                <a class="me-3" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a class="me-3" href="https://www.youtube.com/@FPTUniversityDaNang"><i class="fab fa-instagram"></i></a>
                                 <a class="" href=""><i class="fab fa-youtube"></i></a>
                             </div>
                         </div>

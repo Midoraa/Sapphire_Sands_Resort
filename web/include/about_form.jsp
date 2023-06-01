@@ -1,7 +1,5 @@
 <%-- 
-    Document   : about_form
-    Created on : May 18, 2023, 4:59:06 PM
-    Author     : TRUNG
+    
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

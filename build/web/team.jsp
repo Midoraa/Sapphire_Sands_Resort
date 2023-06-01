@@ -1,7 +1,5 @@
 <%-- 
-    Document   : team
-    Created on : May 18, 2023, 5:54:42 PM
-    Author     : TRUNG
+
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

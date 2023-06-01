@@ -1,7 +1,5 @@
 <%-- 
-    Document   : testimonial_form
-    Created on : May 18, 2023, 5:55:33 PM
-    Author     : TRUNG
+
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

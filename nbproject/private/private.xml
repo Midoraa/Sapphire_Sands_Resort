@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Sapphire-Sands-Resort/web/css/bootstrap.min.css</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Sapphire-Sands-Resort/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Sapphire-Sands-Resort/src/java/model/entity/Account.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Sapphire-Sands-Resort/web/include/footer.jsp</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Sapphire-Sands-Resort/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Sapphire-Sands-Resort/src/java/model/service/AccountService.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Sapphire-Sands-Resort/src/java/model/config/DBConnect.java</file>
-            <file>file:/C:/Users/Admin/Documents/NetBeansProjects/Sapphire-Sands-Resort/src/java/model/repository/AccountRepository.java</file>
+            <file>file:/D:/Learning%20FPT/Summer%202023/SWP%20391%20-%20Software%20development%20project/Managerment%20Resort/Sapphire_Sands_Resort/web/css/bootstrap.min.css</file>
+            <file>file:/D:/Learning%20FPT/Summer%202023/SWP%20391%20-%20Software%20development%20project/Managerment%20Resort/Sapphire_Sands_Resort/web/css/style.css</file>
+            <file>file:/D:/Learning%20FPT/Summer%202023/SWP%20391%20-%20Software%20development%20project/Managerment%20Resort/Sapphire_Sands_Resort/web/about.jsp</file>
+            <file>file:/D:/Learning%20FPT/Summer%202023/SWP%20391%20-%20Software%20development%20project/Managerment%20Resort/Sapphire_Sands_Resort/web/include/footer.jsp</file>
+            <file>file:/D:/Learning%20FPT/Summer%202023/SWP%20391%20-%20Software%20development%20project/Managerment%20Resort/Sapphire_Sands_Resort/web/include/header.jsp</file>
+            <file>file:/D:/Learning%20FPT/Summer%202023/SWP%20391%20-%20Software%20development%20project/Managerment%20Resort/Sapphire_Sands_Resort/src/java/model/config/DBConnect.java</file>
         </group>
     </open-files>
 </project-private>

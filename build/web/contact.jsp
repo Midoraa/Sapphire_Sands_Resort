@@ -1,7 +1,5 @@
 <%-- 
-    Document   : contact
-    Created on : May 18, 2023, 5:39:27 PM
-    Author     : TRUNG
+
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

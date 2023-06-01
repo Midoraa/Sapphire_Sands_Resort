@@ -1,7 +1,5 @@
 <%-- 
-    Document   : room
-    Created on : May 18, 2023, 5:49:56 PM
-    Author     : TRUNG
+
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
