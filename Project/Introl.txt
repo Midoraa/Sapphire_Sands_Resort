@@ -1,0 +1,3 @@
+Include: mỗi khi làm việc gì thì cần phải làm lại thao tác nào đó. Ví dụ: khi rút tiền cần phải nhập mã pin, chuyển khoản cũng cần nhập lại mã pin. Mũi tên nét đứt hướng về thao tác lặp lại.
+Extend: 1 chức năng có thể thực hiện 1 trong nhiều hoạt động đó. Ví dụ: CRUD : có thể làm 1 hành động Create hoặc Update hoặc Delete hoặc Read. Mũi tên nét đứt hướng về chức năng tổng quát.
+Kế thừa: mũi tên trắng. Ví dụ: Khách hàng có tài khoản cũng có thể có chức năng của khách hàng không có tài khoản.
