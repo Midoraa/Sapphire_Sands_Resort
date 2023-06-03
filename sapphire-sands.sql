@@ -34,9 +34,10 @@ create table Employee(
 );
 
 create table WorkSchedule(
-	empID char(10) primary key,
+	empID char(10),
     dayWork datetime,
-    slot int  
+    slot int,
+    constraint fk_schedule foreign key(empID) references Employee(empID)
 );
 
 create table `Order`(
@@ -62,6 +63,7 @@ create table Room(
     room_direction nvarchar(100)
 );
 create table HistoryPrice(	
+	historyID char(10) primary key,
     roomID char(10),
     empID char(10),
 	timeChange datetime,
