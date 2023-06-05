@@ -8,6 +8,7 @@ create table Account(
     password char(50),
     `role` bit
 );
+-- SELECT accountID FROM account WHERE accountID LIKE 'CUS%' ORDER BY accountID DESC LIMIT 1;
 
 
 create table Customer(
@@ -54,6 +55,7 @@ create table Room(
 	roomID char(10) primary key,
     roomName nvarchar(50),
     roomType char(10),
+    maxPeople int,
     roomPrice decimal(10, 0),
     roomStatus bit,
     roomDescipt nvarchar(500),
@@ -72,13 +74,13 @@ create table HistoryPrice(
 );
 
 create table Food(
-	foodID char(10),
+	foodID char(10) primary key,
     foodName nvarchar(50),
     foodPrice decimal(10,0)
 );
 
 create table Service(
-	serviceID char(10),
+	serviceID char(10) primary key,
     serviceName nvarchar(50),
     servicePrice decimal(10,0)
 );
@@ -92,6 +94,7 @@ create table ContractDetail(
     orderID char(10),
     timeIn datetime,
     timOut datetime,
+    people int,
     timeRegister datetime,
     constraint fk_order foreign key(orderID) references `Order`(orderID),
     constraint fk_room foreign key(roomID) references Room(roomID)
@@ -105,7 +108,6 @@ create table OrderDetail(
 	orderID char(10),
     foodID char(10),
     Amount int,
-    constraint pk_orderDetail primary key (orderID, foodID),
     constraint fk_orderdt foreign key(orderID) references `Order`(orderID),
     constraint fk_fooddt foreign key(foodID) references Food(foodID)
 );
@@ -116,12 +118,40 @@ create table ServiceDetail(
 	orderID char(10),
     serviceID char(10),
     Amount int,
-    constraint pk_orderDetail primary key (orderID, serviceID),
     constraint fk_orderdtt foreign key(orderID) references `Order`(orderID),
     constraint fk_servicedt foreign key(serviceID) references Service(serviceID)
 );
 
 -- INSERT 
+
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000001', 'user1', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000002', 'user2', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000003', 'user3', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000004', 'user4', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000005', 'user5', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000006', 'user6', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000007', 'user7', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000008', 'user8', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000009', 'user9', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000010', 'user10', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000011', 'user11', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('CUS000012', 'user12', '123', 0);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000001', 'emp1', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000002', 'emp2', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000003', 'emp3', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000004', 'emp4', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000005', 'emp5', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000006', 'emp6', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000007', 'emp7', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000008', 'emp8', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000009', 'emp9', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('EMP000010', 'emp10', '234', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('ADM000001', 'adm1', '345', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('ADM000002', 'adm2', '345', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('ADM000003', 'adm3', '345', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('MAN000001', 'man1', '456', 1);
+INSERT INTO Account (accountID, username, password, role) VALUES ('MAN000002', 'man2', '456', 1);
+
 
 -- insert into Customer
 -- values 
