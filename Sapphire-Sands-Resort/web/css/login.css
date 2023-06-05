@@ -201,10 +201,13 @@
   line-height: 60px;
 }
 
+.registerButton{
+    background-color: #fff !important;
+}
 .button {
   margin-top: 20px;
   margin: 40px 0;
-  overflow: hidden;
+  /*overflow: hidden;*/
   z-index: 2;
 }
 .button.login {
