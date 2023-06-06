@@ -7,22 +7,22 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.entity.Account;
-import model.service.AccountService;
+import model.entity.Room;
+import model.service.RoomService;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "ListRoom", urlPatterns = {"/room"})
+public class ListRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
+            out.println("<title>Servlet ListRoom</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ListRoom at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +62,10 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login_register.jsp").forward(request, response);
+        List<Room> listRoom = new ArrayList<Room>();
+        listRoom = RoomService.getAllRoom();
+        request.setAttribute("listRoom", listRoom);
+        request.getRequestDispatcher("room.jsp").forward(request, response);
     }
 
     /**
@@ -76,25 +79,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        Account a = AccountService.login(username, password);
-        System.out.println(a);
-        if (a != null) {
-            Cookie userCookies = new Cookie("username", username);
-            Cookie passCookies = new Cookie("password", password);
-            userCookies.setMaxAge(60 * 60 * 24);
-            passCookies.setMaxAge(60 * 60 * 24);
-            response.addCookie(userCookies);
-            response.addCookie(passCookies);
-            HttpSession session = request.getSession();
-            session.setAttribute("account", a);
-            response.sendRedirect("home.jsp");
-        }
-        else{
-            request.setAttribute("thongbao", "Thông tin đăng nhập không chính xác");
-            request.getRequestDispatcher("login_register.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

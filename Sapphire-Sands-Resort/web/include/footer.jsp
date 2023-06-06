@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer wow fadeIn pt-5 mt-2 w-100 " data-wow-delay="0.1s">
+    <div class="container-fluid bg-dark text-light footer wow fadeIn pt-5 mt-5 w-100 " data-wow-delay="0.1s">
         <div class="container pb-5 ">
             <div class="row g-5 d-flex justify-content-center">
                 <div class="col-md-6 col-lg-3 ">
@@ -47,10 +47,6 @@
         </div>
     <!-- Footer End -->
 
-
-
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
     <!-- JavaScript Libraries -->
