@@ -131,7 +131,7 @@ TRUNG --%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
                 <div class="form-floating">
                   <select class="form-select" id="select1">
                     <option value="1" selected>Việt Nam</option>
-                    <option value="2">Nước Ngoài</option>
+                    <option value="2">Ngoại Quốc</option>
                   </select>
                   <label for="select1">Quốc Tịch</label>
                 </div>
