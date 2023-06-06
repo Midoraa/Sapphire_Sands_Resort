@@ -86,6 +86,7 @@
                                               <option value="1" selected >Việt Nam</option>
                                               <option value="2">Nước Ngoài</option>
                                             </select>
+                                          
                                             <label for="select2">Quốc Tịch</label>
                                           </div>
                                     </div>
