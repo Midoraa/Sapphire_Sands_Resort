@@ -22,7 +22,6 @@
                 </div>
             </div>
         </div>
-        <!-- Page Header End -->
 <!-- Booking Start -->
         <div class="container-xxl py-5">
             <div class="container">
