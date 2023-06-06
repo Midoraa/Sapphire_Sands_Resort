@@ -50,66 +50,48 @@
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
                             <form>
                                 <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="name" placeholder="Fullname">
+                                            <label for="name"> Họ Và Tên</label>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                            <label for="name">Your Name</label>
+                                            <input type="email" class="form-control" id="email" placeholder="Email">
+                                            <label for="email">Email</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                            <label for="email">Your Email</label>
+                                            <input type="tel" class="form-control" id="phone" placeholder="Phone">
+                                            <label for="phone">Số Điện Thoại</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating date" id="date3" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
-                                            <label for="checkin">Check In</label>
+                                    
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control" id="dob" placeholder="DOB">
+                                            <label for="dob"> Ngày Sinh </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating date" id="date4" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
-                                            <label for="checkout">Check Out</label>
+                                    
+                                     <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="cccd" placeholder="CCCD">
+                                            <label for="cccd"> CCCD </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-floating">
                                             <select class="form-select" id="select1">
-                                              <option value="1">Adult 1</option>
-                                              <option value="2">Adult 2</option>
-                                              <option value="3">Adult 3</option>
+                                              <option value="1" selected >Việt Nam</option>
+                                              <option value="2">Nước Ngoài</option>
                                             </select>
-                                            <label for="select1">Select Adult</label>
+                                            <label for="select1">Quốc Tịch</label>
                                           </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <select class="form-select" id="select2">
-                                              <option value="1">Child 1</option>
-                                              <option value="2">Child 2</option>
-                                              <option value="3">Child 3</option>
-                                            </select>
-                                            <label for="select2">Select Child</label>
-                                          </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <select class="form-select" id="select3">
-                                              <option value="1">Room 1</option>
-                                              <option value="2">Room 2</option>
-                                              <option value="3">Room 3</option>
-                                            </select>
-                                            <label for="select3">Select A Room</label>
-                                          </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Special Request" id="message" style="height: 100px"></textarea>
-                                            <label for="message">Special Request</label>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
                                     </div>
