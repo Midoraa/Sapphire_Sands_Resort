@@ -90,7 +90,6 @@
                                             <label for="select2">Quốc Tịch</label>
                                           </div>
                                     </div>
-
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100 py-3" type="submit">Book Now</button>
                                     </div>
