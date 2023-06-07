@@ -11,6 +11,7 @@
 
     <head>
         <meta charset="utf-8">
+        <link rel="shortcut icon" href="img/sapphire-sands-website-favicon-color.png" type="image/x-icon">
         <title>Sapphire Sands</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">

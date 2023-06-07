@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <p class="card-text" style="height: 48px;">${room.roomName}</p>
-                            <a href="#" class="btn btn-primary">Khám phá ngay</a>
+                            <a href="room_detail?roomID=${room.roomID}" class="btn btn-primary">Khám phá ngay</a>
                         </div>
                     </div>
                 </div>

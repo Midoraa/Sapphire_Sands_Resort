@@ -30,23 +30,6 @@ $(function() {
       }
    });
 
-   $(".button").click(function(e) {
-      var pX = e.pageX,
-         pY = e.pageY,
-         oX = parseInt($(this).offset().left),
-         oY = parseInt($(this).offset().top);
-
-      $(this).append('<span class="click-efect x-' + oX + ' y-' + oY + '" style="margin-left:' + (pX - oX) + 'px;margin-top:' + (pY - oY) + 'px;"></span>')
-      $('.x-' + oX + '.y-' + oY + '').animate({
-         "width": "500px",
-         "height": "500px",
-         "top": "-250px",
-         "left": "-250px",
-
-      }, 600);
-      $("button", this).addClass('active');
-   })
-
    $(".alt-2").click(function() {
       if (!$(this).hasClass('material-button')) {
          $(".shape").css({
@@ -115,5 +98,73 @@ $(function() {
       }
 
    });
+});
+//check diều kiện ở đăng nhập ở JS 
+function checkLogin() {
+    const userLogin = document.getElementById('userLogin');
+    const passwordLogin = document.getElementById('passwordLogin');
+    const loginButton = document.getElementById('loginButton');
+    const errorText = document.getElementById('errorText');
+  
+    const user = userLogin.value;
+    const password = passwordLogin.value;
+  
+   
+    if (user.length < 5) {
+        loginButton.setAttribute("disabled", false);
+        errorText.textContent = 'Vui lòng kiểm tra lại tên đăng nhập !';   
+        return;
+    } 
+    if(password.length < 3){
+        loginButton.setAttribute("disabled", false);
+        errorText.textContent = 'Vui lòng nhập mật khẩu trên 3 kí tự !';   
+        return;
+    }
+        loginButton.removeAttribute("disabled");
+        errorText.textContent = '';
+}
 
+//Check DK ở Register
+
+function checkRegister() {
+    const regname = document.getElementById('regname');
+    const regpass = document.getElementById('regpass');
+    const reregpass = document.getElementById('reregpass');
+    const registerButton = document.getElementById('registerButton');
+    const errorTextRegister = document.getElementById('errorTextRegister');
+  
+    const nameRegister = regname.value;
+    const passRegister = regpass.value;
+    const rePassRegister = reregpass.value;
+    
+   
+    if (nameRegister.length < 3) {
+        registerButton.setAttribute("disabled", false);
+        errorTextRegister.textContent = 'Vui lòng kiểm tra lại tên đăng nhập !';   
+        return;
+    } 
+    if(passRegister.length < 3){
+        registerButton.setAttribute("disabled", false);
+        errorTextRegister.textContent = 'Vui lòng nhập mật khẩu trên 3 kí tự !';   
+        return;
+    }
+    if(rePassRegister != passRegister){
+        registerButton.setAttribute("disabled", false);
+        errorTextRegister.textContent = 'Mật khẩu nhập không khớp !';   
+        return;
+    }
+        registerButton.removeAttribute("disabled");
+        errorTextRegister.textContent = '';
+        
+}
+document.querySelector('#registerButton').addEventListener('click', function (event) {
+    event.preventDefault(); // Ngăn chặn việc submit form
+
+    // Hiển thị modal thôngáo đăng ký thành công
+    const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+    modal.show();
+
+    setTimeout(function() {
+        window.location.href = "login_register.jsp"; 
+    }, 3000);
 });

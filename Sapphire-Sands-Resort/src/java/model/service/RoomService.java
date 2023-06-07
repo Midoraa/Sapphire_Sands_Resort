@@ -17,4 +17,8 @@ public class RoomService {
     public static List<Room> getAllRoom(){
         return RoomRepository.getAllRoom();
     }
+    
+    public static Room getRoomByID(String id){
+        return RoomRepository.getRoomByID(id);
+    }
 }
