@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,14 +19,15 @@ public class FoodController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String page = request.getParameter("page");
-        System.out.println(page);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        Cookie cookie = new Cookie("cart", "");
+        cookie.setMaxAge(24*60*60);
 
         List<Food> listFood = new ArrayList<Food>();
         listFood = FoodService.getFood();
@@ -41,7 +43,6 @@ public class FoodController extends HttpServlet {
             page = 1;
             System.out.println(e);
         }
-        System.out.println("Nhay");
 
         int begin = (page - 1) * itemsPerPage;
         int end = itemsPerPage * page - 1;
