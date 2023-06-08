@@ -41,7 +41,7 @@
                         </a>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                        <a class="service-item rounded" href="">
+                        <a class="service-item rounded" href="food">
                             <div class="service-icon bg-transparent border rounded p-1">
                                 <div class="w-100 h-100 border rounded d-flex align-items-center justify-content-center">
                                     <i class="fa fa-utensils fa-2x text-primary"></i>

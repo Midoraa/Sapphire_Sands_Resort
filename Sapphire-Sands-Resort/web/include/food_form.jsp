@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-1.jpg);">
     <div class="container-fluid page-header-inner py-5">
         <div class="container text-center pb-5">
@@ -23,7 +23,7 @@
     </div>
 </div>
 <!-- Page Header End -->
-<!-- Room Start -->
+<!-- Food Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -48,15 +48,35 @@
                                                 <h5 class="fw-bolder">${f.foodName}</h5>
                                             </a>
                                             <!-- Product price-->
-                                            <div class="price" style="padding: 20%">
+                                            <div class="price" style="padding: 10%">
                                                 <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${f.foodPrice}"/> VND
+                                            </div>
+                                            <!-- Quantity Product Order-->
+                                            <div class="quantity">
+                                                <!--                                                <button class="btn btn-primary updatefood"> - </button>
+                                                                                                <input class="updatefood text-center w-25" value="3">
+                                                                                                <button class="btn btn-primary updatefood"> + </button>-->
+
+                                                <div class="qty d-flex justify-content-center">
+                                                    <button class="btn btn-primary px-2 me-1"
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+                                                    <div class="form-outline w-25">
+                                                        <input class="form-control text-center" min="0" name="quantity" type="number" placeholder="0"/>
+                                                    </div>
+                                                    <button  class="btn btn-primary px-2 ms-2"
+                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
-                                            <a class="btn btn-outline-dark mt-auto" href="#">Gọi Món</a>
+                                            <a class="btn btn-outline-dark mt-auto" href="foodcart">Gọi Món</a>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +85,7 @@
 
                         <div class="row justify-content-center">
                             <div class="col-12">
-                                
+
                                 <a class="btn btn-primary" href="food"> << </a>
 
                                 <a class="btn btn-primary" href="food?page=${(page != 1) ? page-1 : 1}"> < </a>
@@ -85,7 +105,7 @@
         </div>
     </div>
 </div><!--
-<!-- Room End -->
+<!-- Food End -->
 
 
 <!-- Testimonial Start -->
