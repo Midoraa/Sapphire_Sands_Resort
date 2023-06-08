@@ -28,7 +28,9 @@
         <!-- Icon Font Stylesheet -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+              integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+              crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Libraries Stylesheet -->
         <link href="lib/animate/animate.min.css" rel="stylesheet">
         <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -93,19 +95,19 @@
                                     <a href="home.jsp" class="nav-item nav-link active">Home</a>
                                     <a href="about.jsp" class="nav-item nav-link">About</a>
                                     <a href="service.jsp" class="nav-item nav-link">Services</a>
-                                    <a href="room.jsp" class="nav-item nav-link">Rooms</a>
+                                    <a href="room" class="nav-item nav-link">Rooms</a>
                                     <div class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                         <div class="dropdown-menu rounded-0 m-0">
-                                            <a href="booking.jsp" class="dropdown-item">Booking</a>
+                                            <a href="customer_register.jsp" class="dropdown-item">Become our customer</a>
                                             <a href="team.jsp" class="dropdown-item">Our Team</a>
                                             <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
                                         </div>
                                     </div>
                                     <a href="contact.jsp" class="nav-item nav-link">Contact</a>
                                 </div>
-                                    <c:if test="${sessionScope.account==null}">
-                                    <a href="login" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Log in <i class="bi bi-arrow-right"></i></a>
+                                <c:if test="${sessionScope.account==null}">
+                                    <a href="login_register.jsp" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Log in <i class="bi bi-arrow-right"></i></a>
                                     </c:if>
                                     <c:if test="${sessionScope.account!=null}">
                                     <div class="nav-item dropdown">

@@ -7,20 +7,22 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.entity.Account;
-import model.service.AccountService;
+import model.entity.Room;
+import model.service.RoomService;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
-public class RegisterController extends HttpServlet {
+@WebServlet(name = "ListChooseRoomController", urlPatterns = {"/list_choose_room"})
+public class ListChooseRoomController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +41,10 @@ public class RegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");            
+            out.println("<title>Servlet ListChooseRoomController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ListChooseRoomController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +62,10 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login_register.jsp").forward(request, response);
+        List<Room> listRoom = new ArrayList<Room>();
+        listRoom = RoomService.getAllRoom();
+        request.setAttribute("listRoom", listRoom);
+        request.getRequestDispatcher("list_choose_room.jsp").forward(request, response);
     }
 
     /**
@@ -74,20 +79,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String accountID = AccountService.generateID();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        Account a = new Account(accountID, username, password, false);
-        System.out.println(a);
-        if (AccountService.checkUserNameExist(username)) {
-            request.setAttribute("message", "Tài khoản " + username + " đã tồn tại");
-            request.getRequestDispatcher("login_register.jsp").forward(request, response);
-        }else{
-            AccountService.register(a);
-            request.setAttribute("message", "Tạo tài khoản thành công");
-            request.getRequestDispatcher("login_register.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**

@@ -7,20 +7,23 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.entity.Account;
-import model.service.AccountService;
+import model.entity.Customer;
+import model.service.CustomerService;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
-public class RegisterController extends HttpServlet {
+@WebServlet(name = "CustomerRegisterController", urlPatterns = {"/customer_register"})
+public class CustomerRegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +42,10 @@ public class RegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegisterController</title>");            
+            out.println("<title>Servlet CustomerRegisterController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CustomerRegisterController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +63,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login_register.jsp").forward(request, response);
+        request.getRequestDispatcher("customer_register.jsp").forward(request, response);
     }
 
     /**
@@ -74,20 +77,21 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String accountID = AccountService.generateID();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String cusName = request.getParameter("cusName");
+        Date cusDOB = Date.valueOf(request.getParameter("cusDOB"));
+        String cusPhone = request.getParameter("cusPhone");
+        String cusEmail = request.getParameter("cusEmail");
+        String cusCCCD = request.getParameter("cusCCCD");
+        int cusType = Integer.parseInt(request.getParameter("cusType"));
         
-        Account a = new Account(accountID, username, password, false);
-        System.out.println(a);
-        if (AccountService.checkUserNameExist(username)) {
-            request.setAttribute("message", "Tài khoản " + username + " đã tồn tại");
-            request.getRequestDispatcher("login_register.jsp").forward(request, response);
-        }else{
-            AccountService.register(a);
-            request.setAttribute("message", "Tạo tài khoản thành công");
-            request.getRequestDispatcher("login_register.jsp").forward(request, response);
-        }
+        HttpSession session = request.getSession();
+        Account a = (Account) session.getAttribute("account");
+        Customer cus = new Customer(a.getAccountID(), a.getUsername(), a.getPassword(), false, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType);
+        CustomerService.registerCustomer(cus);
+        request.getRequestDispatcher("customer_register.jsp").forward(request, response);
+        session = request.getSession();
+        session.setAttribute("customer", cus);
+        System.out.println(cus);
     }
 
     /**

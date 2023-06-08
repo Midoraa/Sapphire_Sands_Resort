@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-primary w-100">Tìm phòng</button>
+                    <a href="list_choose_room" class="btn btn-primary w-100">Tìm phòng</a>
                 </div>
             </form>
         </div>

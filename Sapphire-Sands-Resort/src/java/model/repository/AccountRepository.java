@@ -97,9 +97,9 @@ public class AccountRepository {
 
     }
 
-    public static void main(String[] args) {
-        Account a = AccountRepository.login("adm1", "345");
-        System.out.println(a.toString());
-    }
+//    public static void main(String[] args) {
+//        Account a = AccountRepository.login("adm1", "345");
+//        System.out.println(a.toString());
+//    }
 
 }
