@@ -60,7 +60,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login_register.jsp").forward(request, response);
+        request.getRequestDispatcher("new_register.jsp").forward(request, response);
     }
 
     /**
@@ -82,11 +82,11 @@ public class RegisterController extends HttpServlet {
         System.out.println(a);
         if (AccountService.checkUserNameExist(username)) {
             request.setAttribute("message", "Tài khoản " + username + " đã tồn tại");
-            request.getRequestDispatcher("login_register.jsp").forward(request, response);
+            request.getRequestDispatcher("new_register.jsp").forward(request, response);
         }else{
             AccountService.register(a);
             request.setAttribute("message", "Tạo tài khoản thành công");
-            request.getRequestDispatcher("login_register.jsp").forward(request, response);
+            request.getRequestDispatcher("home.jsp").forward(request, response);
         }
     }
 
