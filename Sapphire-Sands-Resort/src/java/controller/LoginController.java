@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login_register.jsp").forward(request, response);
+        request.getRequestDispatcher("new_login.jsp").forward(request, response);
     }
 
     /**
@@ -93,7 +93,7 @@ public class LoginController extends HttpServlet {
         }
         else{
             request.setAttribute("thongbao", "Thông tin đăng nhập không chính xác");
-            request.getRequestDispatcher("login_register.jsp").forward(request, response);
+            request.getRequestDispatcher("new_login.jsp").forward(request, response);
         }
     }
 
