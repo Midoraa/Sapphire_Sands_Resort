@@ -109,7 +109,7 @@ public class RoomRepository {
         return listRoom;
 
     }
-    public static void main(String[] args) {
-        System.out.println(getRoomByID("R000001"));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(getRoomByID("R000001"));
+//    }
 }

@@ -41,6 +41,9 @@
                     <div class="register-link">
                         <p>Đã có tài khoản? <a href="login">Đăng nhập</a></p>
                     </div>
+                    <div class="message" style="text-align: center; color: red;">
+                        <p>${message}</p>
+                    </div>
                 </form>
             </div>
 

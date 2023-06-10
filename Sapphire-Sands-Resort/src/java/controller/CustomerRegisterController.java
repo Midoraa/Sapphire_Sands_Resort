@@ -90,7 +90,7 @@ public class CustomerRegisterController extends HttpServlet {
         CustomerService.registerCustomer(cus);
         request.getRequestDispatcher("customer_register.jsp").forward(request, response);
         session = request.getSession();
-        session.setAttribute("customer", cus);
+        session.setAttribute("account", cus);
         System.out.println(cus);
     }
 
