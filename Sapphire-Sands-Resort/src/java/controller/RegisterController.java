@@ -9,9 +9,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.entity.Account;
 import model.service.AccountService;
 
@@ -85,8 +87,8 @@ public class RegisterController extends HttpServlet {
             request.getRequestDispatcher("new_register.jsp").forward(request, response);
         }else{
             AccountService.register(a);
-            request.setAttribute("message", "Tạo tài khoản thành công");
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.setAttribute("message", "Tạo tài khoản thành công vui lòng đăng nhập");
+            request.getRequestDispatcher("new_login.jsp").forward(request, response);
         }
     }
 

@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.entity.Account;
+import model.entity.Customer;
 import model.service.AccountService;
+import model.service.CustomerService;
 
 /**
  *
@@ -87,8 +89,13 @@ public class LoginController extends HttpServlet {
             passCookies.setMaxAge(60 * 60 * 24);
             response.addCookie(userCookies);
             response.addCookie(passCookies);
-            HttpSession session = request.getSession();
-            session.setAttribute("account", a);
+            HttpSession session = request.getSession();                
+            Customer cus = CustomerService.getCustomerByID(a.getAccountID());
+            if (cus.getCusCCCD()!=null) {
+                session.setAttribute("account", cus);
+            }else{
+                session.setAttribute("account", a);
+            }
             response.sendRedirect("home.jsp");
         }
         else{

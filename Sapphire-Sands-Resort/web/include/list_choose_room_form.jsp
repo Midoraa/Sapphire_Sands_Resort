@@ -61,7 +61,7 @@
                     <div class="mt-3">
                         <%
                             // Kiểm tra trạng thái đăng nhập của người dùng
-                            Customer cus = (Customer) session.getAttribute("customer");
+                            Customer cus = (Customer) session.getAttribute("account");
                             String cusCCCD = null;
 
                             if (cus != null) {

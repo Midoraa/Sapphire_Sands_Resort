@@ -40,7 +40,7 @@ public class CustomerRepository {
     
     public static Customer getCustomerByID(String id){
         try(Connection conn = DBConnect.getConnection()) {
-            String query = "SELECT * FROM Account JOIN Customer ON accountID = cusID WHERE account = ?";
+            String query = "SELECT * FROM Account JOIN Customer ON accountID = cusID WHERE cusID = ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
@@ -50,12 +50,13 @@ public class CustomerRepository {
                 String password = rs.getString(3);
                 boolean role = rs.getBoolean(4);
                 String cusID = rs.getString(5);
-                Date cusDOB = rs.getDate(6);
-                String cusPhone = rs.getString(7);
-                String cusEmail = rs.getString(8);
-                String cusCCCD = rs.getString(9);
-                int cusType = rs.getInt(10);
-                Customer cus = new Customer(accountID, username, password, role, username, cusDOB, cusPhone, cusEmail, cusCCCD, cusType);
+                String cusName = rs.getString(6);
+                Date cusDOB = rs.getDate(7);
+                String cusPhone = rs.getString(8);
+                String cusEmail = rs.getString(9);
+                String cusCCCD = rs.getString(10);
+                int cusType = rs.getInt(11);
+                Customer cus = new Customer(accountID, username, password, role, cusID, cusDOB, cusPhone, cusEmail, cusCCCD, cusType);
                 return cus;
             }
         } catch (Exception e) {
