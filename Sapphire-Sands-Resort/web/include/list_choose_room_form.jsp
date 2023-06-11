@@ -1,11 +1,5 @@
-<%-- 
-    Document   : list_choose_room_form
-    Created on : Jun 7, 2023, 7:14:19 PM
-    Author     : Admin
---%>
-
-<%@page import="model.entity.Customer"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="model.entity.Customer" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="container-fluid">
     <div class="bg-white mt-5 container">
@@ -59,27 +53,12 @@
                     </div>
                     <div class="text-danger">USD/night</div>
                     <div class="mt-3">
-                        <%
-                            // Kiểm tra trạng thái đăng nhập của người dùng
-                            Customer cus = (Customer) session.getAttribute("account");
-                            String cusCCCD = null;
-
-                            if (cus != null) {
-                                cusCCCD = cus.getCusCCCD();
-                            }
-
-                            if (cusCCCD == null) {
-                                // Chưa đăng nhập, chuyển hướng đến trang đăng ký Customer
-                        %>
-                        <a href="customer_register">Đặt phòng</a>
-                        <%
-                        } else {
-                            // Đã đăng nhập, chuyển hướng trực tiếp đến trang thanh toán
-                        %>
-                        <a href="payment.jsp">Đặt phòng</a>
-                        <%
-                            }
-                        %>
+                       <c:if test="${sessionScope.customer==null}">
+                           <a class="btn btn-primary" href="customer_register">Đặt phòng</a>
+                        </c:if>
+                        <c:if test="${sessionScope.customer != null}">
+                            <a class="btn btn-primary" href="payment.jsp">Đặt phòng</a>
+                        </c:if> 
                     </div>
                 </div>
             </div>

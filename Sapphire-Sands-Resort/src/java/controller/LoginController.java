@@ -14,9 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.entity.Account;
 import model.entity.Customer;
-import model.service.AccountService;
 import model.service.CustomerService;
 
 /**
@@ -80,25 +78,20 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        Account a = AccountService.login(username, password);
-        System.out.println(a);
-        if (a != null) {
+        Customer cus = CustomerService.login(username, password);
+        System.out.println(cus);
+        if (cus != null) {
             Cookie userCookies = new Cookie("username", username);
             Cookie passCookies = new Cookie("password", password);
             userCookies.setMaxAge(60 * 60 * 24);
             passCookies.setMaxAge(60 * 60 * 24);
             response.addCookie(userCookies);
             response.addCookie(passCookies);
-            HttpSession session = request.getSession();                
-            Customer cus = CustomerService.getCustomerByID(a.getAccountID());
-            if (cus.getCusCCCD()!=null) {
-                session.setAttribute("account", cus);
-            }else{
-                session.setAttribute("account", a);
-            }
+            HttpSession session = request.getSession();
+            session.setAttribute("customer", cus);
             response.sendRedirect("home.jsp");
-        }
-        else{
+        } else {
+            System.out.println("Khong the dang nhap");
             request.setAttribute("thongbao", "Thông tin đăng nhập không chính xác");
             request.getRequestDispatcher("new_login.jsp").forward(request, response);
         }
