@@ -35,7 +35,7 @@
                     </div>
                     <button type="submit">Đăng nhập</button>
                     <div class="register-link">
-                        <p>Chưa có tài khoản? <a href="register">Đăng ký</a></p>
+                        <p>Chưa có tài khoản? <a href="customer_register">Đăng ký</a></p>
                     </div>
                 </form>
             </div>

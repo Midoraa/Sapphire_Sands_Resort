@@ -7,30 +7,29 @@ package model.entity;
 
 import java.sql.Date;
 
-
 /**
  *
  * @author Admin
  */
-public class Customer extends Account{
+public class Customer {
+
+    private String accountID, username, password;
+    private int role=0;
+    private String cusID;
     private String cusName;
     private Date cusDOB;
     private String cusPhone, cusEmail, cusCCCD;
     private int cusType;
 
-    public Customer(String cusName, Date cusDOB, String cusPhone, String cusEmail, String cusCCCD, int cusType) {
-        this.cusName = cusName;
-        this.cusDOB = cusDOB;
-        this.cusPhone = cusPhone;
-        this.cusEmail = cusEmail;
-        this.cusCCCD = cusCCCD;
-        this.cusType = cusType;
+    public Customer() {
     }
-    
-    
 
-    public Customer(String accountID, String username, String password, boolean role, String cusName, Date cusDOB, String cusPhone, String cusEmail, String cusCCCD, int cusType) {
-        super(accountID, username, password, role);
+    public Customer(String accountID, String username, String password, int role, String cusID, String cusName, Date cusDOB, String cusPhone, String cusEmail, String cusCCCD, int cusType) {
+        this.accountID = accountID;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.cusID = cusID;
         this.cusName = cusName;
         this.cusDOB = cusDOB;
         this.cusPhone = cusPhone;
@@ -41,11 +40,49 @@ public class Customer extends Account{
 
     @Override
     public String toString() {
-        return "Customer{" + "cusName=" + cusName + ", cusDOB=" + cusDOB + ", cusPhone=" + cusPhone + ", cusEmail=" + cusEmail + ", cusCCCD=" + cusCCCD + ", cusType=" + cusType + '}';
+        return "Customer{" + "accountID=" + accountID + ", username=" + username + ", password=" + password + ", role=" + role + ", cusID=" + cusID + ", cusName=" + cusName + ", cusDOB=" + cusDOB + ", cusPhone=" + cusPhone + ", cusEmail=" + cusEmail + ", cusCCCD=" + cusCCCD + ", cusType=" + cusType + '}';
     }
 
-    
-    
+    public String getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(String accountID) {
+        this.accountID = accountID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    public String getCusID() {
+        return cusID;
+    }
+
+    public void setCusID(String cusID) {
+        this.cusID = cusID;
+    }
+
     public String getCusName() {
         return cusName;
     }
@@ -93,6 +130,7 @@ public class Customer extends Account{
     public void setCusType(int cusType) {
         this.cusType = cusType;
     }
+    
     
     
 }

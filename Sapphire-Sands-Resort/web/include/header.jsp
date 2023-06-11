@@ -106,15 +106,15 @@
                                     </div>
                                     <a href="contact.jsp" class="nav-item nav-link">Contact</a>
                                 </div>
-                                <c:if test="${sessionScope.account==null}">
-                                    <a href="login_register.jsp" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Log in <i class="bi bi-arrow-right"></i></a>
+                                <c:if test="${sessionScope.customer==null}">
+                                    <a href="login" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Log in <i class="bi bi-arrow-right"></i></a>
                                     </c:if>
-                                    <c:if test="${sessionScope.account!=null}">
+                                    <c:if test="${sessionScope.customer!=null}">
                                     <div class="nav-item dropdown">
-                                        <a href="#" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block" data-bs-toggle="dropdown">${sessionScope.account.username}</a>
+                                        <a href="#" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block" data-bs-toggle="dropdown">${sessionScope.customer.username}</a>
                                         <div class="dropdown-menu m-0">
                                             <a href="inforUser.jsp" class="dropdown-item">Your information</a>
-                                            <c:if test="${sessionScope.user.userRole.equals('admin')}">
+                                            <c:if test="${sessionScope.customer.role == 2}">
                                                 <a href="admin.jsp" class="dropdown-item">Admin</a>
                                             </c:if>
 

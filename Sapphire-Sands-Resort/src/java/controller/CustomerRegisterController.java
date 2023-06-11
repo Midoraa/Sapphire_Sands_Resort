@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.entity.Account;
 import model.entity.Customer;
 import model.service.CustomerService;
 
@@ -77,6 +76,9 @@ public class CustomerRegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String accountID = CustomerService.generateNewID();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
         String cusName = request.getParameter("cusName");
         Date cusDOB = Date.valueOf(request.getParameter("cusDOB"));
         String cusPhone = request.getParameter("cusPhone");
@@ -84,14 +86,16 @@ public class CustomerRegisterController extends HttpServlet {
         String cusCCCD = request.getParameter("cusCCCD");
         int cusType = Integer.parseInt(request.getParameter("cusType"));
         
-        HttpSession session = request.getSession();
-        Account a = (Account) session.getAttribute("account");
-        Customer cus = new Customer(a.getAccountID(), a.getUsername(), a.getPassword(), false, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType);
-        CustomerService.registerCustomer(cus);
-        request.getRequestDispatcher("customer_register.jsp").forward(request, response);
-        session = request.getSession();
-        session.setAttribute("account", cus);
+        Customer cus = new Customer(accountID, username, password, 0, accountID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType);
         System.out.println(cus);
+        if (CustomerService.checkUserNameExist(username)) {
+            request.setAttribute("message", "Tài khoản " + username + " đã tồn tại");
+            request.getRequestDispatcher("customer_register.jsp").forward(request, response);
+        }else{
+            CustomerService.registerCustomer(cus);
+            request.setAttribute("message", "Tạo tài khoản thành công vui lòng đăng nhập");
+            response.sendRedirect("login");
+        }
     }
 
     /**

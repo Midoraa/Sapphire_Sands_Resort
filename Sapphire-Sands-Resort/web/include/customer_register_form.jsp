@@ -141,6 +141,41 @@ TRUNG --%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
                                     <label for="select1">Quốc Tịch</label>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input
+                                        name="username"
+                                        type="text"
+                                        class="form-control"
+                                        id="username"
+                                        placeholder="Tên đăng nhập"
+                                        />
+                                    <label for="username"> Tên đăng nhập </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input
+                                        name="password"
+                                        type="password"
+                                        class="form-control"
+                                        id="pasword"
+                                        placeholder="Mật khẩu"
+                                        />
+                                    <label for="pasword"> Mật khẩu </label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        id="re-pasword"
+                                        placeholder="Xác nhận mật khẩu"
+                                        />
+                                    <label for="re-pasword">Xác nhận mật khẩu</label>
+                                </div>
+                            </div>
 
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" type="submit">
