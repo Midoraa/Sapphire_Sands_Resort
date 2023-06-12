@@ -6,10 +6,14 @@ create table Account(
 	accountID char(10) primary key,
     username char(50),
     password char(50),
-    `role` bit
+    `role` int
 );
--- SELECT accountID FROM account WHERE accountID LIKE 'CUS%' ORDER BY accountID DESC LIMIT 1;
 
+-- SELECT accountID FROM account WHERE accountID LIKE 'CUS%' ORDER BY accountID DESC LIMIT 1;
+-- select * from account;
+-- select * from Customer;
+-- SELECT * FROM Account JOIN Customer ON accountID = cusID where accountID='CUS000013' ; 
+-- SELECT * FROM Account JOIN Customer ON Account.accountID = Customer.cusID WHERE username = 'user1' AND password = '123';
 
 create table Customer(
 	cusID char(10) PRIMARY KEY,
@@ -30,15 +34,7 @@ create table Employee(
     empAdress nvarchar(100),
     empPhone char(11),
     empEmail char(50),
-    empRole char(10),
     constraint fk_empId foreign key(empID) references Account(accountID)
-);
-
-create table WorkSchedule(
-	empID char(10),
-    dayWork datetime,
-    slot int,
-    constraint fk_schedule foreign key(empID) references Employee(empID)
 );
 
 create table `Order`(
@@ -53,12 +49,12 @@ create table `Order`(
 
 create table Room(
 	roomID char(10) primary key,
-    roomName nvarchar(50),
-    roomType char(10),
+    roomName nvarchar(100),
+    roomType int,
     maxPeople int,
     roomPrice decimal(10, 0),
     roomStatus bit,
-    roomDescipt nvarchar(500),
+    roomDescipt nvarchar(1000),
     roomArea double,
     bedroom nvarchar(500),
     bathroom nvarchar(500),
@@ -107,6 +103,7 @@ ALTER TABLE Food ADD INDEX idx_food_id (foodID);
 create table OrderDetail(
 	orderID char(10),
     foodID char(10),
+    orTime datetime,
     Amount int,
     constraint fk_orderdt foreign key(orderID) references `Order`(orderID),
     constraint fk_fooddt foreign key(foodID) references Food(foodID)
@@ -117,6 +114,7 @@ ALTER TABLE Service ADD INDEX idx_service_id (serviceID);
 create table ServiceDetail(
 	orderID char(10),
     serviceID char(10),
+    svTime datetime,
     Amount int,
     constraint fk_orderdtt foreign key(orderID) references `Order`(orderID),
     constraint fk_servicedt foreign key(serviceID) references Service(serviceID)
@@ -151,6 +149,37 @@ INSERT INTO Account (accountID, username, password, role) VALUES ('ADM000002', '
 INSERT INTO Account (accountID, username, password, role) VALUES ('ADM000003', 'adm3', '345', 1);
 INSERT INTO Account (accountID, username, password, role) VALUES ('MAN000001', 'man1', '456', 1);
 INSERT INTO Account (accountID, username, password, role) VALUES ('MAN000002', 'man2', '456', 1);
+
+
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000001', 'Nguyễn Anh Thư ', '2000-06-17', '0912017119', 'thunade170102@fpt.edu.vn', '49204004951', '1');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000002', 'Nguyễn Quang Đăng Khoa ', '1999-02-18', '0867876188', 'khoanqdde160390@fpt.edu.vn', '49204005371', '2');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000003', 'Nguyễn Thị Bích Liên ', '2002-08-02', '0356829925', 'lienntbde160471@fpt.edu.vn', '52204004284', '1');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000004', 'Nguyễn Thị Mỹ Duyên ', '1998-08-25', '0358026576', 'duyenntmde160345@fpt.edu.vn', '49204000628', '2');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000005', 'Ngô Lê Thành ', '1996-01-26', '0789453155', 'thanhnlds160044@fpt.edu.vn', '44204001198', '2');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000006', 'Ngô Xuân Duy', '1989-04-23', '0785130942', 'duynxda160051@fpt.edu.vn', '48203000268', '2');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000007', 'Hoàng Khánh Hoà', '1982-04-26', '0942528151', 'Hoahkde160202@fpt.edu.vn', '49204004430', '2');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000008', 'Hồ Phước Thuật', '2000-01-11', '0868350013', 'thuathpde160218@fpt.edu.vn', '49202008542', '1');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000009', 'Hồ Văn Lẹ', '1994-01-06', '0935011916', 'Lehvde160240@fpt.edu.vn', '48303001745', '2');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000010', 'Hoàng Thị Minh Hạnh', '1982-10-16', '0898350127', 'Hanhhtmde160147@fpt.edu.vn', '46304010259', '1');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000011', 'Hoàng Vũ Minh Anh', '2001-04-07', '0858089768', 'anhhvmde160399@fpt.edu.vn', '44204001279', '1');
+INSERT INTO Customer (cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) VALUES ('CUS000012', 'Khấu Trần Ngọc Thiệp', '2000-08-27', '0862210623', 'thiepktnde160439@fpt.edu.vn', '48303001765', '1');
+
+
+
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000001', 'Phòng Resort Classic Hướng Biển', 1, '4', '300000000', 0, 'Nghỉ dưỡng trong căn phòng Classic đầy cảm hứng mang phong cách kết hợp tuyệt vời giữa nét văn hóa Việt Nam truyền thống và kiến trúc đương đại. Tận hưởng những làn gió biển trong không gian rộng rãi trong nhà – ngoài trời và những phút giây thư giãn tuyệt đối trong bồn tắm bằng đá cẩm thạch và giường cỡ lớn (King hoặc Queen) êm ái. Không gian rộng mở của ban công riêng là địa điểm hoàn hảo để cùng bạn bè thưởng thức những loại đồ uống ngon trong lúc hòa mình vào những tiếng sóng vỗ rì rào đầy thơ mộng của đại dương.', '120', 'Giường King hoặc 2 giường đơn', 'Bàn trang điểm đôi, vòi hoa sen, bồn tắm đá cẩm thạch tách biệt', 'Vườn và biển');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000002', 'Phòng Resort Classic Toàn Cảnh Biển', 1, '4', '320000000', 0, 'Lấy cảm hứng thiết kế từ văn hóa truyền thống Việt Nam với không gian mở ra thiên nhiên khoáng đạt, phòng Resort Classic Toàn Cảnh Biển chào đón bạn đến với khung cảnh núi rừng, khoảng vườn xanh mát và đại dương mênh mông. Thả mình thư giãn trên chiếc giường King hay Queen êm ái, trải nghiệm những giây phút gắn kết với gia đình trong không gian rộng rãi trong nhà – ngoài trời.', '90', 'Phòng ngủ giường King, được trang bị Tivi và bàn làm việc', 'Bàn trang điểm đôi, vòi hoa sen, bồn tắm đá cẩm thạch tách biệt', 'Panoramic vistas of the mountains, gardens and sea');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000003', 'Phòng Terrace Suite Hướng Biển', 2, '4', '400000000', 0, 'Trải nghiệm căn phòng suite rộng rãi được thiết kế khoáng đạt đón nắng gió vào trong không gian nghỉ dưỡng hoàn hảo. Cùng với ban công rộng rãi, Classic Terrace Suite là lựa chọn tuyệt vời để trò chuyện, đọc sách hay đơn giản là để thư giãn ngắm nhìn vịnh biển.', '80', 'Phòng ngủ giường King, được trang bị Tivi màn hình phẳng và lối đi ra khu vực ngoài trời.', 'Bàn trang điểm đôi, vòi hoa sen, bồn tắm đá cẩm thạch tách biệt', 'Vườn và biển');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000004', 'Club Terrace Suite Toàn Cảnh Biển', 2, '4', '435000000', 0, 'Tận hưởng đặc quyền thượng lưu Club Sapphire Sands của hạng phòng sở hữu không gian trong nhà – ngoài trời rộng rãi. Thiết kế nội thất sống động, tầm nhìn toàn cảnh ra vịnh biển và núi rừng từ ban công riêng, và chỉ cách biển vài bước chân. Terrace Suite hứa hẹn mang đến cho bạn một kỳ nghỉ tràn đầy cảm hứng và những trải nghiệm tuyệt vời.', '150', 'Phòng ngủ giường King, được trang bị Tivi và bàn làm việc', 'Phòng tắm lớn với bàn trang điểm đôi, vòi hoa sen và bồn tắm lát đá cẩm thạch tách biệt.', 'Tầm nhìn 180 độ ra vịnh biển và rừng nhiệt đới');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000005', 'Penthouse Một Phòng Ngủ Hướng Biển', 3, '4', '620000000', 0, 'Nghỉ dưỡng đẳng cấp tại tầng cao nhất của khu nghỉ dưỡng với sân vườn trên ban công và hồ bơi riêng hướng tầm nhìn tuyệt vời ra rừng nhiệt đới và vịnh biển riêng. Đặc biệt thiết kế cửa kính ba mặt nối từ sàn đến trần nhà của căn phòng tạo sự kết nối đặc sắc giữa phong cách nội thất sống động của căn phòng với ánh nắng rực rỡ trên Bán đảo Sơn Trà. Những chiếc đèn chùm Hội An, giường ngủ có màn che và các bức tranh vẽ rực rỡ là điểm nhấn khiến cho kỳ nghỉ dưỡng tại Penthouse tràn đầy cảm hứng.', '170', 'Phòng ngủ giường King, được trang bị Tivi và bàn làm việc', 'Phòng tắm phong cách với bàn trang điểm đôi, khu vực trang điểm và thay đồ cùng bồn tắm cỡ lớn', 'Tầm nhìn tuyệt vời ra vịnh biển riêng và rừng nhiệt đới.');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000006', 'Biệt Thự Một Phòng Ngủ Cạnh Biển', 3, '4', '600000000', 0, 'Chỉ cách bãi biển vài bước chân, Biệt Thự Cạnh Biển mang đến cho bạn một kỳ nghỉ riêng tư tuyệt đối. Hãy cảm nhận tiếng sóng vỗ, làn gió biển xào xác trong tán lá dừa, tận hưởng những phút giây thư giãn trên sân hiên riêng, hồ bơi vô cực riêng, khu để thưởng thức ẩm thực ngoài trời và chiếc ghế xích đu phong cách. Phòng ngủ của biệt thự được thiết kế mang những nét tính cách riêng với chiếc giường sofa êm ái.', '145', 'Phòng ngủ giường King, được trang bị Tivi và bàn làm việc', 'Phòng tắm riêng với bàn trang điểm đôi, khu vực thay quần áo, vòi sen và bồn tắm tách biệt', 'Biển và bãi biển');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000007', 'Biệt Thự Một Phòng Ngủ trên Ghềnh Đá Cạnh Biển', 3, '4', '700000000', 0, 'Hãy thư giãn và lắng nghe tiếng sóng biển thì thầm bên tai, đọc sách bên sân hiên ngoài trời, trải nghiệm hồ bơi vô cực và thưởng thức bữa tối lãng mạn dưới những vì sao. Phòng ngủ của biệt thự được thiết kế với trần cao, góc thư giãn riêng với giường sofa lớn tại không gian nghỉ dưỡng thật thoải mái. Nếu bạn đang tìm kiếm chốn nghỉ dưỡng riêng tư, bỏ lại sau lưng những bận rộn của phố thị, biệt thự trên ghềnh đá của chúng tôi là sự lựa chọn hoàn hảo.', '220', 'Phòng ngủ giường King, được trang bị Tivi và bàn làm việc', 'Phòng tắm riêng với bàn trang điểm đôi, khu vực thay quần áo, vòi sen và bồn tắm tách biệt', 'Tầm nhìn hướng biển');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000008', 'Biệt Thự Một Phòng Ngủ Spa Lagoon', 3, '4', '730000000', 0, 'Đắm mình thư giãn trong thiên nhiên yên bình hoang sơ thuộc khu đầm phá Spa của chúng tôi. Với thiết kế đặc biệt khi đặt phòng trị liệu trong biệt thự với bồn sục Jacuzzi riêng cùng hai ban công trên mặt nước, biệt thự Spa Lagoon là lựa chọn không thể tuyệt vời hơn cho kỳ nghỉ dưỡng xua tan mọi căng thẳng ưu tư. Tận hưởng sự thanh bình tuyệt đối trong khuôn viên vườn với vòi tắm hoa sen ngoài trời hoặc trong bồn tắm hình kén được thiết kế riêng duy nhất dành cho biệt thự Spa Lagoon.', '260', 'Phòng ngủ trên mặt nước với giường King êm ái.', 'Phòng tắm kiểu spa bao gồm bàn trang điểm đôi, khu vực thay đồ, vòi sen và bồn tắm tách biệt"', 'Núi rừng và đầm phá');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000009', 'Biệt Thự Hai Phòng Ngủ trên Ghềnh Đá Cạnh Biển', 3, '6', '800000000', 0, 'Tầng 3 được thiết kế với sân hiên ngoài trời rộng rãi cùng khu vực giải trí âm thực, hồ bơi riêng tư và phòng ngủ giường King đầy phong cách. Ở tầng dưới, bạn sẽ khám phá phòng ngủ thứ hai của biệt thự với không gian ngoài trời riêng tư. Tầng cuối là sân hiên rộng rãi với ghế ngồi thoải mái để bạn có thể giao lưu, nghỉ ngơi hoặc đơn giản chỉ để ngắm nhìn từng đợt sóng tung bọt biển trắng xóa.', '450', 'Phòng ngủ chính giường King thuộc tầng trên, khu vực giải trí được trang bị Tivi và giường sofa lớn.', 'Hai phòng tắm riêng với bàn trang điểm đôi, khu vực thay đồ, vòi sen và bồn tắm tách biệt"', 'Tầm nhìn bao trọn vịnh biển');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000010', 'Biệt Thự Hai Phòng Ngủ Hoàng Gia Royal Residence Cạnh Biển', 3, '10', '900000000', 0, 'Một trải nghiệm tinh tế và đầy cảm hứng đang chờ đợi bạn tại không gian nghỉ dưỡng đẳng cấp trong biệt thự Hoàng gia của chúng tôi. Biệt Thự gồm 2 tầng, 2 phòng ngủ sẽ mang đến những đặc quyền và sự riêng tư tuyệt đối. Phòng khách được thiết kế với cây đàn piano, một quầy bar và phòng đa phương tiện riêng biệt với dàn karaoke cho hoạt động thư giãn và giải trí. Phòng ăn được thiết kế nổi trên mặt vịnh biển, được kết nối với phòng khách bằng lối đi nhỏ lát đá có mái che độc đáo.', '450', '2 giường King, một giường trẻ em được kê thêm trong phòng ngủ tầng dưới', 'Hai phòng tắm riêng đầy đủ tiện nghi', 'Tầm nhìn bao trọn cảnh biển');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000011', 'Biệt Thự Hai Phòng Ngủ Sun Peninsula Residence Cạnh Biển', 3, '12', '1500000000', 0, 'Mỗi biệt thự sườn đồi ba phòng ngủ hướng biển có bể bơi của chúng tôi đều là nơi phô diễn kỹ nghệ tinh xảo của các nghệ nhân địa phương, với các phòng được thiết kế đẹp mắt thể hiện sự chăm chút đến từng chi tiết nhỏ của mĩ nghệ Việt Nam. Biệt thự rộng 260 mét vuông này có phòng khách rộng rãi, bể bơi lớn, bể sục, phòng ăn, phòng bếp và ba phòng ngủ sang trọng, mỗi phòng đều có phòng tắm riêng. Đây sẽ là tổ ấm thứ hai cho các gia đình và nhóm bạn bè.', '800', 'Gồm 1 phòng ngủ giường đơn và 1 phòng ngủ giường đôi giường King được kê thêm trong phòng ngủ tầng dưới', 'Hai phòng tắm riêng đầy đủ tiện nghi', 'HƯỚNG ĐẠI DƯƠNG');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000012', 'Biệt Thự Ba Phòng Ngủ Sun Peninsula Residence Cạnh Biển', 3, '12', '1700000000', 0, 'Nghỉ dưỡng cao cấp tại biệt thự Sun Peninsula Residence được xây dựng bên sườn núi Sơn Trà, tựa lưng vào rừng nhiệt đới. Nếu muốn dạo bộ trên bãi biển riêng, bạn có thể đi bộ qua chiếc cầu thang gỗ dài được nối riêng trực tiếp với biệt thự. Sau một buổi chiều thỏa thích bơi lội trong hai hồ bơi vô cực, hãy cùng gia đình và bạn bè quây quần bên nhau, thưởng thức ẩm thực tinh tế với tầm nhìn 180 độ ra vịnh biển và thiên nhiên tươi xanh. Với thiết kế khoáng đạt và hiện đại, Biệt thự Ba Phòng Ngủ Sun Peninsula Residence Cạnh Biển mang đến không gian sống ngoài trời đầy mơ ước với khu vườn riêng xanh mát, khu vực tắm vòi hoa sen ngoài trời và sân hiên tắm nắng rộng lớn.', '1000', '3 phòng ngủ, mỗi phòng được thiết kế với phòng thay đồ và phòng tắm riêng', 'Ba phòng tắm đầy đủ tiện nghi với bồn tắm lớn bằng đá cẩm thạch và vòi sen', 'Tầm nhìn bao trọn vịnh biển và rừng nhiệt đới.');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000013', 'Biệt Thự Ba Phòng Ngủ Vịnh Bãi Bắc Hướng Biển', 3, '10', '1200000000', 0, 'Nằm ẩn mình trên sườn núi hoang sơ của bán đảo Sơn Trà, biệt thự Vịnh Bãi Bắc mang đến một không gian nghỉ dưỡng cao cấp và riêng tư nhất trong các loại biệt thự của chúng tôi với tầm nhìn bao quát ra vịnh biển riêng và phong cách thiết kế độc đáo. Đặc biệt, căn biệt thự bao gồm 3 phòng ngủ, mỗi khu vực đều có mái hiên nằm tắm nắng với hồ bơi riêng. Được thiết kế bởi Kiến trúc sư lừng danh thế giới Bill Bensley, căn biệt thự là sự kết hợp hoàn hảo giữa phong cách kiến trúc kiểu thực dân với tông màu trắng đen chủ đạo pha trộn cùng những gam màu sống động, rực rỡ khơi gợi nét nghệ thuật hậu hiện đại, mang lại không gian sống tui tươi rực rỡ.', '500', '3 phòng ngủ (2 giường cỡ king, 1 giường đôi), mỗi phòng ngủ được thiết kế với phòng thay đồ và phòng tắm riêng.', 'Ba phòng tắm đầy đủ tiện nghi với bồn tắm lớn bằng đá cẩm thạch và vòi sen', 'Tầm nhìn bao trọn vịnh biển và rừng nhiệt đới.');
+INSERT INTO Room (roomID, roomName, roomType, maxPeople, roomPrice, roomStatus, roomDescipt, roomArea, bedroom, bathroom, room_direction) VALUES ('R000014', 'Biệt thự 4 phòng ngủ với hồ bơi riêng', 3, '12', '1400000000', 0, 'Quý khách sẽ vô cùng thích thú và thỏa sức thăng hoa cảm xúc cùng gia đình và bạn bè trong một không gian mở hiện đại và đẳng cấp của một biệt thự hai tầng, bốn phòng ngủ đầy đủ tiện nghi ngay tại Tầng Mặt đất (Earth) của Khu nghỉ dưỡng. Với thiết kế ngắm trọn toàn cảnh bãi cát trắng mịn, đại dương xanh thẳm và núi rừng kỳ vĩ, không gian ban công thoáng đãng và mát mẻ chính là một chọn lựa lý tưởng để thả mình và cảm nhận trọn vẹn từng khoảnh khắc an yên, bên cạnh đó thư giãn cùng làn nước mát rượi tại một trong ba hồ bơi của khu biệt thự cũng là một lựa chọn khác không kém phần hấp dẫn.', '705', 'Bốn phòng ngủ, mỗi phòng đều có phòng khách thoáng đãng ngắm toàn cảnh đại dương xanh mát kết hợp cùng phòng tắm riêng với bồn tắm lớn', 'Phòng tắm mở nhưng riêng tư kết hợp cùng vòi hoa sen và bồn tắm lớn sang trọng, đón nhận toàn bộ ánh sáng thiên nhiên ấm áp', 'Ngắm trọn cảnh biển trong xanh, bãi cát trắng và núi rừng kỳ vĩ');
 
 
 -- insert into Customer
