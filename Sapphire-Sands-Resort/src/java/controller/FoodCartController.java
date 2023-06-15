@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ public class FoodCartController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet FoodCartController</title>");            
+            out.println("<title>Servlet FoodCartController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet FoodCartController at " + request.getContextPath() + "</h1>");
@@ -35,21 +36,21 @@ public class FoodCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String cusID = request.getParameter("cusID");
-        
-        List<FoodCart> listOrder = new ArrayList<>();
-        listOrder = FoodCartService.getFoodCart("CUS000002");
-        long totalMoney = FoodCartService.getTotalPrice("CUS000002");
-        int totalItem = FoodCartService.getTotalItem("CUS000002");
-        
-        request.setAttribute("listOrder", listOrder);
-        request.setAttribute("totalPrice", totalMoney);
-        request.setAttribute("totalItem", totalItem);
-        
-        
-        System.out.println(totalItem);
-        
-        
+        String txt = "";
+        Cookie[] arr = request.getCookies();
+
+        if(arr != null){
+            for (Cookie c : arr) {
+                if (c.getName().equals("cart")) {
+                    txt = c.getValue();
+                }
+            }
+        }
+
+        List<FoodCart> listCart = new ArrayList<>();
+        listCart = FoodCartService.getListCart(txt);
+
+        request.setAttribute("listCart", listCart);
         request.getRequestDispatcher("food_cart.jsp").forward(request, response);
     }
 

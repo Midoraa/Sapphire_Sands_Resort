@@ -1,5 +1,5 @@
 <%-- 
-    Document   : card_form
+    Document   : food_form
     Created on : Jun 5, 2023, 5:14:23 PM
     Author     : DELL
 --%>
@@ -29,58 +29,42 @@
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title text-center text-primary text-uppercase">Our Food & Restaurant</h6>
             <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Food & Restaurant</span></h1>
+            <a class="btn btn-outline-dark mt-auto" href="foodcart"><i class="bi bi-cart"></i></a>
         </div>
         <div class="row g-4">
             <section class="py-5">
                 <div class="container px-4 px-lg-5 mt-5">
                     <div id="content" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-
                         <c:forEach items="${listFood}" var="f" begin="${begin}" end="${end}">
-                            <div class="col mb-5">
-                                <div class="card h-100" style="box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.19)">
-                                    <!-- Product image-->
-                                    <img class="card-img-top" src="img/${f.foodID}.jpg" alt="img/${f.foodID}.jpg" style="height: 85%;"/>
-                                    <!-- Product details-->
-                                    <div class="card-body p-4">
-                                        <div class="text-center">
-                                            <!-- Product name-->
-                                            <a href="#" style="text-decoration: none; color: black" >
-                                                <h5 class="fw-bolder">${f.foodName}</h5>
-                                            </a>
-                                            <!-- Product price-->
-                                            <div class="price" style="padding: 10%">
-                                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${f.foodPrice}"/> VND
-                                            </div>
-                                            <!-- Quantity Product Order-->
-                                            <div class="quantity">
-                                                <!--                                                <button class="btn btn-primary updatefood"> - </button>
-                                                                                                <input class="updatefood text-center w-25" value="3">
-                                                                                                <button class="btn btn-primary updatefood"> + </button>-->
+                                <div class="col mb-5">
+                                    <div class="card h-100" style="box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.19)">
+                                        <!-- Product image-->
+                                        <img class="card-img-top" src="img/${f.foodID}.jpg" alt="img/${f.foodID}.jpg" style="height: 85%;"/>
+                                        <!-- Product details-->
 
-                                                <div class="qty d-flex justify-content-center">
-                                                    <button class="btn btn-primary px-2 me-1"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                        <i class="fas fa-minus"></i>
-                                                    </button>
-                                                    <div class="form-outline w-25">
-                                                        <input class="form-control text-center" min="0" name="quantity" type="number" placeholder="0"/>
-                                                    </div>
-                                                    <button  class="btn btn-primary px-2 ms-2"
-                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                        <i class="fas fa-plus"></i>
-                                                    </button>
+                                        <!--<form action="food" method="post">-->
+                                        <div class="card-body p-4">
+                                            <div class="text-center">
+                                                <!-- Product name-->
+                                                <a href="#" style="text-decoration: none; color: black" >
+                                                    <h5 class="fw-bolder">${f.foodName}</h5>
+                                                </a>
+                                                <!-- Product price-->
+                                                <div class="price" style="padding: 10%">
+                                                    <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${f.foodPrice}"/> VND
+                                                </div>
                                                 </div>
                                             </div>
+                                            <!-- Product actions-->
+                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                <div class="text-center">
+                                                    <a class="btn btn-outline-dark mt-auto" id="input" href="food?foodID=${f.foodID}&quantity=1">Gọi Món</a>
+                                                    <!--<button class="btn btn-outline-dark mt-auto" id="input" type="summit"> Gọi Món </button>-->
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- Product actions-->
-                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                        <div class="text-center">
-                                            <a class="btn btn-outline-dark mt-auto" href="foodcart">Gọi Món</a>
-                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
                         </c:forEach>
 
                         <div class="row justify-content-center">
@@ -147,4 +131,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>  
