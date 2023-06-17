@@ -3,7 +3,7 @@ package model.entity;
 import java.sql.Date;
 
 public class FoodCart {
-    private String orderID, foodID, foodName, empID, cusID;
+    private String orderID, foodID, foodName, cusID;
     private double foodPrice;
     private Date orDate;
     private int amount;
@@ -12,29 +12,39 @@ public class FoodCart {
     public FoodCart() {
     }
 
-    public FoodCart(String orderID, String foodID, String foodName, double foodPrice, String empID, String cusID, Date orDate, int amount, boolean orStatus) {
-        this.orderID = orderID;
+    public FoodCart(String foodID, int amount) {
+        this.foodID = foodID;
+        this.amount = amount;
+    }
+
+    public FoodCart(String foodID, String foodName, double foodPrice, int amount) {
         this.foodID = foodID;
         this.foodName = foodName;
         this.foodPrice = foodPrice;
-        this.empID = empID;
+        this.amount = amount;
+    }
+    
+
+    public FoodCart(String foodID, String foodName, String cusID, double foodPrice, Date orDate, int amount) {
+        this.foodID = foodID;
+        this.foodName = foodName;
         this.cusID = cusID;
+        this.foodPrice = foodPrice;
+        this.orDate = orDate;
+        this.amount = amount;
+    }
+
+    public FoodCart(String orderID, String foodID, String foodName, String cusID, double foodPrice, Date orDate, int amount, boolean orStatus) {
+        this.orderID = orderID;
+        this.foodID = foodID;
+        this.foodName = foodName;
+        this.cusID = cusID;
+        this.foodPrice = foodPrice;
         this.orDate = orDate;
         this.amount = amount;
         this.orStatus = orStatus;
     }
 
-    public FoodCart(String cusID, String orderID, String foodID, String foodName, double foodPrice, int amount, Date orDate, boolean orStatus) {
-        this.cusID = cusID;
-        this.orderID = orderID;
-        this.foodID = foodID;
-        this.foodName = foodName;
-        this.foodPrice = foodPrice;
-        this.amount = amount;
-        this.orDate = orDate;
-        this.orStatus = orStatus;
-    }
-    
     public String getOrderID() {
         return orderID;
     }
@@ -59,28 +69,20 @@ public class FoodCart {
         this.foodName = foodName;
     }
 
-    public double getFoodPrice() {
-        return foodPrice;
-    }
-
-    public void setFoodPrice(double foodPrice) {
-        this.foodPrice = foodPrice;
-    }
-
-    public String getEmpID() {
-        return empID;
-    }
-
-    public void setEmpID(String empID) {
-        this.empID = empID;
-    }
-
     public String getCusID() {
         return cusID;
     }
 
     public void setCusID(String cusID) {
         this.cusID = cusID;
+    }
+
+    public double getFoodPrice() {
+        return foodPrice;
+    }
+
+    public void setFoodPrice(double foodPrice) {
+        this.foodPrice = foodPrice;
     }
 
     public Date getOrDate() {
@@ -109,9 +111,8 @@ public class FoodCart {
 
     @Override
     public String toString() {
-        return "OrderDetail{" + "orderID=" + orderID + ", foodID=" + foodID + ", foodName=" + foodName + ", foodPrice=" + foodPrice + ", empID=" + empID + ", cusID=" + cusID + ", orDate=" + orDate + ", amount=" + amount + ", orStatus=" + orStatus + '}';
+//        return foodID + ":" + amount + "/";
+        return foodID + ":" + foodName + ":" + foodPrice + ":" + amount;
     }
-
-    
     
 }

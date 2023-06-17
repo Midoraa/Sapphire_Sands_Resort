@@ -21,19 +21,21 @@ public class FoodController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
     }
 
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        Cookie cookie = new Cookie("cart", "");
-        cookie.setMaxAge(24*60*60);
 
+//        Get List of Food in Database
         List<Food> listFood = new ArrayList<Food>();
         listFood = FoodService.getFood();
 
+//        Get total Food in List Food
         int totalItem = listFood.size();
+//        Paging: 1 page have 8 cart
         int itemsPerPage = 8;
+//        Max page of List Food when paging
         int maxPage = totalItem % itemsPerPage == 0 ? (totalItem / itemsPerPage) : (totalItem / itemsPerPage + 1);
         int page;
 
@@ -54,13 +56,43 @@ public class FoodController extends HttpServlet {
         request.setAttribute("itemsPerPage", itemsPerPage);
         request.setAttribute("maxPage", maxPage);
         request.setAttribute("page", page);
+               
+        String txt = "";  
+////        Lấy giá trị Cookie ở trên Client Khách Hàng rồi gán giá trị vào 1 chuỗi và xóa Cookie đó
+        Cookie[] arr = request.getCookies();
+        if(arr != null){
+            for(Cookie o: arr){
+                if(o.getName().equals("cart")){
+                    txt = txt + o.getValue();
+                    o.setMaxAge(0);
+                    response.addCookie(o);
+                }
+            }
+        }
+        
+//      Lấy giá trị cart từ thông tin   
+        String foodID = request.getParameter("foodID");
+        String amount = request.getParameter("quantity");
+        
+        if(foodID != null && amount != null){
+            if(txt.isEmpty())
+                txt = foodID + ":" + amount;
+            else
+                txt = txt + "/" + foodID + ":" + amount;
+        }
+//        
+        Cookie c = new Cookie("cart", txt);
+        c.setMaxAge(24*60*60);
+        response.addCookie(c);
+        
 
         request.getRequestDispatcher("food.jsp").forward(request, response);
     }
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {  
     }
 
     @Override

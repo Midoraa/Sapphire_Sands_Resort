@@ -95,8 +95,8 @@
             border-radius: 4px;
         }
         .cart-page .table input {
-            width: 40px;
-            height: 29px;
+            width: 50px;
+            height: 30px;
             font-size: 16px;
             color: #ffffff;
             text-align: center;
@@ -219,40 +219,52 @@
                             </thead>
 
                             <tbody class="align-middle">
+                                <c:set var="totalItem" value="0"></c:set>
+                                <c:set var="totalPrice" value="0"></c:set>
 
-                                <c:forEach items="${listOrder}" var="o">
-                                    <tr>
-                                        <td>
-                                            <div class="img">   
-                                                <img src="img/${o.foodID}.jpg" alt="Image">
+                                <c:forEach items="${listCart}" var="o">
+
+                                    <c:set var="totalItem"> ${totalItem+1}</c:set>
+                                        <tr>
+                                            <td>
+                                                <div class="img">   
+                                                    <img src="img/${o.foodID}.jpg" alt="Image">
                                                 <p>${o.foodName}</p>
                                             </div>
                                         </td>
                                         <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.foodPrice}"/> VND</td>
                                         <td>
-                                            <div class="qty d-flex">
+                                            <form action="process" method="get">
+                                                <div class="d-flex justify-content-center">
+
                                                     <button class="btn btn-primary px-2 me-1"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()" name="num" value="-1">
                                                         <i class="fas fa-minus"></i>
                                                     </button>
-                                                    <div class="form-outline">
-                                                        <input class="form-control" min="0" name="quantity" value="${o.amount}" type="number" />
-                                                        <!--<label class="form-label" for="form1">Quantity</label>-->
+
+                                                    <div class="form-outline w-50">
+                                                        <input class="form-control text-center" id="quantity" min="1" value="${o.amount}" name="quantity" type="number" 
+                                                               onchange="const quantity = document.getElementById('quantity').value;"/>
+
                                                     </div>
+
                                                     <button  class="btn btn-primary px-2 ms-2"
-                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()" name="num" value="1">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
-                                            </div>
+                                                    <input name="foodID" value="${o.foodID}" type="text" hidden="">
+                                                </div>                      
+                                            </form>   
                                         </td>
                                         <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.foodPrice*o.amount}"/> VND</td>
-                                        <td>
-                                            <form action = "changeammount">
-                                                <input name ="delete" value = "${o.foodID}" type = "hidden">
+                                        <c:set var="totalPrice">${totalPrice + o.foodPrice*o.amount}</c:set>
+                                            <td>
+                                                <form action = "process" method="post">
+                                                    <input name ="foodID" value = "${o.foodID}" type = "hidden">
                                                 <button type = "submit"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
-                                    </tr>                                                                       
+                                    </tr>                                                                    
                                 </c:forEach>
                             </tbody>
                         </table>
@@ -262,12 +274,14 @@
             <div class="col-lg-4">
                 <div class="cart-page-inner">
                     <div class="row">
-                        <!--                        <div class="col-md-12">
+                        <!--                        
+                                                <div class="col-md-12">
                                                     <div class="coupon">
                                                         <input type="text" placeholder="Coupon Code">
                                                         <input class="button" type="submit" value="Apply Code">
                                                     </div>
-                                                </div>-->
+                                                </div>
+                        -->
                         <div class="col-md-12">
                             <div class="cart-summary">
                                 <div class="cart-content">
@@ -276,10 +290,11 @@
                                     <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/> VND</p>
                                 </div>
                                 <div class="cart-btn">
-                                    <form action="">
-                                        <button type = "submit">Gọi Món</button>
-                                        <button>Xem Thực Đơn</button>
-                                    </form>
+                                    
+                                    <button type = "submit" name="order" value="order" onclick="window.location.href='process'">Gọi Món</button>
+
+                                    <button type="submit" onclick="window.location.href='food'">Xem Thực Đơn</button>
+
                                 </div>
                             </div>
                         </div>
@@ -288,4 +303,5 @@
             </div>
         </div>
     </div>
+
 </div>
