@@ -41,7 +41,7 @@ public class ListChooseRoomController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListChooseRoomController</title>");            
+            out.println("<title>Servlet ListChooseRoomController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ListChooseRoomController at " + request.getContextPath() + "</h1>");
@@ -62,10 +62,21 @@ public class ListChooseRoomController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         List<Room> listRoom = new ArrayList<Room>();
-        listRoom = RoomService.getAllRoom();
-        request.setAttribute("listRoom", listRoom);
+        String timeIn = request.getParameter("time_in");
+        String timeOut = request.getParameter("time_out");
+        String roomType = request.getParameter("room_type");
+        int maxPeople = Integer.parseInt(request.getParameter("max_people"));
+
+        listRoom = RoomService.getChoosenRoom(roomType, maxPeople);
+        request.setAttribute("listChoosenRoom", listRoom);
+        request.setAttribute("time_in", timeIn);
+        request.setAttribute("time_out", timeOut);
+        request.setAttribute("room_type", roomType);
+        request.setAttribute("people", maxPeople);
         request.getRequestDispatcher("list_choose_room.jsp").forward(request, response);
+
     }
 
     /**

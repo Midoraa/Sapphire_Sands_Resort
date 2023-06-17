@@ -17,24 +17,23 @@
     </div>
     <div class="booking wow fadeIn w-100" data-wow-delay="0.1s">
         <div class="booking-detail">
-            <form class="row col-md-12">
+            <form action="list_choose_room" class="row col-md-12">
                 <div class="col-md-10">
                     <div class="row g-2">
                         <div class="col-md-3 px-2">
                             <div class="date" id="date1" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input"
-                                       placeholder="Nhận phòng" data-target="#date1"
-                                       data-toggle="datetimepicker" />
+                                <input name="time_in" type="date" class="form-control"
+                                       placeholder="Nhận phòng" />
                             </div>
                         </div>
                         <div class="col-md-3 px-2">
                             <div class="date" id="date2" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input"
-                                       placeholder="Trả phòng" data-target="#date2" data-toggle="datetimepicker" />
+                                <input name="time_out" type="date" class="form-control"
+                                       placeholder="Trả phòng"/>
                             </div>
                         </div>
                         <div class="col-md-3 px-2">
-                            <select class="form-select">
+                            <select class="form-select" name="max_people">
                                 <option selected>Số người</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -51,17 +50,17 @@
                             </select>
                         </div>
                         <div class="col-md-3 px-2">
-                            <select class="form-select">
+                            <select class="form-select" name="room_type">
                                 <option selected>Loại phòng</option>
-                                <option value="1">Phòng nghỉ dưỡng</option>
-                                <option value="2">Suite</option>
-                                <option value="3">PENTHOUSES & VILLAS</option>
+                                <option value="Phòng nghỉ dưỡng">Phòng nghỉ dưỡng</option>
+                                <option value="Suite">Suite</option>
+                                <option value="PENTHOUSES & VILLAS">PENTHOUSES & VILLAS</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <a href="list_choose_room" class="btn btn-primary w-100">Tìm phòng</a>
+                    <button type="submit" class="btn btn-primary w-100">Tìm phòng</button>
                 </div>
             </form>
         </div>
@@ -231,15 +230,15 @@
     <div class="container">
         <div class="owl-carousel testimonial-carousel py-5">
             <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                <img src="https://cdn-anleb.nitrocdn.com/tCRkDCsbycMpcUNHfNUFRoXsIImxjOzf/assets/images/optimized/rev-3fbd1ba/wp-content/uploads/2022/03/Resort-Terrace-Suite-terrace-scaled.jpg"
+                <img src="img/room/${room.roomID}-1.jpg"
                      alt="">
             </div>
             <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                <img src="https://cdn-anleb.nitrocdn.com/tCRkDCsbycMpcUNHfNUFRoXsIImxjOzf/assets/images/optimized/rev-3fbd1ba/wp-content/uploads/2022/10/Club-Terrace-Suite-desk-area-scaled.jpg"
+                <img src="img/room/${room.roomID}-2.jpg"
                      alt="">
             </div>
             <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
-                <img src="https://cdn-anleb.nitrocdn.com/tCRkDCsbycMpcUNHfNUFRoXsIImxjOzf/assets/images/optimized/rev-3fbd1ba/wp-content/uploads/2022/03/Bathroom-Terrace-Suite-Club-Terrace-Suite-scaled.jpg"
+                <img src="img/room/${room.roomID}-3.jpg"
                      alt="">
             </div>
         </div>
@@ -277,8 +276,11 @@
 
 <style>
     .room-detail{
-        background-image: url("https://cdn-anleb.nitrocdn.com/tCRkDCsbycMpcUNHfNUFRoXsIImxjOzf/assets/images/optimized/rev-3fbd1ba/wp-content/uploads/2022/10/2BR-SP-Residence-aerial-1-scaled.jpg");
-        background-clip: var(--dark);
+        background: -moz-linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7));
+        background: -webkit-linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7));
+        background: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7));
+        filter: unquote("progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#b3000000',GradientType=0 )");
+        background-image: url("img/room/${room.roomID}-2.jpg");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
