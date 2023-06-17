@@ -8,6 +8,7 @@ package model.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.config.DBConnect;
 import model.entity.Room;
@@ -17,9 +18,9 @@ import model.entity.Room;
  * @author Admin
  */
 public class RoomRepository {
-    
-    public static Room getRoomByID(String id){
-        try(Connection conn = DBConnect.getConnection()) {
+
+    public static Room getRoomByID(String id) {
+        try (Connection conn = DBConnect.getConnection()) {
             String query = "select * from Room WHERE roomID = ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, id);
@@ -36,8 +37,8 @@ public class RoomRepository {
                 String bedRoom = rs.getString(9);
                 String bathRoom = rs.getString(10);
                 String roomDirection = rs.getString(11);
-                
-                double dollaPrice = Math.floor(roomPrice/20000);
+
+                double dollaPrice = Math.floor(roomPrice / 20000);
                 String roomTypeString;
                 switch (roomType) {
                     case 1:
@@ -53,7 +54,7 @@ public class RoomRepository {
                         roomTypeString = "Unknown";
                         break;
                 }
-                
+
                 Room room = new Room(roomID, roomName, roomTypeString, maxPeople, dollaPrice, roomStatus, roomDescript, roomArea, bedRoom, bathRoom, roomDirection);
                 return room;
             }
@@ -82,9 +83,8 @@ public class RoomRepository {
                 String bedRoom = results.getString(9);
                 String bathRoom = results.getString(10);
                 String roomDirection = results.getString(11);
-                
-                
-                double dollaPrice = Math.floor(roomPrice/20000);
+
+                double dollaPrice = Math.floor(roomPrice / 20000);
                 String roomTypeString;
                 switch (roomType) {
                     case 1:
@@ -109,7 +109,60 @@ public class RoomRepository {
         return listRoom;
 
     }
+
+    public static ArrayList<Room> getChoosenRoom(String roomInputType, int maxInputPeople) {
+        ArrayList<Room> listChoosenRoom = new ArrayList<Room>();
+        try (Connection conn = DBConnect.getConnection()) {
+            String query = "SELECT * FROM Room WHERE roomStatus = 0 AND roomType = ? AND maxPeople >= ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            if (roomInputType.equalsIgnoreCase("Phòng nghỉ dưỡng")) {
+                ps.setInt(1, 1);
+            } else if (roomInputType.equalsIgnoreCase("SUITE")) {
+                ps.setInt(1, 2);
+            } else {
+                ps.setInt(1, 3);
+            }       
+            ps.setInt(2, maxInputPeople);
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+                String roomID = results.getString(1);
+                String roomName = results.getString(2);
+                int roomType = results.getInt(3);
+                int maxPeople = results.getInt(4);
+                double roomPrice = results.getDouble(5);
+                boolean roomStatus = results.getBoolean(6);
+                String roomDescript = results.getString(7);
+                double roomArea = results.getDouble(8);
+                String bedRoom = results.getString(9);
+                String bathRoom = results.getString(10);
+                String roomDirection = results.getString(11);
+
+                double dollaPrice = Math.floor(roomPrice / 20000);
+                String roomTypeString;
+                switch (roomType) {
+                    case 1:
+                        roomTypeString = "Phòng nghỉ dưỡng";
+                        break;
+                    case 2:
+                        roomTypeString = "SUITE";
+                        break;
+                    case 3:
+                        roomTypeString = "Penthouses & Villas";
+                        break;
+                    default:
+                        roomTypeString = "Unknown";
+                        break;
+                }
+                Room r = new Room(roomID, roomName, roomTypeString, maxPeople, dollaPrice, roomStatus, roomDescript, roomArea, bedRoom, bathRoom, roomDirection);
+                listChoosenRoom.add(r);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("Loi lay CHoosen room trong RoomRepository");
+        }
+        return listChoosenRoom;
+    }
 //    public static void main(String[] args) {
-//        System.out.println(getRoomByID("R000001"));
+//        System.out.println(getChoosenRoom("SUITE", 4));
 //    }
 }

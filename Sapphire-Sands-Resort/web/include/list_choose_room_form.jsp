@@ -8,13 +8,15 @@
     <div class="container bg-primary text-white mt-5 align-items-center">
         <div class="d-flex">
             <div class="align-self-center mx-5 py-3">
-                07/06/2023 - 08-06-2023
+                ${time_in} / ${time_out}
             </div>
-            <div class="align-self-center mx-5">2 Customer</div>
-            <div class="align-self-center mx-5">Phòng nghỉ dưỡng</div>
+            <div class="align-self-center mx-5">${people} người</div>
+            <div class="align-self-center mx-5">
+                ${room_type}
+            </div>
         </div>
     </div>
-    <c:forEach var="room" items="${listRoom}">
+    <c:forEach var="room" items="${listChoosenRoom}">
         <div class="container bg-body p-0">
             <div class="w-100 mt-5 d-flex justify-content-between">
                 <div class="d-flex">
@@ -22,13 +24,13 @@
                         <div id="${room.roomID}" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
-                                    <img src="https://cdn-anleb.nitrocdn.com/tCRkDCsbycMpcUNHfNUFRoXsIImxjOzf/assets/images/optimized/rev-3fbd1ba/wp-content/uploads/2022/10/Club-Terrace-Suite-desk-area-scaled.jpg" class="d-block w-100" alt="...">
+                                    <img src="img/room/${room.roomID}-2.jpg" class="d-block w-100" alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="https://cdn-anleb.nitrocdn.com/tCRkDCsbycMpcUNHfNUFRoXsIImxjOzf/assets/images/optimized/rev-3fbd1ba/wp-content/uploads/2022/03/Bathroom-Terrace-Suite-Club-Terrace-Suite-scaled.jpg" class="d-block w-100" alt="...">
+                                    <img src="img/room/${room.roomID}-1.jpg" class="d-block w-100" alt="...">
                                 </div>
                                 <div class="carousel-item">
-                                    <img src="https://cdn-anleb.nitrocdn.com/tCRkDCsbycMpcUNHfNUFRoXsIImxjOzf/assets/images/optimized/rev-3fbd1ba/wp-content/uploads/2022/03/Resort-Terrace-Suite-terrace-scaled.jpg" class="d-block w-100" alt="...">
+                                    <img src="imt/room/${room.roomID}-3.jpg" class="d-block w-100" alt="...">
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#${room.roomID}" data-bs-slide="prev">
@@ -53,11 +55,11 @@
                     </div>
                     <div class="text-danger">USD/night</div>
                     <div class="mt-3">
-                       <c:if test="${sessionScope.customer==null}">
-                           <a class="btn btn-primary" href="customer_register">Đặt phòng</a>
+                        <c:if test="${sessionScope.customer==null}">
+                            <a class="btn btn-primary" href="login">Đặt phòng</a>
                         </c:if>
                         <c:if test="${sessionScope.customer != null}">
-                            <a class="btn btn-primary" href="payment.jsp">Đặt phòng</a>
+                                <a class="btn btn-primary" href="confirm_contract?roomID=${room.roomID}&time_in=${time_in}&time_out=${time_out}&people=${people}">Đặt phòng</a>
                         </c:if> 
                     </div>
                 </div>

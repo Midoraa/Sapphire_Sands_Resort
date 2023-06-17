@@ -21,4 +21,8 @@ public class RoomService {
     public static Room getRoomByID(String id){
         return RoomRepository.getRoomByID(id);
     }
+    
+    public static List<Room> getChoosenRoom(String roomInputType, int roomInputMaxPeole){
+        return RoomRepository.getChoosenRoom(roomInputType, roomInputMaxPeole);
+    }
 }
