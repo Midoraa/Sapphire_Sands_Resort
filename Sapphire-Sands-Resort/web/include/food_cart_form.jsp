@@ -206,18 +206,20 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="cart-page-inner">
+                    <div class="notification text-center">
+                        <c:out value="${notification}"></c:out>
+                    </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Thực Đơn</th>
-                                    <th>Giá</th>
-                                    <th>Số Lượng</th>
-                                    <th>Tổng Tiền</th>
-                                    <th>Hủy Món</th>
-                                </tr>
-                            </thead>
-
+                        <table class="table table-bordered"> 
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Thực Đơn</th>
+                                        <th>Giá</th>
+                                        <th>Số Lượng</th>
+                                        <th>Tổng Tiền</th>
+                                        <th>Hủy Món</th>
+                                    </tr>
+                                </thead>
                             <tbody class="align-middle">
                                 <c:set var="totalItem" value="0"></c:set>
                                 <c:set var="totalPrice" value="0"></c:set>
@@ -244,7 +246,7 @@
 
                                                     <div class="form-outline w-50">
                                                         <input class="form-control text-center" id="quantity" min="1" value="${o.amount}" name="quantity" type="number" 
-                                                               onchange="const quantity = document.getElementById('quantity').value;"/>
+                                                               onchange="const quantity = document.getElementById('quantity').value;" readonly=""/>
 
                                                     </div>
 
@@ -252,7 +254,7 @@
                                                              onclick="this.parentNode.querySelector('input[type=number]').stepUp()" name="num" value="1">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
-                                                    <input name="foodID" value="${o.foodID}" type="text" hidden="">
+                                                    <input name="foodID" value="${o.foodID}" type="text" hidden="" >
                                                 </div>                      
                                             </form>   
                                         </td>
@@ -290,10 +292,10 @@
                                     <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/> VND</p>
                                 </div>
                                 <div class="cart-btn">
-                                    
-                                    <button type = "submit" name="order" value="order" onclick="window.location.href='process'">Gọi Món</button>
 
-                                    <button type="submit" onclick="window.location.href='food'">Xem Thực Đơn</button>
+                                    <button type = "submit" name="order" value="order" onclick="window.location.href = 'process'">Gọi Món</button>
+
+                                    <button type="submit" onclick="window.location.href = 'food'">Xem Thực Đơn</button>
 
                                 </div>
                             </div>

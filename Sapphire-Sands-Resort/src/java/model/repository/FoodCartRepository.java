@@ -10,21 +10,65 @@ import java.util.Map;
 import model.config.DBConnect;
 import model.entity.FoodCart;
 import model.service.FoodCartService;
+import java.sql.*;
 
 public class FoodCartRepository {
 
+    public static void insertFoodOrder(String orderID, String txt) {
+//        Get real time for Food Order in mysql type Timestamp
+        Timestamp orTime = new Timestamp(System.currentTimeMillis());
+
+        List<FoodCart> listCart = new ArrayList();
+
+        String[] foodID = null;
+        int[] amount = null;
+
+        if (!txt.isEmpty() && txt.length() != 0) {
+
+            String[] id_amount = txt.split("/");
+
+            for (String element : id_amount) {
+                String f[] = element.split(":");
+                listCart.add(new FoodCart(orderID, f[0], orTime, Integer.parseInt(f[1]), 0));
+            }
+
+        }
+        
+        for (FoodCart foodCart : listCart) {
+
+            try (Connection conn = DBConnect.getConnection()) {
+                //        Insert into OrderDetail Value('OD000001', 'F000003', '2023-06-17 06:43:27.13', 2, 0);
+                String query = "Insert into OrderDetail (orderID, foodID, orTime, Amount, orStatus) Value(?,?,?,?,?)";
+                PreparedStatement ps = conn.prepareStatement(query);
+                ps.setString(1, foodCart.getOrderID());
+                ps.setString(2, foodCart.getFoodID());
+                ps.setTimestamp(3, foodCart.getOrTime());
+                ps.setInt(4, foodCart.getAmount());
+                ps.setInt(5, foodCart.getOrStatus());
+
+                ps.executeUpdate();
+                ps.close();
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+        }
+
+    }
+
 //    Get List Food Cart in Database
-    public static List<FoodCart> getListFoodOrder(String cusID){
+    public static List<FoodCart> getListFoodOrder(String cusID) {
         List<FoodCart> list = new ArrayList<>();
-        String query = "Select a.cusID, a.orderID, b.foodID, c.foodName, c.foodPrice, b.Amount, a.orDate ,a.orStatus \n" +
-                        "from `Order` a join OrderDetail b join Food c \n" +
-                        "on a.orderID = b.orderID and b.foodID = c.foodID\n" +
-                        "where a.cusID = ? ";
+        String query = "Select a.cusID, a.orderID, b.foodID, c.foodName, c.foodPrice, b.Amount, a.orDate ,a.orStatus \n"
+                + "from `Order` a join OrderDetail b join Food c \n"
+                + "on a.orderID = b.orderID and b.foodID = c.foodID\n"
+                + "where a.cusID = ? ";
         try (Connection conn = DBConnect.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, cusID);
-            ResultSet rs = ps.executeQuery();  
-            while(rs.next()) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
 //                list.add(new FoodCart(
 //                        rs.getNString(1),
 //                        rs.getNString(2),
@@ -41,8 +85,7 @@ public class FoodCartRepository {
         }
         return list;
     }
-    
-    
+
 //    Get Total Money of item had order
 //    public static long getTotalPrice(String cusID) {
 //        String query = "Select Sum(foodPrice*Amount)\n"
@@ -63,7 +106,6 @@ public class FoodCartRepository {
 //        }
 //        return 0;
 //    }
-
 //    Count Item in shop cart
 //    public static int getTotalItem(String cusID) {
 //        String query = "Select Count(b.foodID)\n"
@@ -84,11 +126,7 @@ public class FoodCartRepository {
 //        }
 //        return 0;
 //    }
-
-
-    
 //    Make Shop Cart with Cookie save in User Client.
-    
 //    Get List Food had insert into Cookie and return List Cart include: FoodID, FoodName, FoodPrice, FoodAmount.
     public static List<FoodCart> getListCart(String txt) {
         List<FoodCart> listCart = new ArrayList();
@@ -138,8 +176,7 @@ public class FoodCartRepository {
         }
         return listCart;
     }
-    
-    
+
 //    Update Amount in Shop Cart add or remove 1 food
     public static List<FoodCart> updateAmount(String txt, String foodID, int num) {
         List<FoodCart> listCart = new ArrayList();
@@ -147,7 +184,7 @@ public class FoodCartRepository {
 
         for (FoodCart f : listCart) {
             if (f.getFoodID().equals(foodID)) {
-                if (f.getAmount()+num != 0) {
+                if (f.getAmount() + num != 0) {
                     f.setAmount(f.getAmount() + num);
                 }
             }
@@ -155,14 +192,14 @@ public class FoodCartRepository {
         System.out.println(foodID);
         return listCart;
     }
-    
+
 //    Delete one Food when click remove in food_cart_form.jsp
-     public static List<FoodCart> deleteCart(String txt, String foodID) {
+    public static List<FoodCart> deleteCart(String txt, String foodID) {
         List<FoodCart> listCart = new ArrayList();
         listCart = getListCart(txt);
         listCart.removeIf(FoodCart -> FoodCart.getFoodID().equals(foodID));
         return listCart;
-     }
+    }
 
     public static void main(String[] args) {
         String txt = "F000001:1/F000003:1/F000004:2/F000002:1/F000001:1/F000002:2/F000003:1/F000004:3/F000004:5/F000004:6/F000004:3/F000004:2/F000004:2/F000004:2/F000002:2/F000006:1";
@@ -185,5 +222,7 @@ public class FoodCartRepository {
         list = FoodCartService.deleteCart(txt1, "F000003");
         System.out.println(list.toString());
         
+        FoodCartService.insertFoodOrder("OD000005", txt1);
+
     }
 }

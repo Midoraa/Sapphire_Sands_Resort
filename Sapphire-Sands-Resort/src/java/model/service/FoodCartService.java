@@ -28,4 +28,8 @@ public class FoodCartService {
     public static List<FoodCart> deleteCart(String txt, String foodID){
         return FoodCartRepository.deleteCart(txt, foodID);
     }
+    
+    public static void insertFoodOrder(String orderID, String txt){
+        FoodCartRepository.insertFoodOrder(orderID, txt);
+    }
 }

@@ -36,35 +36,36 @@
                 <div class="container px-4 px-lg-5 mt-5">
                     <div id="content" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                         <c:forEach items="${listFood}" var="f" begin="${begin}" end="${end}">
-                                <div class="col mb-5">
-                                    <div class="card h-100" style="box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.19)">
-                                        <!-- Product image-->
-                                        <img class="card-img-top" src="img/${f.foodID}.jpg" alt="img/${f.foodID}.jpg" style="height: 85%;"/>
-                                        <!-- Product details-->
+                            <div class="col mb-5">
+                                <div class="card h-100" style="box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.19)">
+                                    <!-- Product image-->
+                                    <img class="card-img-top" src="img/${f.foodID}.jpg" alt="img/${f.foodID}.jpg" style="height: 85%;"/>
+                                    <!-- Product details-->
 
-                                        <!--<form action="food" method="post">-->
-                                        <div class="card-body p-4">
-                                            <div class="text-center">
-                                                <!-- Product name-->
-                                                <a href="#" style="text-decoration: none; color: black" >
-                                                    <h5 class="fw-bolder">${f.foodName}</h5>
-                                                </a>
-                                                <!-- Product price-->
-                                                <div class="price" style="padding: 10%">
-                                                    <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${f.foodPrice}"/> VND
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <!-- Product actions-->
-                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                                <div class="text-center">
-                                                    <a class="btn btn-outline-dark mt-auto" id="input" href="food?foodID=${f.foodID}&quantity=1">Gọi Món</a>
-                                                    <!--<button class="btn btn-outline-dark mt-auto" id="input" type="summit"> Gọi Món </button>-->
+                                    <!--<form action="food" method="post">-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Product name-->
+                                            <a href="#" style="text-decoration: none; color: black" >
+                                                <h5 class="fw-bolder">${f.foodName}</h5>
+                                            </a>
+                                            <!-- Product price-->
+                                            <div class="price" style="padding: 10%">
+                                                <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${f.foodPrice}"/> VND
                                             </div>
                                         </div>
-
                                     </div>
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center">
+                                                    <a class="btn btn-outline-dark mt-auto" id="input" href="food?foodID=${f.foodID}&quantity=1">Gọi Món</a>
+                                            <!--<button class="btn btn-outline-dark mt-auto" id="input" type="summit"> Gọi Món </button>-->
+                                            
+                                        </div>
+                                    </div>
+
                                 </div>
+                            </div>
                         </c:forEach>
 
                         <div class="row justify-content-center">
