@@ -29,7 +29,7 @@
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title text-center text-primary text-uppercase">Our Service</h6>
             <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Service</span></h1>
-            <a class="btn btn-outline-dark mt-auto" href="foodcart"><i class="bi bi-cart"></i></a>
+            <a class="btn btn-outline-dark mt-auto" href="serviceCart"><i class="bi bi-cart"></i></a>
         </div>
         <div class="row g-4">
             <section class="py-5">
@@ -39,7 +39,7 @@
                             <div class="col mb-5">
                                 <div class="card h-100" style="box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.19)">
                                     <!-- Product image-->
-                                    <img class="card-img-top" src="img/${s.serviceID}.jpg" alt="img/${s.serviceID}.jpg" style="height: 85%;"/>
+                                    <img class="card-img-top" src="img/Service/${s.serviceID}.jpg" alt="img/Service/${s.serviceID}.jpg" style="height: 85%;"/>
                                     <!-- Product details-->
 
                                     <!--<form action="food" method="post">-->
