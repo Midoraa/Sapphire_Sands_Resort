@@ -1,13 +1,13 @@
 package model.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class FoodCart {
     private String orderID, foodID, foodName, cusID;
     private double foodPrice;
-    private Date orDate;
+    private Timestamp orTime;
     private int amount;
-    private boolean orStatus;
+    private int orStatus;
 
     public FoodCart() {
     }
@@ -25,22 +25,30 @@ public class FoodCart {
     }
     
 
-    public FoodCart(String foodID, String foodName, String cusID, double foodPrice, Date orDate, int amount) {
+    public FoodCart(String foodID, String foodName, String cusID, double foodPrice, Timestamp orTime, int amount) {
         this.foodID = foodID;
         this.foodName = foodName;
         this.cusID = cusID;
         this.foodPrice = foodPrice;
-        this.orDate = orDate;
+        this.orTime = orTime;
         this.amount = amount;
     }
 
-    public FoodCart(String orderID, String foodID, String foodName, String cusID, double foodPrice, Date orDate, int amount, boolean orStatus) {
+    public FoodCart(String orderID, String foodID, String foodName, String cusID, double foodPrice, Timestamp orTime, int amount, int orStatus) {
         this.orderID = orderID;
         this.foodID = foodID;
         this.foodName = foodName;
         this.cusID = cusID;
         this.foodPrice = foodPrice;
-        this.orDate = orDate;
+        this.orTime = orTime;
+        this.amount = amount;
+        this.orStatus = orStatus;
+    }
+
+    public FoodCart(String orderID, String foodID, Timestamp orTime, int amount, int orStatus) {
+        this.orderID = orderID;
+        this.foodID = foodID;
+        this.orTime = orTime;
         this.amount = amount;
         this.orStatus = orStatus;
     }
@@ -85,12 +93,12 @@ public class FoodCart {
         this.foodPrice = foodPrice;
     }
 
-    public Date getOrDate() {
-        return orDate;
+    public Timestamp getOrTime() {
+        return orTime;
     }
 
-    public void setOrDate(Date orDate) {
-        this.orDate = orDate;
+    public void setOrTime(Timestamp orTime) {
+        this.orTime = orTime;
     }
 
     public int getAmount() {
@@ -101,11 +109,11 @@ public class FoodCart {
         this.amount = amount;
     }
 
-    public boolean isOrStatus() {
+    public int getOrStatus() {
         return orStatus;
     }
 
-    public void setOrStatus(boolean orStatus) {
+    public void setOrStatus(int orStatus) {
         this.orStatus = orStatus;
     }
 
