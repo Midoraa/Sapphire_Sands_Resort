@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +24,7 @@ public class ServiceController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Service> listService = new ArrayList<Service>();
+        List<Service> listService = new ArrayList<>();
         listService = ServiceDouble.getService();
 
 //        Get total Food in List Food
@@ -53,35 +52,6 @@ public class ServiceController extends HttpServlet {
         request.setAttribute("itemsPerPage", itemsPerPage);
         request.setAttribute("maxPage", maxPage);
         request.setAttribute("page", page);
-
-//      Lấy giá trị cart từ thông tin   
-        String serviceID = request.getParameter("serviceID");
-        String amount = request.getParameter("quantity");
-            
-        String txt = "";
-////        Lấy giá trị Cookie ở trên Client Khách Hàng rồi gán giá trị vào 1 chuỗi và xóa Cookie đó
-        Cookie[] arr = request.getCookies();
-        if (arr != null) {
-            for (Cookie o : arr) {
-                if (o.getName().equals("cartService")) {
-                    txt = txt + o.getValue();
-                    o.setMaxAge(0);
-                    response.addCookie(o);
-                }
-            }
-        }
-
-        if (serviceID != null && amount != null) {
-            if (txt.isEmpty()) {
-                txt = serviceID + ":" + amount;
-            } else {
-                txt = txt + "/" + serviceID + ":" + amount;
-            }
-        }
-//        
-        Cookie c = new Cookie("cartService", txt);
-        c.setMaxAge(24 * 60 * 60);
-        response.addCookie(c);
 
         request.getRequestDispatcher("service_list.jsp").forward(request, response);
     }

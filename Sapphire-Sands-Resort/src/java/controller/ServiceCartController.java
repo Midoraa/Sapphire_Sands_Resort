@@ -1,11 +1,16 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.entity.ServiceCart;
+import model.service.ServiceDouble;
 
 @WebServlet(name = "ServiceCartController", urlPatterns = {"/serviceCart"})
 public class ServiceCartController extends HttpServlet {
@@ -18,7 +23,23 @@ public class ServiceCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        String txt = "";
+        Cookie[] arr = request.getCookies();
+        if (arr != null) {
+            for (Cookie o : arr) {
+                if (o.getName().equals("cartService")) {
+                    txt = txt + o.getValue();
+                }
+            }
+        }
+        
+        List<ServiceCart> list = new ArrayList<>();
+        list = ServiceDouble.getServiceCart(txt);
+        
+        request.setAttribute("listServiceCart", list);
+        
+        request.getRequestDispatcher("service_cart.jsp").forward(request, response);
     }
 
     @Override

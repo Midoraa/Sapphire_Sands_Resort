@@ -293,7 +293,7 @@
                                 </div>
                                 <div class="cart-btn">
 
-                                    <button type = "submit" name="order" value="order" onclick="window.location.href = 'process'">Gọi Món</button>
+                                    <button type = "submit" name="order" value="order" onclick="window.location.href = 'process' ">Gọi Món</button>
 
                                     <button type="submit" onclick="window.location.href = 'food'">Xem Thực Đơn</button>
 

@@ -58,12 +58,11 @@
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
-                                                    <a class="btn btn-outline-dark mt-auto" id="input" href="food?foodID=${s.serviceID}&quantity=1">Đặt Dịch Vụ</a>
-                                            <!--<button class="btn btn-outline-dark mt-auto" id="input" type="summit"> Gọi Món </button>-->
-                                            
+                                            <form action="processServiceCart" method="post">
+                                                <button class="btn btn-outline-dark mt-auto" id="input" type="summit" name="serviceID" value="${s.serviceID}"> Đặt Dịch Vụ </button>
+                                            </form>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </c:forEach>

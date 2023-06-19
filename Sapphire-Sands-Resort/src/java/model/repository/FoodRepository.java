@@ -32,6 +32,8 @@ public class FoodRepository {
     
     public static void main(String[] args) {
         List<Food> list = new ArrayList<>();
-        list = FoodService.getFood();
+//        list = FoodService.getFood();
+        list = getListFood();
+        System.out.println(list.toString());
     }
 }

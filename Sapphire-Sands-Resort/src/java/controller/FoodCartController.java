@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -19,24 +18,13 @@ public class FoodCartController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FoodCartController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FoodCartController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String txt = "";
+        System.out.println("First: " + txt);
         Cookie[] arr = request.getCookies();
 
         if(arr != null){
@@ -47,6 +35,8 @@ public class FoodCartController extends HttpServlet {
             }
         }
 
+        System.out.println("Second: " + txt);
+        
         List<FoodCart> listCart = new ArrayList<>();
         listCart = FoodCartService.getListCart(txt);
 
