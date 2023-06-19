@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -15,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.entity.Customer;
+import model.entity.Order;
 import model.service.CustomerService;
+import model.service.OrderService;
 
 /**
  *
@@ -83,12 +86,16 @@ public class LoginController extends HttpServlet {
         if (cus != null) {
             Cookie userCookies = new Cookie("username", username);
             Cookie passCookies = new Cookie("password", password);
-            userCookies.setMaxAge(60 * 60 * 24);
+            userCookies.setMaxAge(60 * 60 * 24);    
             passCookies.setMaxAge(60 * 60 * 24);
             response.addCookie(userCookies);
             response.addCookie(passCookies);
             HttpSession session = request.getSession();
             session.setAttribute("customer", cus);
+            
+            List<Order> listOrder = OrderService.getOrderByCustomerID(cus.getCusID());
+            session.setAttribute("listOrder", listOrder);
+            
             response.sendRedirect("home.jsp");
         } else {
             System.out.println("Khong the dang nhap");

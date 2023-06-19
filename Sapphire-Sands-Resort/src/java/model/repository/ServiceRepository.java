@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package model.repository;
 
 import java.sql.Connection;
@@ -6,20 +11,21 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.config.DBConnect;
-import model.entity.Food;
-import model.service.FoodService;
+import model.entity.Service;
 
-public class FoodRepository {
-    
-    
-    public static List<Food> getListFood(){
-        List<Food> list = new ArrayList<>();
-        String query = "Select * from Food";
+/**
+ *
+ * @author Admin
+ */
+public class ServiceRepository {
+    public static List<Service> getListFood(){
+        List<Service> list = new ArrayList<>();
+        String query = "Select * from Service";
         try (Connection conn = DBConnect.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();  
             while(rs.next()) {
-                list.add(new Food(
+                list.add(new Service(
                         rs.getNString(1), 
                         rs.getNString(2), 
                         rs.getDouble(3)));
@@ -29,9 +35,4 @@ public class FoodRepository {
         }
         return list;
     }
-    
-//    public static void main(String[] args) {
-//        List<Food> list = new ArrayList<>();
-//        list = FoodService.getFood();
-//    }
 }
