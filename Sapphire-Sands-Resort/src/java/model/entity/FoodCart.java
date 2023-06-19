@@ -8,7 +8,7 @@ public class FoodCart {
     private Timestamp orTime;
     private int amount;
     private int orStatus;
-
+    
     public FoodCart() {
     }
 

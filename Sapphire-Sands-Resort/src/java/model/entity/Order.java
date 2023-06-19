@@ -5,17 +5,21 @@
  */
 package model.entity;
 
+import java.util.Date;
+
 /**
  *
  * @author Admin
  */
-public class OrderAccept {
-    String orderID, cusID, date, orStatus;
+public class Order {
+    private String orderID, cusID;
+    private Date date;
+    private boolean orStatus;
 
-    public OrderAccept() {
+    public Order() {
     }
 
-    public OrderAccept(String orderID, String cusID, String date, String orStatus) {
+    public Order(String orderID, String cusID, Date date, boolean orStatus) {
         this.orderID = orderID;
         this.cusID = cusID;
         this.date = date;
@@ -24,7 +28,7 @@ public class OrderAccept {
 
     @Override
     public String toString() {
-        return "OrderAccept{" + "orderID=" + orderID + ", cusID=" + cusID + ", date=" + date + ", orStatus=" + orStatus + '}';
+        return "Order{" + "orderID=" + orderID + ", cusID=" + cusID + ", date=" + date + ", orStatus=" + orStatus + '}';
     }
 
     public String getOrderID() {
@@ -43,20 +47,22 @@ public class OrderAccept {
         this.cusID = cusID;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public String getOrStatus() {
+    public boolean isOrStatus() {
         return orStatus;
     }
 
-    public void setOrStatus(String orStatus) {
+    public void setOrStatus(boolean orStatus) {
         this.orStatus = orStatus;
     }
+
+    
     
 }
