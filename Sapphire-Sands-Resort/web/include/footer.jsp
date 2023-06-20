@@ -63,3 +63,5 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script src="js/checkInput.js"></script>
+    
