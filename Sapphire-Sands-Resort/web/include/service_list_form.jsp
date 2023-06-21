@@ -61,7 +61,7 @@
 
                                             <form action="processServiceCart" method="post">
                                                 <c:if test="${sessionScope.customer==null}">
-                                                    <a class="btn btn-primary" href="login">Đặt phòng</a>
+                                                    <a class="btn btn-primary" href="login">Đặt Dịch Vụ</a>
                                                 </c:if>
                                                 <c:if test="${sessionScope.customer != null}">
                                                     <button class="btn btn-outline-dark mt-auto" id="input" type="summit" name="serviceID" value="${s.serviceID}"> Đặt Dịch Vụ </button>

@@ -19,7 +19,6 @@ public class ServiceCart {
     }
     
     
-
     public String getServiceID() {
         return serviceID;
     }

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public interface DBConnect {
     public static String user = "root";
-    public static String password = "1234"; 
+    public static String password = "15082001"; 
     String url = "jdbc:mysql://localhost:3306/SapphireSands";
     
     public static Connection getConnection() throws SQLException{
