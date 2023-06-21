@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.entity;
 
-/**
- *
- * @author Admin
- */
 public class Service {
     private String serviceID, serviceName;
     private double servicePrice;
@@ -24,8 +15,11 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service{" + "serviceID=" + serviceID + ", serviceName=" + serviceName + ", servicePrice=" + servicePrice + '}';
+//        return "Service{" + "serviceID=" + serviceID + ", serviceName=" + serviceName + ", servicePrice=" + servicePrice + '}';
+        return '{' + " foodID: " + serviceID + ", foodName: " + serviceName + ", foodPrice: " + servicePrice + '}' + "\n";
+        
     }
+    
 
     public String getServiceID() {
         return serviceID;
@@ -50,6 +44,6 @@ public class Service {
     public void setServicePrice(double servicePrice) {
         this.servicePrice = servicePrice;
     }
-
+    
     
 }

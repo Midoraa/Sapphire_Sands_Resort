@@ -9,11 +9,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.entity.FoodCart;
-import model.service.FoodCartService;
+import model.entity.ServiceCart;
+import model.service.ServiceDouble;
 
-@WebServlet(name = "FoodCartController", urlPatterns = {"/foodcart"})
-public class FoodCartController extends HttpServlet {
+@WebServlet(name = "ServiceCartController", urlPatterns = {"/serviceCart"})
+public class ServiceCartController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -23,25 +23,23 @@ public class FoodCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String txt = "";
-        System.out.println("First: " + txt);
         Cookie[] arr = request.getCookies();
-
-        if(arr != null){
-            for (Cookie c : arr) {
-                if (c.getName().equals("cart")) {
-                    txt = c.getValue();
+        if (arr != null) {
+            for (Cookie o : arr) {
+                if (o.getName().equals("cartService")) {
+                    txt = txt + o.getValue();
                 }
             }
         }
-
-        System.out.println("Second: " + txt);
         
-        List<FoodCart> listCart = new ArrayList<>();
-        listCart = FoodCartService.getListCart(txt);
-
-        request.setAttribute("listCart", listCart);
-        request.getRequestDispatcher("food_cart.jsp").forward(request, response);
+        List<ServiceCart> list = new ArrayList<>();
+        list = ServiceDouble.getServiceCart(txt);
+        
+        request.setAttribute("listServiceCart", list);
+        
+        request.getRequestDispatcher("service_cart.jsp").forward(request, response);
     }
 
     @Override
@@ -49,5 +47,10 @@ public class FoodCartController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
 }

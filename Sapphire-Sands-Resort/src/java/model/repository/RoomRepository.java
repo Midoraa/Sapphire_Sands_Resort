@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import model.config.DBConnect;
 import model.entity.Room;
 
@@ -165,4 +166,25 @@ public class RoomRepository {
 //    public static void main(String[] args) {
 //        System.out.println(getChoosenRoom("SUITE", 4));
 //    }
+    public static List<Room> getListRoom(){
+        List<Room> list = new ArrayList<>();
+        String query = "Select * from Room";
+        try (Connection conn = DBConnect.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Room(rs.getString(1), rs.getNString(2), "Penthouses & Villas", rs.getInt(4), rs.getDouble(5), Boolean.getBoolean(String.valueOf(rs.getInt(6))), rs.getNString(7), rs.getDouble(8), rs.getNString(9), rs.getNString(10), rs.getNString(11)));
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public static void main(String[] args) {
+        List<Room> list = new ArrayList<>();
+        list = getListRoom();
+        System.out.println(list.toString());
+    }
 }

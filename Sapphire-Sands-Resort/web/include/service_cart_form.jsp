@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cart_form
-    Created on : Jun 7, 2023, 5:20:51 PM
+    Document   : service_cart_form
+    Created on : Jun 18, 2023, 11:20:13 AM
     Author     : DELL
 --%>
 
@@ -171,7 +171,7 @@
             margin: 0;
         }
         .cart-page .cart-summary .cart-btn button:first-child {
-            margin-right: 25px;
+            margin-right: 20px;
             color: #7AB730;
             background: #ffffff;
             border: 1px solid #7AB730;
@@ -199,44 +199,40 @@
             border: 1px solid #7AB730;
         }
 
-
-
     </style>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
                 <div class="cart-page-inner">
-                    <div class="notification text-center">
-                        <c:out value="${notification}"></c:out>
-                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered"> 
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>Thực Đơn</th>
-                                        <th>Giá</th>
-                                        <th>Số Lượng</th>
-                                        <th>Tổng Tiền</th>
-                                        <th>Hủy Món</th>
-                                    </tr>
-                                </thead>
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Dịch Vụ</th>
+                                    <th>Giá</th>
+                                    <th>Số Người</th>
+                                    <th>Tổng Tiền</th>
+                                    <th>Hủy Dịch Vụ</th>
+                                </tr>
+                            </thead>
                             <tbody class="align-middle">
                                 <c:set var="totalItem" value="0"></c:set>
                                 <c:set var="totalPrice" value="0"></c:set>
 
-                                <c:forEach items="${listCart}" var="o">
+                                <c:forEach items="${listServiceCart}" var="so">
 
                                     <c:set var="totalItem"> ${totalItem+1}</c:set>
                                         <tr>
                                             <td>
                                                 <div class="img">   
-                                                    <img src="img/${o.foodID}.jpg" alt="Image">
-                                                <p>${o.foodName}</p>
+                                                    <img src="img/Service/${so.serviceID}.jpg" alt="Image">
+                                                <p>${so.serviceName}</p>
                                             </div>
                                         </td>
-                                        <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.foodPrice}"/> VND</td>
+                                        <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${so.servicePrice}"/> VND</td>
                                         <td>
-                                            <form action="process" method="get">
+                                            <form action="processServiceCart" method="post">
+                                                <input name="statusWeb" value="quantity" hidden=""/>
                                                 <div class="d-flex justify-content-center">
 
                                                     <button class="btn btn-primary px-2 me-1"
@@ -244,8 +240,8 @@
                                                         <i class="fas fa-minus"></i>
                                                     </button>
 
-                                                    <div class="form-outline w-50">
-                                                        <input class="form-control text-center" id="quantity" min="1" value="${o.amount}" name="quantity" type="number" 
+                                                    <div class="form-outline">
+                                                        <input class="form-control text-center" id="quantity" min="1" value="${so.amount}" name="quantity" type="number" 
                                                                onchange="const quantity = document.getElementById('quantity').value;" readonly=""/>
 
                                                     </div>
@@ -254,15 +250,16 @@
                                                              onclick="this.parentNode.querySelector('input[type=number]').stepUp()" name="num" value="1">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
-                                                    <input name="foodID" value="${o.foodID}" type="text" hidden="" >
+                                                    <input name="serviceID" value="${so.serviceID}" type="text" hidden="" >
                                                 </div>                      
                                             </form>   
                                         </td>
-                                        <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.foodPrice*o.amount}"/> VND</td>
-                                        <c:set var="totalPrice">${totalPrice + o.foodPrice*o.amount}</c:set>
+                                        <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${so.servicePrice*so.amount}"/> VND</td>
+                                        <c:set var="totalPrice">${totalPrice + so.servicePrice*so.amount}</c:set>
                                             <td>
-                                                <form action = "process" method="post">
-                                                    <input name ="foodID" value = "${o.foodID}" type = "hidden">
+                                                <form action = "processServiceCart" method="post">
+                                                    <input name="statusWeb" value="delete" hidden="">
+                                                    <input name ="serviceID" value = "${so.serviceID}" type = "hidden">
                                                 <button type = "submit"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>
@@ -276,26 +273,34 @@
             <div class="col-lg-4">
                 <div class="cart-page-inner">
                     <div class="row">
-                        <!--                        
-                                                <div class="col-md-12">
-                                                    <div class="coupon">
-                                                        <input type="text" placeholder="Coupon Code">
-                                                        <input class="button" type="submit" value="Apply Code">
-                                                    </div>
-                                                </div>
-                        -->
                         <div class="col-md-12">
                             <div class="cart-summary">
                                 <div class="cart-content">
-                                    <h1>Giỏ Hàng</h1>
-                                    <p>Số Lượng Thực Đơn: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalItem}"/></p>
+                                    <h1>Dịch Vụ Đã Chọn</h1>
+                                    <p>Số Lượng Dịch Vụ: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalItem}"/></p>
                                     <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/> VND</p>
                                 </div>
+                                <!--                                <div class="cart-btn">
+                                                                    <div class="container-fluid">
+                                                                        <div class="a" style="display: inline-block;">
+                                                                            <div class="col-md-5 w-100">
+                                                                                <form action="processServiceCart" method="post">
+                                                                                    <button type = "submit" name="statusWeb" value="order">Đặt Dịch Vụ</button>
+                                                                                </form>
+                                                                            </div>
+                                                                            <div class="col-md-5 w-100">
+                                                                                <form action="service" method="post">
+                                                                                    <button type = "submit" name="statusWeb" value="viewService">Xem Dịch Vụ</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>-->
                                 <div class="cart-btn">
 
-                                    <button type = "submit" name="order" value="order" onclick="window.location.href = 'process' ">Gọi Món</button>
+                                    <button type="submit" name="statusWeb" value="order" onclick="window.location.href = 'processServiceCart?statusWeb=order'">Đặt Dịch Vụ</button>
 
-                                    <button type="submit" onclick="window.location.href = 'food'">Xem Thực Đơn</button>
+                                    <button type="submit" name="statusWeb" value="viewService" onclick="window.location.href = 'service'">Xem Dịch Vụ</button>
 
                                 </div>
                             </div>

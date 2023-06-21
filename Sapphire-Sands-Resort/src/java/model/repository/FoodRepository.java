@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.config.DBConnect;
 import model.entity.Food;
-import model.service.FoodService;
 
 public class FoodRepository {
     
@@ -30,8 +29,10 @@ public class FoodRepository {
         return list;
     }
     
-//    public static void main(String[] args) {
-//        List<Food> list = new ArrayList<>();
+    public static void main(String[] args) {
+        List<Food> list = new ArrayList<>();
 //        list = FoodService.getFood();
-//    }
+        list = getListFood();
+        System.out.println(list.toString());
+    }
 }
