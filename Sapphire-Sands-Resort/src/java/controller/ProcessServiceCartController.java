@@ -59,11 +59,11 @@ public class ProcessServiceCartController extends HttpServlet {
             
             response.sendRedirect("serviceCart");
         }
-//        else if(statusWeb.equals("order")){
+        else if(statusWeb.equals("order")){
             String orderID = "OD000005";
             ServiceDouble.insertServiceDetail(txt, orderID);
             response.sendRedirect("serviceCart");  
-//        }     
+        }     
     }
 
     @Override

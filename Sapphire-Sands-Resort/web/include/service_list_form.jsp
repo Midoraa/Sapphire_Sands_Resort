@@ -58,8 +58,15 @@
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
+
                                             <form action="processServiceCart" method="post">
-                                                <button class="btn btn-outline-dark mt-auto" id="input" type="summit" name="serviceID" value="${s.serviceID}"> Đặt Dịch Vụ </button>
+                                                <c:if test="${sessionScope.customer==null}">
+                                                    <a class="btn btn-primary" href="login">Đặt phòng</a>
+                                                </c:if>
+                                                <c:if test="${sessionScope.customer != null}">
+                                                    <button class="btn btn-outline-dark mt-auto" id="input" type="summit" name="serviceID" value="${s.serviceID}"> Đặt Dịch Vụ </button>
+                                                </c:if> 
+
                                             </form>
                                         </div>
                                     </div>

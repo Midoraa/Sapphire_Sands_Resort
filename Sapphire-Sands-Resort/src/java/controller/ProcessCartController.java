@@ -26,9 +26,9 @@ public class ProcessCartController extends HttpServlet {
         processRequest(request, response);
 
 //        Perform the function of ordering and saving to the data
-        if (request.getParameter("num") == null || request.getParameter("foodID") == null ) {
+        if (request.getParameter("num") == null || request.getParameter("foodID") == null) {
 //            If num or foodID is null so the system will perform function Order (It is code perform )
-            
+
 //          Chờ lấy orderID từ khi đăng nhập
             String orderID = "OD000005";
 //            Get Cookie Cart and Save it into String txt
@@ -41,15 +41,17 @@ public class ProcessCartController extends HttpServlet {
                         txt = c.getValue();
                         c.setMaxAge(0);
                         response.addCookie(c);
+
+                        FoodCartService.insertFoodOrder(orderID, txt);
+                        
+                        request.getRequestDispatcher("home.jsp").forward(request, response);
                     }
-                    
-                    FoodCartService.insertFoodOrder(orderID, txt);
                 }
             }
-            
+//            System.out.println("Error: " + txt);
             request.getRequestDispatcher("food").forward(request, response);
         }
-        
+
 //        Update number food change in Food Cart when read from Cookie
         int numUpdate = Integer.parseInt(request.getParameter("num"));
         String foodID = request.getParameter("foodID");
@@ -70,7 +72,7 @@ public class ProcessCartController extends HttpServlet {
 //        Function update amount food
         List<FoodCart> listCart = new ArrayList<>();
         listCart = FoodCartService.updateAmount(txt, foodID, numUpdate);
-        
+
 //        After update amount reset String txt to contain new Food Cart after update
         txt = null;
 
@@ -82,12 +84,12 @@ public class ProcessCartController extends HttpServlet {
                 txt = txt + "/" + f.getFoodID() + ":" + f.getAmount();
             }
         }
-        
+
 //        Create again Cookie Cart
         Cookie c = new Cookie("cart", txt);
         c.setMaxAge(24 * 60 * 60);
         response.addCookie(c);
-        
+
 //        Return foodcart to view Food Cart
         response.sendRedirect("foodcart");
     }

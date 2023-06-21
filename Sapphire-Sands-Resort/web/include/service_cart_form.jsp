@@ -298,7 +298,7 @@
                                                                 </div>-->
                                 <div class="cart-btn">
 
-                                    <button type="submit" name="statusWeb" value="order" onclick="window.location.href = 'processServiceCart'">Đặt Dịch Vụ</button>
+                                    <button type="submit" name="statusWeb" value="order" onclick="window.location.href = 'processServiceCart?statusWeb=order'">Đặt Dịch Vụ</button>
 
                                     <button type="submit" name="statusWeb" value="viewService" onclick="window.location.href = 'service'">Xem Dịch Vụ</button>
 
