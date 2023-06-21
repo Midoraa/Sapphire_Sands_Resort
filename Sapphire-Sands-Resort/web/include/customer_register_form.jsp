@@ -79,24 +79,28 @@
                                         type="text"
                                         class="form-control"
                                         id="name"
-                                        placeholder="Fullname"
+                                        placeholder="Fullname" autocomplete="off" onkeyup="cusNameRegister(event)"
                                         />
                                     <label for="name"> Họ Và Tên</label>
                                 </div>
+                                <div id="messCusFullName" class="error-text text-center text-warning"></div>
                             </div>
-
-                            <div class="col-md-6">
+                            
+                            <div class="d-flex">
+                                <div class="col-md-6 px-2">
                                 <div class="form-floating">
                                     <input
                                         name="cusDOB"
                                         type="date"
                                         class="form-control"
                                         id="dob"
-                                        placeholder="DOB"
+                                        placeholder="DOB" onchange="cus_DOB(event)"
                                         />
                                     <label for="dob"> Ngày Sinh </label>
                                 </div>
+                                    <div id="messCusDOB" class="error-text text-center text-warning"></div>
                             </div>
+                            
                             <div class="col-md-6">
                                 <div class="form-floating">
                                     <input
@@ -104,11 +108,15 @@
                                         type="tel"
                                         class="form-control"
                                         id="phone"
-                                        placeholder="Phone"
+                                        placeholder="Phone" autocomplete="off" onkeyup="cusPhoneRegister(event)"
                                         />
                                     <label for="phone">Số Điện Thoại</label>
-                                </div>
+                                </div>     
+                                <div id="messCusPhone" class="error-text text-center text-warning"></div>
                             </div>
+                            
+                            </div>
+                            
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <input
@@ -116,12 +124,12 @@
                                         type="email"
                                         class="form-control"
                                         id="email"
-                                        placeholder="Email"
+                                        placeholder="Email" autocomplete="off" onkeyup="cusEmailRegister(event)"
                                         />
                                     <label for="email">Email</label>
                                 </div>
                             </div>
-
+                            <div id="messCusEmail" class="error-text text-center text-warning"></div>
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <input
@@ -129,11 +137,12 @@
                                         type="text"
                                         class="form-control"
                                         id="cccd"
-                                        placeholder="CCCD"
+                                        placeholder="CCCD" autocomplete="off" onkeyup="cusCCCDRegister(event)"
                                         />
                                     <label for="cccd"> CCCD </label>
                                 </div>
                             </div>
+                            <div id="messCusCCCD" class="error-text text-center text-warning"></div>
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <select name="cusType" class="form-select" id="select1">
@@ -150,11 +159,12 @@
                                         type="text"
                                         class="form-control"
                                         id="username"
-                                        placeholder="Tên đăng nhập"
+                                        placeholder="Tên đăng nhập" autocomplete="off" onkeyup="cusUserRegister(event)"
                                         />
                                     <label for="username"> Tên đăng nhập </label>
                                 </div>
                             </div>
+                            <div id="messCusUser" class="error-text text-center text-warning"></div>
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <input
@@ -162,25 +172,27 @@
                                         type="password"
                                         class="form-control"
                                         id="pasword"
-                                        placeholder="Mật khẩu"
+                                        placeholder="Mật khẩu" autocomplete="off" onkeyup="cusPassRegister(event)"
                                         />
                                     <label for="pasword"> Mật khẩu </label>
                                 </div>
                             </div>
+                            <div id="messCusPass" class="error-text text-center text-warning"></div>
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <input
                                         type="password"
                                         class="form-control"
                                         id="re-pasword"
-                                        placeholder="Xác nhận mật khẩu"
+                                        placeholder="Xác nhận mật khẩu" autocomplete="off" onkeyup="cusRePassRegister(event)"
                                         />
                                     <label for="re-pasword">Xác nhận mật khẩu</label>
                                 </div>
                             </div>
-
+                            <div id="messCusRePass" class="error-text text-center text-warning"></div>
+                            <div id="" class="error-text text-center text-warning">${message}</div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">
+                                <button class="btn btn-primary w-100 py-3" type="submit" id="registerButtonCus" disabled>
                                     Đăng ký 
                                 </button>
                             </div>

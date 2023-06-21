@@ -22,18 +22,19 @@
                     <h2>Đăng nhập</h2>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="person"></ion-icon></span>
-                        <input type="text" name="username" required> 
+                        <input type="text" name="username" required autocomplete="off" onkeyup="userName(event)"> 
                         <label>Tên đăng nhập</label>
                     </div>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input type="password" name="password" required> 
+                        <input type="password" name="password" required autocomplete="off" onkeyup="Pass(event)"> 
                         <label>Mật khẩu</label>
                     </div>
                     <div class="remember-forgot">
                         <a href="#">Quên mật khẩu</a>
                     </div>
-                    <button type="submit">Đăng nhập</button>
+                    <div class="text-warning text-center" id="messText" >${thongbao}</div>
+                    <button type="submit" class="btn btn-light" id="loginButton" disabled>Đăng nhập</button>
                     <div class="register-link">
                         <p>Chưa có tài khoản? <a href="customer_register">Đăng ký</a></p>
                     </div>
@@ -48,3 +49,40 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     </body>
 </html>
+<script>
+    const loginButton = document.getElementById("loginButton");
+    const messText = document.getElementById("messText");
+    let usernameLogin = "", passLogin = " ";
+    
+    function userName(event){
+        usernameLogin = event.target.value;
+        if(usernameLogin.length === 0){
+            messText.textContent = "Vui lòng không để trống !"
+        }else if (usernameLogin.length < 3){
+            messText.textContent = "Vui lòng nhập tên đăng trên 3 kí tự !"
+        }else{
+            messText.innerHTML = ""
+        }
+        checkLogin();
+    }
+    function Pass(event){
+        passLogin = event.target.value;
+        
+        if(passLogin.length === 0){
+            messText.textContent = "Vui lòng không để trống !"
+        }else if(passLogin.length < 3){
+             messText.textContent = "Vui lòng nhập mật khẩu trên 3 kí tự !"
+        }else{
+             messText.textContent = ""
+        }
+        checkLogin();
+    }
+    function checkLogin(){
+        if(usernameLogin.length >= 3 && passLogin.length >= 3){
+            loginButton.disabled = false
+        }else{
+            loginButton.disabled = true;
+        }
+    }
+    
+</script>

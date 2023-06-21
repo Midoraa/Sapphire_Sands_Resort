@@ -23,15 +23,19 @@
                         <div class="col-md-3 px-2">
                             <div class="date" id="date1" data-target-input="nearest">
                                 <input name="time_in" type="date" class="form-control"
-                                       placeholder="Nhận phòng" />
+                                       placeholder="Nhận phòng" onchange="checkIn(event)"/>
                             </div>
+                            <div id="messCheckIn" class="error-text text-center text-warning"></div>
                         </div>
+                        
                         <div class="col-md-3 px-2">
                             <div class="date" id="date2" data-target-input="nearest">
                                 <input name="time_out" type="date" class="form-control"
-                                       placeholder="Trả phòng"/>
+                                       placeholder="Trả phòng" onchange="checkOut(event)"/>
                             </div>
+                            <div id="messCheckOut" class="error-text text-center text-warning"></div>
                         </div>
+                        
                         <div class="col-md-3 px-2">
                             <select class="form-select" name="max_people">
                                 <option selected>Số người</option>
@@ -60,7 +64,7 @@
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">Tìm phòng</button>
+                    <button type="submit" class="btn btn-primary w-100" id="searchRoom" disabled>Tìm phòng</button>
                 </div>
             </form>
         </div>

@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.Map;
 import model.config.DBConnect;
 import model.entity.FoodCart;
-import model.service.FoodCartService;
 import java.sql.*;
+import model.entity.ServiceCart;
 
-public class FoodCartRepository {
+public class ServiceCartRepository {
 
-    public static void insertFoodOrder(String orderID, String txt) {
-//        Get real time for Food Order in mysql type Timestamp
+    public static void insertServiceOrder(String orderID, String txt) {
+//        Get real time for Service Order in mysql type Timestamp
         Timestamp orTime = new Timestamp(System.currentTimeMillis());
 
-        List<FoodCart> listCart = new ArrayList();
+        List<ServiceCart> listCart = new ArrayList();
 
-        String[] foodID = null;
+        String[] serviceID = null;
         int[] amount = null;
 
         if (!txt.isEmpty() && txt.length() != 0) {
@@ -29,28 +29,29 @@ public class FoodCartRepository {
 
             for (String element : id_amount) {
                 String f[] = element.split(":");
-                listCart.add(new FoodCart(orderID, f[0], orTime, Integer.parseInt(f[1]), 0));
+                listCart.add(new ServiceCart(orderID, f[0], orTime, Integer.parseInt(f[1]), 0));
             }
 
         }
         
-        for (FoodCart foodCart : listCart) {
+        for (ServiceCart serviceCart : listCart) {
 
             try (Connection conn = DBConnect.getConnection()) {
                 //        Insert into OrderDetail Value('OD000001', 'F000003', '2023-06-17 06:43:27.13', 2, 0);
-                String query = "Insert into OrderDetail (orderID, foodID, orTime, Amount, orStatus) Value(?,?,?,?,?)";
+                String query = "Insert into ServiceDetail (orderID, serviceID, svTime, Amount, svStatus) Value(?,?,?,?,?)";
                 PreparedStatement ps = conn.prepareStatement(query);
-                ps.setString(1, foodCart.getOrderID());
-                ps.setString(2, foodCart.getFoodID());
-                ps.setTimestamp(3, foodCart.getOrTime());
-                ps.setInt(4, foodCart.getAmount());
-                ps.setInt(5, foodCart.getOrStatus());
+                ps.setString(1, serviceCart.getOrderID());
+                ps.setString(2, serviceCart.getServiceID());
+                ps.setTimestamp(3, serviceCart.getSvTime());
+                ps.setInt(4, serviceCart.getAmount());
+                ps.setInt(5, serviceCart.getSvStatus());
 
                 ps.executeUpdate();
                 ps.close();
 
             } catch (Exception e) {
                 System.out.println(e);
+                System.out.println("================Loi INSERT ServiceDetail trong Service Repo===============");
             }
 
         }
@@ -59,27 +60,27 @@ public class FoodCartRepository {
 
 //    Make Shop Cart with Cookie save in User Client.
 //    Get List Food had insert into Cookie and return List Cart include: FoodID, FoodName, FoodPrice, FoodAmount.
-    public static List<FoodCart> getListCart(String txt) {
-        List<FoodCart> listCart = new ArrayList();
-        String[] foodID = null;
+    public static List<ServiceCart> getListServiceCart(String txt) {
+        List<ServiceCart> listCart = new ArrayList();
+        String[] serviceID = null;
         int[] amount = null;
         if (!txt.isEmpty() && txt.length() != 0) {
 //            List chứa tạm thời
-            List<FoodCart> var = new ArrayList();
+            List<ServiceCart> var = new ArrayList();
             String[] id_amount = txt.split("/");
             for (String element : id_amount) {
                 String f[] = element.split(":");
-                var.add(new FoodCart(f[0], Integer.parseInt(f[1])));
+                var.add(new ServiceCart(f[0], Integer.parseInt(f[1])));
             }
 
             Map<String, Integer> map = new HashMap<>();
 
-            for (FoodCart foodCart : var) {
-                if (foodCart.getAmount() >= 1) {
-                    if (map.containsKey(foodCart.getFoodID())) {
-                        map.put(foodCart.getFoodID(), map.get(foodCart.getFoodID()) + foodCart.getAmount());
+            for (ServiceCart serviceCart : var) {
+                if (serviceCart.getAmount() >= 1) {
+                    if (map.containsKey(serviceCart.getServiceID())) {
+                        map.put(serviceCart.getServiceID(), map.get(serviceCart.getServiceID()) + serviceCart.getAmount());
                     } else {
-                        map.put(foodCart.getFoodID(), foodCart.getAmount());
+                        map.put(serviceCart.getServiceID(), serviceCart.getAmount());
                     }
                 }
             }
@@ -88,16 +89,16 @@ public class FoodCartRepository {
 
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
 //                var.add(new FoodCart(entry.getKey(), entry.getValue()));
-                String query = "Select foodID, foodName, foodPrice\n"
-                        + "From Food \n"
-                        + "Where foodID = ?";
+                String query = "Select serviceID, serviceName, servicePrice\n"
+                        + "From Service \n"
+                        + "Where serviceID = ?";
                 try (Connection conn = DBConnect.getConnection()) {
                     PreparedStatement ps = conn.prepareStatement(query);
 //                        ps.setString(1, food);
                     ps.setString(1, entry.getKey());
                     ResultSet rs = ps.executeQuery();
                     while (rs.next()) {
-                        listCart.add(new FoodCart(rs.getNString(1), rs.getString(2), rs.getDouble(3), entry.getValue()));
+                        listCart.add(new ServiceCart(rs.getNString(1), rs.getString(2), rs.getDouble(3), entry.getValue()));
                     }
                 } catch (Exception e) {
                     System.out.println(e);
@@ -109,26 +110,26 @@ public class FoodCartRepository {
     }
 
 //    Update Amount in Shop Cart add or remove 1 food
-    public static List<FoodCart> updateAmount(String txt, String foodID, int num) {
-        List<FoodCart> listCart = new ArrayList();
-        listCart = getListCart(txt);
+    public static List<ServiceCart> updateAmount(String txt, String serviceID, int num) {
+        List<ServiceCart> listCart = new ArrayList();
+        listCart = getListServiceCart(txt);
 
-        for (FoodCart f : listCart) {
-            if (f.getFoodID().equals(foodID)) {
+        for (ServiceCart f : listCart) {
+            if (f.getServiceID().equals(serviceID)) {
                 if (f.getAmount() + num != 0) {
                     f.setAmount(f.getAmount() + num);
                 }
             }
         }
-        System.out.println(foodID);
+        System.out.println(serviceID);
         return listCart;
     }
 
 //    Delete one Food when click remove in food_cart_form.jsp
-    public static List<FoodCart> deleteCart(String txt, String foodID) {
-        List<FoodCart> listCart = new ArrayList();
-        listCart = getListCart(txt);
-        listCart.removeIf(FoodCart -> FoodCart.getFoodID().equals(foodID));
+    public static List<ServiceCart> deleteCart(String txt, String serviceID) {
+        List<ServiceCart> listCart = new ArrayList();
+        listCart = getListServiceCart(txt);
+        listCart.removeIf(ServiceCart -> ServiceCart.getServiceID().equals(serviceID));
         return listCart;
     }
 

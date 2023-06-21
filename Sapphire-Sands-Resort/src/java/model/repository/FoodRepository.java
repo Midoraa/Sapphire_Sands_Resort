@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.config.DBConnect;
 import model.entity.Food;
-import model.service.FoodService;
 
 public class FoodRepository {
     
