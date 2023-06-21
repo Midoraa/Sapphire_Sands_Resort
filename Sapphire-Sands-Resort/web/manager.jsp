@@ -3,15 +3,15 @@
     Created on : Jun 15, 2023, 8:12:09 PM
     Author     : Admin
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<jsp:useBean class="model.repository.ManagerRepository" scope="page" id="show"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8">
-        <title>DASHMIN - Bootstrap Admin Template</title>
+        <title>Manager management</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -155,26 +155,110 @@
                             <table class="table text-start align-middle table-bordered table-hover mb-0">
                                 <thead>
                                     <tr class="text-dark">
-                                        <th scope="col">Ngày Làm Hợp Đồng</th>
                                         <th scope="col">ID Khách Hàng</th>
+                                        <th scope="col">Thời gian đặt</th>
                                         <th scope="col">Tên Khách Hàng</th>
                                         <th scope="col">ID Phòng </th>
-                                        <th scope="col">Cần thanh toán</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Ngày thuê</th>
+                                        <th scope="col">Ngày trả</th>
+                                        <th scope="col">Số người</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>01 Jan 2045</td>
-                                        <td>INV-0123</td>
-                                        <td>Jhon Doe</td>
-                                        <td>R00001</td>
-                                        <td>$123</td>
+                                    <c:forEach items="${show.getAllPendingContract()}" var="i" >
+                                    <tr id="row${i.orderID}">
+                                        <td>${i.cusID}</td>
+                                        <td>${i.timeRegister}</td>
+                                        <td>${i.cusName}</td>
+                                        <td>${i.roomID}</td>
+                                        <td>${i.timeIn}</td>
+                                        <td>${i.timeOut}</td>
+                                        <td>${i.people}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-primary" href="">Accept</a>
-                                            <a class="btn btn-sm btn-primary" href="">UnAccept</a>                        
+                                            <a class="btn btn-sm btn-primary" href="accept_contract?orderID=${i.orderID}&cusID=${i.cusID}&roomID=${i.roomID}">Chấp nhận</a>
+                                            <a class="btn btn-sm btn-primary" href="remove_order?orderID=${i.orderID}">Không chấp nhận</a>                        
                                         </td>
-                                    </tr>                           
+                                    </tr>   
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid pt-4 px-4 pb-5" id="contractManager">
+                    <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Hợp đồng thuê phòng đã được chấp nhận</h6>
+                            <!-- <a href="">Show All</a> -->
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <thead>
+                                    <tr class="text-dark">
+                                        <th scope="col">Mã Hóa Đơn</th>
+                                        <th scope="col">ID Khách Hàng</th>
+                                        <th scope="col">Thời gian đặt</th>
+                                        <th scope="col">Tên Khách Hàng</th>
+                                        <th scope="col">ID Phòng </th>
+                                        <th scope="col">Ngày thuê</th>
+                                        <th scope="col">Ngày trả</th>
+                                        <th scope="col">Số người</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${show.getAllAcceptedContract()}" var="i" >
+                                    <tr id="row${i.orderID}">
+                                        <td>${i.orderID}</td>
+                                        <td>${i.cusID}</td>
+                                        <td>${i.timeRegister}</td>
+                                        <td>${i.cusName}</td>
+                                        <td>${i.roomID}</td>
+                                        <td>${i.timeIn}</td>
+                                        <td>${i.timeOut}</td>
+                                        <td>${i.people}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-primary" href="">Thanh toán</a>  
+                                        </td>
+                                    </tr>   
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid pt-4 px-4 pb-5" id="contractManager">
+                    <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Hóa đơn đã được thanh toán</h6>
+                            <!-- <a href="">Show All</a> -->
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <thead>
+                                    <tr class="text-dark">
+                                        <th scope="col">Mã Hóa Đơn</th>
+                                        <th scope="col">ID Khách Hàng</th>
+                                        <th scope="col">Thời gian đặt</th>
+                                        <th scope="col">Tên Khách Hàng</th>
+                                        <th scope="col">ID Phòng </th>
+                                        <th scope="col">Ngày thuê</th>
+                                        <th scope="col">Ngày trả</th>
+                                        <th scope="col">Số người</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${show.getAllPaidContract()}" var="i" >
+                                    <tr id="row${i.orderID}">
+                                        <td>${i.orderID}</td>
+                                        <td>${i.cusID}</td>
+                                        <td>${i.timeRegister}</td>
+                                        <td>${i.cusName}</td>
+                                        <td>${i.roomID}</td>
+                                        <td>${i.timeIn}</td>
+                                        <td>${i.timeOut}</td>
+                                        <td>${i.people}</td>
+                                    </tr>   
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -204,6 +288,7 @@
                                     <tr>
                                         <td><input class="form-check-input" type="checkbox"></td>
                                         <td>DE12NDa</td>
+                                        <td>INV-0123</td>
                                         <td>INV-0123</td>
                                         <td>Cá kho</td>
                                         <td>3</td>
