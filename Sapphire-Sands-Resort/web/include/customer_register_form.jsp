@@ -87,7 +87,7 @@
                             </div>
                             
                             <div class="d-flex">
-                                <div class="col-md-6 px-2">
+                                <div class="col-md-6">
                                 <div class="form-floating">
                                     <input
                                         name="cusDOB"

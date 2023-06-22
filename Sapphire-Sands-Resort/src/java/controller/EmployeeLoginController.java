@@ -89,7 +89,13 @@ public class EmployeeLoginController extends HttpServlet {
             response.addCookie(passCookies);
             HttpSession session = request.getSession();
             session.setAttribute("employee", emp);
-            response.sendRedirect("home.jsp");
+            if (emp.getRole()==3) {
+                response.sendRedirect("manager.jsp");
+            }else if(emp.getRole()==2){
+                response.sendRedirect("admin.jsp");
+            }else{
+                response.sendRedirect("employee.jsp");
+            }
         }else {
             System.out.println("Khong the dang nhap cho EMPLOYEE");
             request.setAttribute("thongbao", "Thông tin đăng nhập không chính xác");

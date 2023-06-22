@@ -44,7 +44,7 @@ public class MakeOrderController extends HttpServlet {
         Customer cus = (Customer) session.getAttribute("customer");
         Contract temporaryContract = (Contract) session.getAttribute("temporary_contract");
         OrderService.makeOrder(room, temporaryContract, cus);
-        request.getRequestDispatcher("mail.jsp").forward(request, response);
+        request.getRequestDispatcher("done_regist_room.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
