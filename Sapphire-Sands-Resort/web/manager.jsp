@@ -5,6 +5,11 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<c:if test="${sessionScope.employee.role!=3}">
+    <% response.sendRedirect("employee_login");%>
+</c:if>
+
 <jsp:useBean class="model.repository.ManagerRepository" scope="page" id="show"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,11 +60,11 @@
                                 <span class="d-none d-lg-inline-flex">Manager</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                                <a href="#" class="dropdown-item"><i class="fa fa-home me-2"></i>Home</a>
+                                <a href="home.jsp" class="dropdown-item"><i class="fa fa-home me-2"></i>Home</a>
                                 <a href="#chart" class="dropdown-item"><i class="fa fa-chart-bar me-2"></i>Charts</a>
                                 <a href="#contractManager" class="dropdown-item"><i class="fas fa-tasks me-2"></i>Contract Manager</a>
                                 <a href="#managerService" class="dropdown-item"><i class="fas fa-tasks me-2"></i>Service Manager</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-arrow-circle-right me-2"></i>Log Out</a>
+                                <a href="logout" class="dropdown-item"><i class="fas fa-arrow-circle-right me-2"></i>Log Out</a>
                             </div>
                         </div>
                     </div>
@@ -176,7 +181,7 @@
                                         <td>${i.people}</td>
                                         <td>
                                             <a class="btn btn-sm btn-primary" href="accept_contract?orderID=${i.orderID}&cusID=${i.cusID}&roomID=${i.roomID}">Chấp nhận</a>
-                                            <a class="btn btn-sm btn-primary" href="remove_order?orderID=${i.orderID}">Không chấp nhận</a>                        
+                                            <a class="btn btn-sm btn-danger" href="remove_order?orderID=${i.orderID}&cusID=${i.cusID}">Không chấp nhận</a>                        
                                         </td>
                                     </tr>   
                                     </c:forEach>
@@ -217,7 +222,7 @@
                                         <td>${i.timeOut}</td>
                                         <td>${i.people}</td>
                                         <td>
-                                            <a class="btn btn-sm btn-primary" href="">Thanh toán</a>  
+                                            <a class="btn btn-sm btn-primary" href="pay?orderID=${i.orderID}">Thanh toán</a>  
                                         </td>
                                     </tr>   
                                     </c:forEach>

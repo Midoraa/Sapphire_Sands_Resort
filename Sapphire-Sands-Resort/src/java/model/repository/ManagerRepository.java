@@ -154,7 +154,7 @@ public class ManagerRepository {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, orderID);
             ps.setString(2, roomID);
-            ps.executeQuery();
+            ps.executeUpdate();
             conn.close();
             ps.close();
         } catch (Exception e) {
@@ -180,6 +180,20 @@ public class ManagerRepository {
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("=============Loi method removeOrder(String id) trong ManagerRepo==========");
+        }
+    }
+    
+    public static void Payment(String orderID){
+        try(Connection conn = DBConnect.getConnection()) {
+            String query = "UPDATE `Order` SET orStatus = 1 WHERE orderID = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, orderID);
+            ps.executeUpdate();
+            conn.close();
+            ps.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("========Loi PAYMENT trong ManagerRepo==========");
         }
     }
 

@@ -34,6 +34,9 @@ public class EmployeeRepository {
                 emp.setEmpAdress(rs.getString("empAdress"));
                 emp.setEmpPhone(rs.getString("empPhone"));
                 emp.setEmpEmail(rs.getString("empEmail"));
+                emp.setUsername(rs.getString("username"));
+                emp.setPassword(rs.getString("password"));
+                emp.setRole(rs.getInt("role"));
                 return emp;
             }
             rs.close();
