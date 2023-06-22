@@ -17,7 +17,16 @@ public class ServiceCart {
         this.amount = amount;
         this.servicePrice = servicePrice;
     }
-    
+
+    public ServiceCart(String orderID, String serviceID, String serviceName, double servicePrice, Timestamp serviceTime, int amount, int serviceStatus) {
+        this.orderID = orderID;
+        this.serviceID = serviceID;
+        this.serviceName = serviceName;
+        this.servicePrice = servicePrice;
+        this.serviceTime = serviceTime;
+        this.amount = amount;
+        this.serviceStatus = serviceStatus;
+    }
     
     public String getServiceID() {
         return serviceID;
@@ -74,6 +83,11 @@ public class ServiceCart {
     public void setServiceTime(Timestamp serviceTime) {
         this.serviceTime = serviceTime;
     }
+
+//    @Override
+//    public String toString() {
+//        return "ServiceCart{" + "serviceID=" + serviceID + ", serviceName=" + serviceName + ", orderID=" + orderID + ", amount=" + amount + ", serviceStatus=" + serviceStatus + ", servicePrice=" + servicePrice + ", serviceTime=" + serviceTime + '}';
+//    }
 
     @Override
     public String toString() {

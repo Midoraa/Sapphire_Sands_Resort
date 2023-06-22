@@ -8,7 +8,6 @@ import model.config.DBConnect;
 import model.entity.Service;
 import model.entity.ServiceCart;
 import java.sql.*;
-import model.service.ServiceDouble;
 
 public class ServiceRepository {
 
@@ -184,9 +183,9 @@ public class ServiceRepository {
         String txt = "SV000002:3/SV000001:2/SV000004:1/SV000003:2";
         
 //        Kiểm tra đẩy dịch vụ lên client
-        List<Service> list = new ArrayList<>();
-        list = ServiceDouble.getService();
-        System.out.println(list.toString());     
+//        List<Service> list = new ArrayList<>();
+//        list = ServiceDouble.getService();
+//        System.out.println(list.toString());   
 
 //          Kiểm tra hàm reset là chuỗi cookie form
 //        System.out.println(ServiceDouble.resetCookieCart(txt));
@@ -203,5 +202,6 @@ public class ServiceRepository {
 ////        Kiểm tra hàm xóa 1 service khỏi cookie
 //        String delete = deleteServiceCart(txt, "SV000001");
 //        System.out.println(delete);
+
     }
 }

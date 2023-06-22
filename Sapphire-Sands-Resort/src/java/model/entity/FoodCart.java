@@ -53,6 +53,17 @@ public class FoodCart {
         this.orStatus = orStatus;
     }
 
+    public FoodCart(String orderID, String foodID, String foodName, double foodPrice, Timestamp orTime, int amount, int orStatus) {
+        this.orderID = orderID;
+        this.foodID = foodID;
+        this.foodName = foodName;
+        this.foodPrice = foodPrice;
+        this.orTime = orTime;
+        this.amount = amount;
+        this.orStatus = orStatus;
+    }
+    
+
     public String getOrderID() {
         return orderID;
     }
@@ -117,10 +128,15 @@ public class FoodCart {
         this.orStatus = orStatus;
     }
 
+//    @Override
+//    public String toString() {
+////        return foodID + ":" + amount + "/";
+//        return foodID + ":" + foodName + ":" + foodPrice + ":" + amount;
+//    }
+
     @Override
     public String toString() {
-//        return foodID + ":" + amount + "/";
-        return foodID + ":" + foodName + ":" + foodPrice + ":" + amount;
+        return "FoodCart{" + "orderID=" + orderID + ", foodID=" + foodID + ", foodName=" + foodName + ", cusID=" + cusID + ", foodPrice=" + foodPrice + ", orTime=" + orTime + ", amount=" + amount + ", orStatus=" + orStatus + '}';
     }
     
 }

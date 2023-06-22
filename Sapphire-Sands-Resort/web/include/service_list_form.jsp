@@ -29,7 +29,13 @@
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title text-center text-primary text-uppercase">Our Service</h6>
             <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Service</span></h1>
-            <a class="btn btn-outline-dark mt-auto" href="serviceCart"><i class="bi bi-cart"></i></a>
+
+            <c:if test="${sessionScope.customer == null}">
+                <a class="btn btn-outline-dark mt-auto" href="login"><i class="bi bi-cart"></i></a>
+                </c:if>
+                <c:if test="${sessionScope.customer != null}">
+                <a class="btn btn-outline-dark mt-auto" href="serviceCart"><i class="bi bi-cart"></i></a>
+                </c:if> 
         </div>
         <div class="row g-4">
             <section class="py-5">

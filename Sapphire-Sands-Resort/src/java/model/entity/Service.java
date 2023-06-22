@@ -15,9 +15,7 @@ public class Service {
 
     @Override
     public String toString() {
-//        return "Service{" + "serviceID=" + serviceID + ", serviceName=" + serviceName + ", servicePrice=" + servicePrice + '}';
-        return '{' + " foodID: " + serviceID + ", foodName: " + serviceName + ", foodPrice: " + servicePrice + '}' + "\n";
-        
+        return "Service{" + "serviceID=" + serviceID + ", serviceName=" + serviceName + ", servicePrice=" + servicePrice + '}';
     }
     
 

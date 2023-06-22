@@ -208,9 +208,9 @@
                 <div class="cart-page-inner">
                     <div class="notification text-center">
                         <c:out value="${notification}"></c:out>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-bordered"> 
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered"> 
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Thực Đơn</th>
@@ -220,7 +220,7 @@
                                         <th>Hủy Món</th>
                                     </tr>
                                 </thead>
-                            <tbody class="align-middle">
+                                <tbody class="align-middle">
                                 <c:set var="totalItem" value="0"></c:set>
                                 <c:set var="totalPrice" value="0"></c:set>
 
@@ -288,12 +288,20 @@
                             <div class="cart-summary">
                                 <div class="cart-content">
                                     <h1>Giỏ Hàng</h1>
+                                    <p class="text-danger">Sau khi đặt thức ăn sẽ không thể hủy vì nhân viên sẽ setup ngay lập tức. Vui lòng xác nhận lại trước khi đặt thức ăn</p>
                                     <p>Số Lượng Thực Đơn: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalItem}"/></p>
                                     <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/> VND</p>
+<!--                                    <p>Chọn Phòng:
+                                        <select id="mySelect">
+                                            <c:forEach items="${listOrderID}" var="orID">
+                                            <option value="${orID}">${orID}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </p>-->
                                 </div>
                                 <div class="cart-btn">
 
-                                    <button type = "submit" name="order" value="order" onclick="window.location.href = 'process' ">Gọi Món</button>
+                                    <button type = "submit" name="order" value="order" onclick="window.location.href = 'process'">Gọi Món</button>
 
                                     <button type="submit" onclick="window.location.href = 'food'">Xem Thực Đơn</button>
 

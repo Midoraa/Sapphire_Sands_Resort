@@ -9,7 +9,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.entity.FoodCart;
+import model.entity.OrderCart;
 import model.service.FoodCartService;
 
 @WebServlet(name = "ProcessCartController", urlPatterns = {"/process"})
@@ -28,9 +30,11 @@ public class ProcessCartController extends HttpServlet {
 //        Perform the function of ordering and saving to the data
         if (request.getParameter("num") == null || request.getParameter("foodID") == null) {
 //            If num or foodID is null so the system will perform function Order (It is code perform )
-
+        
+        String orderID = request.getParameter("orderID");
+        
 //          Chờ lấy orderID từ khi đăng nhập
-            String orderID = "OD000005";
+//            String orderID = "OD000005";
 //            Get Cookie Cart and Save it into String txt
             String txt = "";
             Cookie[] arr = request.getCookies();
@@ -44,7 +48,7 @@ public class ProcessCartController extends HttpServlet {
 
                         FoodCartService.insertFoodOrder(orderID, txt);
                         
-                        request.getRequestDispatcher("home.jsp").forward(request, response);
+                        request.getRequestDispatcher("yourcart").forward(request, response);
                     }
                 }
             }

@@ -277,8 +277,16 @@
                             <div class="cart-summary">
                                 <div class="cart-content">
                                     <h1>Dịch Vụ Đã Chọn</h1>
+                                    <p class="text-danger">Sau khi đặt dịch vụ sẽ không thể hủy vì nhân viên sẽ setup ngay lập tức. Vui lòng xác nhận lại trước khi đặt dịch vụ</p>
                                     <p>Số Lượng Dịch Vụ: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalItem}"/></p>
                                     <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/> VND</p>
+<!--                                    <p>Chọn Phòng: 
+                                        <select>
+                                            <c:forEach items="${listOrderID}" var="orID">
+                                                <option value="${orID}">${orID}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </p>-->
                                 </div>
                                 <!--                                <div class="cart-btn">
                                                                     <div class="container-fluid">

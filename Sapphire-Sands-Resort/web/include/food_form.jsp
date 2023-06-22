@@ -29,7 +29,13 @@
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title text-center text-primary text-uppercase">Our Food & Restaurant</h6>
             <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Food & Restaurant</span></h1>
-            <a class="btn btn-outline-dark mt-auto" href="foodcart"><i class="bi bi-cart"></i></a>
+            <c:if test="${sessionScope.customer == null}">
+                <a class="btn btn-outline-dark mt-auto" href="login"><i class="bi bi-cart"></i></a>
+                </c:if>
+                <c:if test="${sessionScope.customer != null}">
+                <a class="btn btn-outline-dark mt-auto" href="foodcart"><i class="bi bi-cart"></i></a>
+                </c:if> 
+
         </div>
         <div class="row g-4">
             <section class="py-5">
@@ -58,9 +64,15 @@
                                     <!-- Product actions-->
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
-                                                    <a class="btn btn-outline-dark mt-auto" id="input" href="food?foodID=${f.foodID}&quantity=1">Gọi Món</a>
+                                            <c:if test="${sessionScope.customer == null}">
+                                                <a class="btn btn-primary" href="login">Gọi Món</a>
+                                            </c:if>
+                                            <c:if test="${sessionScope.customer != null}">
+                                                <a class="btn btn-outline-dark mt-auto" id="input" href="food?foodID=${f.foodID}&quantity=1">Gọi Món</a>
+                                            </c:if> 
+
                                             <!--<button class="btn btn-outline-dark mt-auto" id="input" type="summit"> Gọi Món </button>-->
-                                            
+
                                         </div>
                                     </div>
 
