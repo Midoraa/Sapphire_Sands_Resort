@@ -9,7 +9,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.entity.Customer;
+import model.entity.OrderCart;
 import model.entity.ServiceCart;
+import model.repository.YourCartRepository;
 import model.service.ServiceDouble;
 
 @WebServlet(name = "ServiceCartController", urlPatterns = {"/serviceCart"})
@@ -24,6 +28,9 @@ public class ServiceCartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        HttpSession session = request.getSession();
+        Customer cus = (Customer) session.getAttribute("customer");
+        if(cus.getAccountID() != null){
         String txt = "";
         Cookie[] arr = request.getCookies();
         if (arr != null) {
@@ -37,9 +44,15 @@ public class ServiceCartController extends HttpServlet {
         List<ServiceCart> list = new ArrayList<>();
         list = ServiceDouble.getServiceCart(txt);
         
-        request.setAttribute("listServiceCart", list);
+        List<OrderCart> listRoom = YourCartRepository.getRoomByAccount(cus.getAccountID(), 0);
         
+        request.setAttribute("listServiceCart", list);
+        request.setAttribute("listRoom", listRoom);
+
         request.getRequestDispatcher("service_cart.jsp").forward(request, response);
+        }
+        
+        response.sendRedirect("login");
     }
 
     @Override

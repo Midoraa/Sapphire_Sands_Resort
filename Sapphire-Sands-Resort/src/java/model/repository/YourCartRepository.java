@@ -10,7 +10,6 @@ import model.entity.FoodCart;
 import model.entity.OrderCart;
 import model.entity.RoomCart;
 import model.entity.ServiceCart;
-import model.service.YourCartService;
 
 public class YourCartRepository {
 
@@ -27,7 +26,6 @@ public class YourCartRepository {
 
         return list;
     }
-    
 
     public static List<OrderCart> getYourCartOrder(String cusID) {
         List<OrderCart> list = new ArrayList<>();
@@ -166,11 +164,59 @@ public class YourCartRepository {
         return list;
     }
 
+    public static List<OrderCart> getRoomByAccount(String cusID, int orStatus) {
+        List<OrderCart> list = new ArrayList<>();
+        String query = "Select a.orderID, a.orStatus, b.roomID, c.roomName from `Order` a join ContractDetail b join Room c "
+                + "on a.orderID = b.orderID and b.roomID = c.roomID "
+                + "Where a.cusID = ? and a.orStatus = ? ";
+
+        try (Connection conn = DBConnect.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, cusID);
+            ps.setInt(2, orStatus);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new OrderCart(rs.getString(1), rs.getInt(2), rs.getString(3), rs.getNString(4)));
+                System.out.println("orderID: " + rs.getString(1) + "orStatus: " + rs.getInt(2) + "roomID: " + rs.getString(3) + "roomName: " + rs.getNString(4));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return list;
+    }
+
+    public static double getTotalPrice(String orderID) {
+        double price = 0;
+
+        List<RoomCart> listRoom = new ArrayList<>();
+        List<FoodCart> listFood = new ArrayList<>();
+        List<ServiceCart> listService = new ArrayList<>();
+
+        listRoom = getYourCartRoom(orderID);
+        listFood = getYourCartFood(orderID);
+        listService = getYourCartService(orderID);
+
+        for (RoomCart roomCart : listRoom) {
+            price = price + roomCart.getRoomPrice()*roomCart.getDayStay();
+        }
+
+        for (FoodCart foodCart : listFood) {
+            price = price + foodCart.getFoodPrice() * foodCart.getAmount();
+        }
+
+        for (ServiceCart serviceCart : listService) {
+            price = price + serviceCart.getServicePrice() * serviceCart.getAmount();
+        }
+
+        return price;
+    }
+
     public static void main(String[] args) {
 //        String orderID = "OD000004";
-        
+
         String orderID = "OD000007:1/OD000008:0/OD000009:1/OD000010:0/OD000011:1/OD000012:0/OD000013:1";
-        
+
 //        List<ServiceCart> list = new ArrayList<>(); 
 //        list = YourCartService.getYourCartService(orderID);
 //        System.out.println(list.toString());
@@ -178,15 +224,18 @@ public class YourCartRepository {
 //        List<FoodCart> list1 = new ArrayList<>(); 
 //        list1 = YourCartService.getYourCartFood(orderID);
 //        System.out.println(list1.toString());
-
-        List<RoomCart> list2 = new ArrayList<>();
-        list2 = YourCartService.getYourCartRoom(orderID);
-        System.out.println(list2.toString());
-        
+//        List<RoomCart> list2 = new ArrayList<>();
+//        list2 = YourCartService.getYourCartRoom(orderID);
+//        System.out.println(list2.toString());
 //        String listOrderID = "OD000007:1/OD000008:0/OD000009:1/OD000010:0/OD000011:1/OD000012:0/OD000013:1";
 //        List<String> list3 = new ArrayList<>();
 //        list3 = getOrderID(orderID);
 //        System.out.println(list3.toString());
+//    List<OrderCart> list = new ArrayList<>();
+//        getRoomByAccount("CUS000013", 0);
+
+        
+        System.out.println(getTotalPrice("OD000013"));
     }
 
 }

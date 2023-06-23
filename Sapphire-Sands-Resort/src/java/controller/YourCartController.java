@@ -85,6 +85,11 @@ public class YourCartController extends HttpServlet {
         request.setAttribute("listRoom0", listRoomCart0);
         request.setAttribute("listService0", listServiceCart0);
         request.setAttribute("listFood0", listFoodCart0);
+        
+        double totalPrice = YourCartService.getTotalPrice(orderID0);
+        request.setAttribute("totalPrice", totalPrice);
+        
+        System.out.println("Total Price: " + totalPrice);
 
         request.getRequestDispatcher("customer_ordered.jsp").forward(request, response);
     }

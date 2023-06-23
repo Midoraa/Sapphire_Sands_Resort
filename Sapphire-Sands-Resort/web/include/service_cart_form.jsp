@@ -203,19 +203,29 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
-                <div class="cart-page-inner">
-                    <div class="table-responsive">
-                        <table class="table table-bordered"> 
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Dịch Vụ</th>
-                                    <th>Giá</th>
-                                    <th>Số Người</th>
-                                    <th>Tổng Tiền</th>
-                                    <th>Hủy Dịch Vụ</th>
-                                </tr>
-                            </thead>
-                            <tbody class="align-middle">
+                <div class="notification text-center">
+                    <p>Chọn Phòng:
+                        <select id="mySelect">
+                            <c:forEach items="${listRoom}" var="room">
+                                <option value="${room.orderID}">${room.roomID} : ${room.roomName}</option>
+                            </c:forEach>
+                        </select>
+                        <c:out value="${notification}"></c:out>
+                        </p>
+                    </div>
+                    <div class="cart-page-inner">
+                        <div class="table-responsive">
+                            <table class="table table-bordered"> 
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Dịch Vụ</th>
+                                        <th>Giá</th>
+                                        <th>Số Người</th>
+                                        <th>Tổng Tiền</th>
+                                        <th>Hủy Dịch Vụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="align-middle">
                                 <c:set var="totalItem" value="0"></c:set>
                                 <c:set var="totalPrice" value="0"></c:set>
 
@@ -280,13 +290,13 @@
                                     <p class="text-danger">Sau khi đặt dịch vụ sẽ không thể hủy vì nhân viên sẽ setup ngay lập tức. Vui lòng xác nhận lại trước khi đặt dịch vụ</p>
                                     <p>Số Lượng Dịch Vụ: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalItem}"/></p>
                                     <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/> VND</p>
-<!--                                    <p>Chọn Phòng: 
-                                        <select>
-                                            <c:forEach items="${listOrderID}" var="orID">
-                                                <option value="${orID}">${orID}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </p>-->
+                                    <!--                                    <p>Chọn Phòng: 
+                                                                            <select>
+                                    <c:forEach items="${listOrderID}" var="orID">
+                                        <option value="${orID}">${orID}</option>
+                                    </c:forEach>
+                                </select>
+                            </p>-->
                                 </div>
                                 <!--                                <div class="cart-btn">
                                                                     <div class="container-fluid">
@@ -306,8 +316,8 @@
                                                                 </div>-->
                                 <div class="cart-btn">
 
-                                    <button type="submit" name="statusWeb" value="order" onclick="window.location.href = 'processServiceCart?statusWeb=order'">Đặt Dịch Vụ</button>
-
+                                    <!--<button type="submit" name="statusWeb" value="order" onclick="window.location.href = 'processServiceCart?statusWeb=order'">Đặt Dịch Vụ</button>-->
+                                    <button type="submit" name="statusWeb" value="order" onclick="goToPage()">Đặt Dịch Vụ</button>
                                     <button type="submit" name="statusWeb" value="viewService" onclick="window.location.href = 'service'">Xem Dịch Vụ</button>
 
                                 </div>
@@ -320,3 +330,11 @@
     </div>
 
 </div>
+<script>
+    function goToPage() {
+        var e = document.getElementById("mySelect");
+        var selectedValue = e.options[e.selectedIndex].value;
+        var link = "processServiceCart?statusWeb=order&&orderID=" + selectedValue;
+        window.location.href = link;
+    }
+</script>

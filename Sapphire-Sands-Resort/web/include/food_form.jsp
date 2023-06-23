@@ -29,11 +29,12 @@
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h6 class="section-title text-center text-primary text-uppercase">Our Food & Restaurant</h6>
             <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Food & Restaurant</span></h1>
+            
             <c:if test="${sessionScope.customer == null}">
                 <a class="btn btn-outline-dark mt-auto" href="login"><i class="bi bi-cart"></i></a>
                 </c:if>
                 <c:if test="${sessionScope.customer != null}">
-                <a class="btn btn-outline-dark mt-auto" href="foodcart"><i class="bi bi-cart"></i></a>
+                <a class="btn btn-outline-dark mt-auto" href="foodCart"><i class="bi bi-cart"></i></a>
                 </c:if> 
 
         </div>
@@ -61,7 +62,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Product actions-->
+<!--                                     Product actions
                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                         <div class="text-center">
                                             <c:if test="${sessionScope.customer == null}">
@@ -71,11 +72,26 @@
                                                 <a class="btn btn-outline-dark mt-auto" id="input" href="food?foodID=${f.foodID}&quantity=1">Gọi Món</a>
                                             </c:if> 
 
-                                            <!--<button class="btn btn-outline-dark mt-auto" id="input" type="summit"> Gọi Món </button>-->
+                                            <button class="btn btn-outline-dark mt-auto" id="input" type="summit"> Gọi Món </button>
 
                                         </div>
-                                    </div>
+                                    </div>-->
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center">
 
+                                            <form action="processFoodCart" method="post">
+                                                <c:if test="${sessionScope.customer==null}">
+                                                    <a class="btn btn-primary" href="login">Gọi Món</a>
+                                                </c:if>
+                                                <c:if test="${sessionScope.customer != null}">
+                                                    <button class="btn btn-outline-dark mt-auto" id="input" type="summit" name="foodID" value="${f.foodID}"> Gọi Món </button>
+                                                </c:if> 
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </c:forEach>

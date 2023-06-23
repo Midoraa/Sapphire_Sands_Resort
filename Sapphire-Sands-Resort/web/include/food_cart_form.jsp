@@ -205,10 +205,17 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
-                <div class="cart-page-inner">
-                    <div class="notification text-center">
+                <div class="notification text-center">
+                    <p>Chọn Phòng:
+                        <select id="mySelect">
+                            <c:forEach items="${listRoom}" var="room">
+                                <option value="${room.orderID}">${room.roomID} : ${room.roomName}</option>
+                            </c:forEach>
+                        </select>
                         <c:out value="${notification}"></c:out>
-                        </div>
+                        </p>
+                    </div>
+                    <div class="cart-page-inner">
                         <div class="table-responsive">
                             <table class="table table-bordered"> 
                                 <thead class="thead-dark">
@@ -224,7 +231,7 @@
                                 <c:set var="totalItem" value="0"></c:set>
                                 <c:set var="totalPrice" value="0"></c:set>
 
-                                <c:forEach items="${listCart}" var="o">
+                                <c:forEach items="${listFoodCart}" var="o">
 
                                     <c:set var="totalItem"> ${totalItem+1}</c:set>
                                         <tr>
@@ -236,7 +243,8 @@
                                         </td>
                                         <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.foodPrice}"/> VND</td>
                                         <td>
-                                            <form action="process" method="get">
+                                            <form action="processFoodCart" method="post">
+                                                <input name="statusWeb" value="quantity" hidden=""/>
                                                 <div class="d-flex justify-content-center">
 
                                                     <button class="btn btn-primary px-2 me-1"
@@ -244,7 +252,7 @@
                                                         <i class="fas fa-minus"></i>
                                                     </button>
 
-                                                    <div class="form-outline w-50">
+                                                    <div class="form-outline">
                                                         <input class="form-control text-center" id="quantity" min="1" value="${o.amount}" name="quantity" type="number" 
                                                                onchange="const quantity = document.getElementById('quantity').value;" readonly=""/>
 
@@ -256,12 +264,13 @@
                                                     </button>
                                                     <input name="foodID" value="${o.foodID}" type="text" hidden="" >
                                                 </div>                      
-                                            </form>   
+                                            </form>     
                                         </td>
                                         <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${o.foodPrice*o.amount}"/> VND</td>
                                         <c:set var="totalPrice">${totalPrice + o.foodPrice*o.amount}</c:set>
                                             <td>
-                                                <form action = "process" method="post">
+                                                <form action = "processFoodCart" method="post">
+                                                    <input name="statusWeb" value="delete" hidden="">
                                                     <input name ="foodID" value = "${o.foodID}" type = "hidden">
                                                 <button type = "submit"><i class="fa fa-trash"></i></button>
                                             </form>
@@ -291,20 +300,17 @@
                                     <p class="text-danger">Sau khi đặt thức ăn sẽ không thể hủy vì nhân viên sẽ setup ngay lập tức. Vui lòng xác nhận lại trước khi đặt thức ăn</p>
                                     <p>Số Lượng Thực Đơn: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalItem}"/></p>
                                     <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/> VND</p>
-<!--                                    <p>Chọn Phòng:
-                                        <select id="mySelect">
-                                            <c:forEach items="${listOrderID}" var="orID">
-                                            <option value="${orID}">${orID}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </p>-->
+                                    </p>
                                 </div>
                                 <div class="cart-btn">
 
-                                    <button type = "submit" name="order" value="order" onclick="window.location.href = 'process'">Gọi Món</button>
+                                    <!--                                    <button type = "submit" name="order" value="order" onclick="window.location.href = 'process'">Gọi Món</button>
+                                    
+                                                                        <button type="submit" onclick="window.location.href = 'food'">Xem Thực Đơn</button>-->
 
-                                    <button type="submit" onclick="window.location.href = 'food'">Xem Thực Đơn</button>
-
+                                    <!--<button type="submit" name="statusWeb" value="order" onclick="window.location.href = 'processFoodCart?statusWeb=order'">Gọi Món</button>-->
+                                    <button type="submit" name="statusWeb" value="order" onclick="goToPage()">Gọi Món</button>
+                                    <button type="submit" name="statusWeb" value="viewFood" onclick="window.location.href = 'food'">Xem Thực Đơn</button>
                                 </div>
                             </div>
                         </div>
@@ -315,3 +321,13 @@
     </div>
 
 </div>
+
+
+<script>
+    function goToPage() {
+        var e = document.getElementById("mySelect");
+        var selectedValue = e.options[e.selectedIndex].value;
+        var link = "processFoodCart?statusWeb=order&&orderID=" + selectedValue;
+        window.location.href = link;
+    }
+</script>

@@ -4,6 +4,8 @@ public class OrderCart {
     private String cusID, orderID;
     private int orStatus;
 
+    private String roomID, roomName;
+    
     public OrderCart() {
     }
 
@@ -11,6 +13,13 @@ public class OrderCart {
         this.cusID = cusID;
         this.orderID = orderID;
         this.orStatus = orStatus;
+    }
+
+    public OrderCart(String orderID, int orStatus, String roomID, String roomName) {
+        this.orderID = orderID;
+        this.orStatus = orStatus;
+        this.roomID = roomID;
+        this.roomName = roomName;
     }
 
     public String getCusID() {
@@ -36,6 +45,24 @@ public class OrderCart {
     public void setOrStatus(int orStatus) {
         this.orStatus = orStatus;
     }
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -27,11 +27,11 @@ public class ServiceController extends HttpServlet {
         List<Service> listService = new ArrayList<>();
         listService = ServiceDouble.getService();
 
-//        Get total Food in List Food
+//        Get total Service in List Service
         int totalItem = listService.size();
 //        Paging: 1 page have 8 cart
         int itemsPerPage = 8;
-//        Max page of List Food when paging
+//        Max page of List Service when paging
         int maxPage = totalItem % itemsPerPage == 0 ? (totalItem / itemsPerPage) : (totalItem / itemsPerPage + 1);
         int page;
 

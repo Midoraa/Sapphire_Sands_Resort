@@ -174,7 +174,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${listService}" var="s">
+                                <c:forEach items="${listService0}" var="s">
                                     <tr class="text-center">
                                         <td class="text-start">${s.serviceName}</td>
                                         <td>${s.amount}</td>
@@ -209,7 +209,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${listFood}" var="f">
+                                <c:forEach items="${listFood0}" var="f">
                                     <tr class="text-center">
                                         <td class="text-start">${f.foodName}</td>
                                         <td>${f.amount}</td>
@@ -245,19 +245,8 @@
                     </div>
                     <div class="table-responsive">
                         <p>Số Lượng Thực Đơn: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${listRoom.size()+ listService.size() + listFood.size()}"/></p>
-                        <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/>1.000.000.000 VND</p>
+                        <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/> VND</p>
                     </div>
-                    <div class="d-flex align-items-center mb-4 w-100 justify-content-around">
-                        <a>
-                            <img class="w-100" src="https://down-vn.img.susercontent.com/file/d4bbea4570b93bfd5fc652ca82a262a8">
-                            <p></p>
-                        </a>
-                        <a>
-                            <img class="w-25" src="https://apinganhang.com/wp-content/uploads/sites/10/2022/07/logo-mbbanksd.png?fbclid=IwAR3ALrPaMAtpC_dm880COomH3dFrndpaT7LCsGuTK1a6aGFPQ4huG99KJvU">
-                            <p>1800 0254 2356</p>
-                        </a>
-                    </div>
-                    
                 </div>
             
                                 

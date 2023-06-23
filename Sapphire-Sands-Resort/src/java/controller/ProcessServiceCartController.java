@@ -60,7 +60,8 @@ public class ProcessServiceCartController extends HttpServlet {
             response.sendRedirect("serviceCart");
         }
         else if(statusWeb.equals("order")){
-            String orderID = "OD000005";
+//            String orderID = "OD000005";
+            String orderID = request.getParameter("orderID");
             ServiceDouble.insertServiceDetail(txt, orderID);
             response.sendRedirect("serviceCart");  
         }     

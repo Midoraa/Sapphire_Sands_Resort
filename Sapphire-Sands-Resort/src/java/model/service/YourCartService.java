@@ -23,4 +23,8 @@ public class YourCartService {
     public static List<OrderCart> getYourCartOrder(String cusID) {
         return YourCartRepository.getYourCartOrder(cusID);
     }
+    
+    public static double getTotalPrice(String orderID){
+        return YourCartRepository.getTotalPrice(orderID);
+    }
 }
