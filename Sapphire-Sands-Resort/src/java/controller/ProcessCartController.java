@@ -31,10 +31,10 @@ public class ProcessCartController extends HttpServlet {
         if (request.getParameter("num") == null || request.getParameter("foodID") == null) {
 //            If num or foodID is null so the system will perform function Order (It is code perform )
         
-        String orderID = request.getParameter("orderID");
+//        String orderID = request.getParameter("orderID");
         
 //          Chờ lấy orderID từ khi đăng nhập
-//            String orderID = "OD000005";
+            String orderID = "OD000005";
 //            Get Cookie Cart and Save it into String txt
             String txt = "";
             Cookie[] arr = request.getCookies();

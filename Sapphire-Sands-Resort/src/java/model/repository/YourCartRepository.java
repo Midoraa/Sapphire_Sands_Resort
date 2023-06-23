@@ -116,7 +116,7 @@ public class YourCartRepository {
         List<RoomCart> list = new ArrayList<>();
         List<String> listOrder = getOrderID(orderID);
 
-        String query = "Select b.orderID, a.roomID, a.roomName, a.roomType, b.timeRegister, b.timeIn, b.timOut, b.people, a.roomPrice \n"
+        String query = "Select b.orderID, a.roomID, a.roomName, a.roomType, b.timeRegister, b.timeIn, b.timeOut, b.people, a.roomPrice \n"
                 + "from Room a join ContractDetail b\n"
                 + "on a.roomID = b.roomID\n"
                 + "where b.orderID = ? ";
