@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.entity;
 
 import java.util.Date;
 
-/**
- *
- * @author Admin
- */
 public class ContractOrder {
     private String orderID, roomID, cusID, cusName;
     private String timeRegister;
@@ -99,6 +90,5 @@ public class ContractOrder {
     public void setPeople(int people) {
         this.people = people;
     }
-    
     
 }

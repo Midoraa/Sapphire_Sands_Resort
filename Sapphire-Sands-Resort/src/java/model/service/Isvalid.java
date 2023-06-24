@@ -4,10 +4,6 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author quang
- */
 public class Isvalid {
 
     public static boolean isValidEmail(String email) {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.repository;
 
 import java.sql.Connection;
@@ -12,15 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.config.DBConnect;
-import model.entity.ContractOrder;
 import model.entity.Customer;
 import model.entity.Employee;
-import model.entity.Service;
 
-/**
- *
- * @author Admin
- */
 public class AdminRepository {
     public static void registerEmployee(Employee emp) {
         System.out.println(emp);
@@ -203,8 +192,5 @@ public class AdminRepository {
         }
         return list;
     }
-    
-//    public static void main(String[] args) {
-//        System.out.println(getAllCustomer());
-//    }
+
 }

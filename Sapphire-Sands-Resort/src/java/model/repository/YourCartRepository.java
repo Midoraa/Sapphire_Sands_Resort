@@ -9,7 +9,6 @@ import model.config.DBConnect;
 import model.entity.FoodCart;
 import model.entity.RoomCart;
 import model.entity.ServiceCart;
-import model.service.YourCartService;
 
 public class YourCartRepository {
 
@@ -113,21 +112,6 @@ public class YourCartRepository {
             System.out.println(e);
         }
         return list;
-    }
-
-    public static void main(String[] args) {
-        String orderID = "OD000004";
-//        List<ServiceCart> list = new ArrayList<>(); 
-//        list = YourCartService.getYourCartService(orderID);
-//        System.out.println(list.toString());
-//        
-//        List<FoodCart> list1 = new ArrayList<>(); 
-//        list1 = YourCartService.getYourCartFood(orderID);
-//        System.out.println(list1.toString());
-
-        List<RoomCart> list2 = new ArrayList<>();
-        list2 = YourCartService.getYourCartRoom(orderID);
-        System.out.println(list2.toString());
     }
 
 }

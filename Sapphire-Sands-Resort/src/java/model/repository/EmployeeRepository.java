@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.repository;
 
 import java.sql.Connection;
@@ -12,10 +7,6 @@ import java.sql.SQLException;
 import model.config.DBConnect;
 import model.entity.Employee;
 
-/**
- *
- * @author Admin
- */
 public class EmployeeRepository {
 
     public static Employee login(String username, String password) {
@@ -31,7 +22,7 @@ public class EmployeeRepository {
                 emp.setEmpNames(rs.getString("empName"));
                 emp.setEmpGender(rs.getBoolean("empGender"));
                 emp.setEmpDOB(rs.getDate("empDOB"));
-                emp.setEmpAdress(rs.getString("empAdress"));
+                emp.setEmpAdress(rs.getString("empAddress"));
                 emp.setEmpPhone(rs.getString("empPhone"));
                 emp.setEmpEmail(rs.getString("empEmail"));
                 emp.setUsername(rs.getString("username"));

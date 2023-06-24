@@ -85,10 +85,6 @@ public class ServiceCart {
         this.serviceTime = serviceTime;
     }
 
-//    @Override
-//    public String toString() {
-//        return "ServiceCart{" + "serviceID=" + serviceID + ", serviceName=" + serviceName + ", orderID=" + orderID + ", amount=" + amount + ", serviceStatus=" + serviceStatus + ", servicePrice=" + servicePrice + ", serviceTime=" + serviceTime + '}';
-//    }
     @Override
     public String toString() {
         return "ServiceCart{" + "serviceID=" + serviceID + ", serviceName=" + serviceName + ", orderID=" + orderID + ", amount=" + amount + ", serviceStatus=" + serviceStatus + ", servicePrice=" + servicePrice + ", serviceTime=" + serviceTime + '}';

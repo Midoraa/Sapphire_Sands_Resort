@@ -82,6 +82,7 @@ public class ServiceRepository {
                 }
             } catch (Exception ex) {
                 System.out.println(ex);
+                System.err.println("Error: Get List Service Cart Fail!");
             }
         }
         return list;
@@ -108,6 +109,7 @@ public class ServiceRepository {
                 ps.close();
             } catch (Exception e) {
                 System.out.println(e);
+                System.err.println("Error: Insert into table ServiceDetail Fail!");
             }
         }
     }
@@ -145,32 +147,4 @@ public class ServiceRepository {
         return cookieCart;
     }
     
- 
-    
-    public static void main(String[] args) {
-//        Chuỗi Test
-        String txt = "SV000002:3/SV000001:2/SV000004:1/SV000003:2";
-        
-//        Kiểm tra đẩy dịch vụ lên client
-//        List<Service> list = new ArrayList<>();
-//        list = ServiceDouble.getService();
-//        System.out.println(list.toString());   
-
-//          Kiểm tra hàm reset là chuỗi cookie form
-//        System.out.println(ServiceDouble.resetCookieCart(txt));
-        
-////        Kiểm tra hàm Service Cart đã được đọc từ cookie hay chưa
-//        List<ServiceCart> list = new ArrayList<>();
-//        list = getListServiceCart(txt);
-//        System.out.println(list.toString());
-//        
-////        Kiểm tra hàm insert dữ liệu vào ServiceDetail đã chạy hay chưa
-//        String orderID = "OD000005";
-//        insertintoServiceDetail(txt, orderID);
-//        
-////        Kiểm tra hàm xóa 1 service khỏi cookie
-//        String delete = deleteServiceCart(txt, "SV000001");
-//        System.out.println(delete);
-
-    }
 }

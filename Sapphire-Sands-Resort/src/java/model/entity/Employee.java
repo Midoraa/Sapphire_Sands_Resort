@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.entity;
 
 import java.util.Date;
 
-/**
- *
- * @author Admin
- */
 public class Employee {
     private String username, password;
     private int role;
@@ -126,6 +117,5 @@ public class Employee {
     public void setEmpEmail(String empEmail) {
         this.empEmail = empEmail;
     }
-    
-    
+       
 }

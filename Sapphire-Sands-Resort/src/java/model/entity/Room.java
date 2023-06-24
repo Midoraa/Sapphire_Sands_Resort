@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.entity;
 
-/**
- *
- * @author Admin
- */
 public class Room {
     String roomID, roomName, roomType;
     int maxPeople;
@@ -128,5 +119,4 @@ public class Room {
         this.roomDirection = roomDirection;
     }
 
-    
 }

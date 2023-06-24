@@ -128,12 +128,6 @@ public class FoodCart {
         this.orStatus = orStatus;
     }
 
-//    @Override
-//    public String toString() {
-////        return foodID + ":" + amount + "/";
-//        return foodID + ":" + foodName + ":" + foodPrice + ":" + amount;
-//    }
-
     @Override
     public String toString() {
         return "FoodCart{" + "orderID=" + orderID + ", foodID=" + foodID + ", foodName=" + foodName + ", cusID=" + cusID + ", foodPrice=" + foodPrice + ", orTime=" + orTime + ", amount=" + amount + ", orStatus=" + orStatus + '}';

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.repository;
 
 import java.sql.Connection;
@@ -14,16 +9,12 @@ import java.util.List;
 import model.config.DBConnect;
 import model.entity.ContractOrder;
 
-/**
- *
- * @author Admin
- */
 public class ManagerRepository {
 
     public static List<ContractOrder> getAllPendingContract() {
         ArrayList<ContractOrder> list = null;
         try (Connection conn = DBConnect.getConnection()) {
-            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timOut, cd.people\n"
+            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timeOut, cd.people\n"
                     + "FROM Customer c\n"
                     + "INNER JOIN `Order` o ON c.cusID = o.cusID\n"
                     + "INNER JOIN ContractDetail cd ON o.orderID = cd.orderID\n"
@@ -56,7 +47,7 @@ public class ManagerRepository {
     public static List<ContractOrder> getAllAcceptedContract() {
         ArrayList<ContractOrder> list = null;
         try (Connection conn = DBConnect.getConnection()) {
-            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timOut, cd.people\n"
+            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timeOut, cd.people\n"
                     + "FROM Customer c\n"
                     + "INNER JOIN `Order` o ON c.cusID = o.cusID\n"
                     + "INNER JOIN ContractDetail cd ON o.orderID = cd.orderID\n"
@@ -89,7 +80,7 @@ public class ManagerRepository {
     public static List<ContractOrder> getAllPaidContract() {
         ArrayList<ContractOrder> list = null;
         try (Connection conn = DBConnect.getConnection()) {
-            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timOut, cd.people\n"
+            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timeOut, cd.people\n"
                     + "FROM Customer c\n"
                     + "INNER JOIN `Order` o ON c.cusID = o.cusID\n"
                     + "INNER JOIN ContractDetail cd ON o.orderID = cd.orderID\n"
@@ -146,7 +137,7 @@ public class ManagerRepository {
             String query = "UPDATE Room\n"
                     + "JOIN ContractDetail ON Room.roomID = ContractDetail.roomID\n"
                     + "SET Room.roomStatus = CASE\n"
-                    + "    WHEN CURDATE() BETWEEN ContractDetail.timeIn AND ContractDetail.timOut THEN 1\n"
+                    + "    WHEN CURDATE() BETWEEN ContractDetail.timeIn AND ContractDetail.timeOut THEN 1\n"
                     + "    ELSE 0\n"
                     + "    END\n"
                     + "WHERE ContractDetail.orderID = ?\n"
@@ -197,7 +188,4 @@ public class ManagerRepository {
         }
     }
 
-//    public static void main(String[] args) {
-//        acceptOrder("OD000005", "CUS000013", "R000010");
-//    }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import model.config.DBConnect;
 import model.entity.FoodCart;
-import model.service.FoodCartService;
 import java.sql.*;
 
 public class FoodCartRepository {
@@ -51,6 +50,7 @@ public class FoodCartRepository {
 
             } catch (Exception e) {
                 System.out.println(e);
+                System.err.println("Error: Insert into table OrderDetail Fail!");
             }
 
         }
@@ -101,6 +101,7 @@ public class FoodCartRepository {
                     }
                 } catch (Exception e) {
                     System.out.println(e);
+                    System.err.println("Error: Get List Food Cart Fail!");
                 }
             }
 
@@ -132,28 +133,4 @@ public class FoodCartRepository {
         return listCart;
     }
 
-    public static void main(String[] args) {
-//        String txt = "F000001:1/F000003:1/F000004:2/F000002:1/F000001:1/F000002:2/F000003:1/F000004:3/F000004:5/F000004:6/F000004:3/F000004:2/F000004:2/F000004:2/F000002:2/F000006:1";
-//        List<FoodCart> list = new ArrayList<>();
-//        list = FoodCartService.getListCart(txt);
-//        System.out.println(list.toString());
-//        list = FoodCartService.updateAmount(txt, "F000001", 1);
-//        System.out.println(list.toString());
-
-//        List<FoodCart> list = new ArrayList<>();
-////        list = FoodCartService.getFoodCart("CUS000002");
-////        System.out.println(list.toString());
-//        long total = FoodCartService.getTotalPrice("CUS000002");
-//        System.out.println(total);
-//        
-//        list = FoodCartService.getListCart("F000001");
-//        System.out.println(list.toString());
-//        String txt1 = "F000004:6/F000003:5/F000002:3";
-//        List<FoodCart> list = new ArrayList<>();
-//        list = FoodCartService.deleteCart(txt1, "F000003");
-//        System.out.println(list.toString());
-//        
-//        FoodCartService.insertFoodOrder("OD000005", txt1);
-
-    }
 }

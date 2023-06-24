@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.repository;
 
 import java.sql.Connection;
@@ -19,10 +14,6 @@ import model.entity.Order;
 import model.entity.Room;
 import model.service.Isvalid;
 
-/**
- *
- * @author Admin
- */
 public class OrderRepository {
     
     public static String getOrderID(){
@@ -93,7 +84,7 @@ public class OrderRepository {
 
     private static void createContractDetail(Room room, Contract contract, String orderID) {
         try (Connection conn = DBConnect.getConnection()){
-            String query = "Insert INTO ContractDetail(roomID, orderID, timeIn, timOut, people, timeRegister, status) VALUES (?, ? , ?, ?, ?, ?, ?)";
+            String query = "Insert INTO ContractDetail(roomID, orderID, timeIn, timeOut, people, timeRegister, status) VALUES (?, ? , ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, room.getRoomID());
             ps.setString(2, orderID);
@@ -124,11 +115,5 @@ public class OrderRepository {
             System.out.println("=============SAI setStatusRoom trong OrderRepo===============");
         }
     }
-//    public static void main(String[] args) {
-//        Room room = new Room("R000001", "Phòng Resort Classic Hướng Biển", "asdas", 4, 300000000, false, "asdasdas", 12, "asd", "asdas", "asdas");
-//        Contract contract = new Contract("R000010", "2023-06-28", "2023-06-29", 8);
-//        Customer cus = new Customer("CUS000001", "bao", "123", 0, "CUS000013", "Nguyễn Quang Bảo", java.sql.Date.valueOf("2002-10-30"), "0702347748", "binnguyen301002@gmail.com", "12312312312", 1);
-//        OrderRepository.makeOrder(room, contract, cus);
-//            System.out.println(OrderRepository.getOrderByCustomerID("CUS000001"));
-//    }
+
 }

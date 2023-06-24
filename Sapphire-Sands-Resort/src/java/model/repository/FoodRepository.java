@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import model.config.DBConnect;
 import model.entity.Food;
-import model.service.FoodService;
 
 public class FoodRepository {
-    
     
     public static List<Food> getListFood(){
         List<Food> list = new ArrayList<>();
@@ -26,12 +24,9 @@ public class FoodRepository {
             }
         } catch (Exception e) {
             System.out.println(e);
+            System.err.println("Error: Get List Food Fail!");
         }
         return list;
     }
     
-//    public static void main(String[] args) {
-//        List<Food> list = new ArrayList<>();
-//        list = FoodService.getFood();
-//    }
 }
