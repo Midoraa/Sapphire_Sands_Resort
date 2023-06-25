@@ -15,7 +15,7 @@ public class Food {
 
     @Override
     public String toString() {
-        return "Food{" + "foodID=" + foodID + ", foodName=" + foodName + ", foodPrice=" + foodPrice + '}';
+        return '{' + " foodID: " + foodID + ", foodName: " + foodName + ", foodPrice: " + foodPrice + '}' + "\n";
     }
 
     public String getFoodID() {

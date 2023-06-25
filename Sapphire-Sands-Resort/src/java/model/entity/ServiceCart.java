@@ -3,7 +3,6 @@ package model.entity;
 import java.sql.Timestamp;
 
 public class ServiceCart {
-
     private String serviceID, serviceName, orderID;
     private int amount, serviceStatus;
     private double servicePrice;
@@ -28,7 +27,7 @@ public class ServiceCart {
         this.amount = amount;
         this.serviceStatus = serviceStatus;
     }
-
+    
     public String getServiceID() {
         return serviceID;
     }
@@ -89,5 +88,5 @@ public class ServiceCart {
     public String toString() {
         return "ServiceCart{" + "serviceID=" + serviceID + ", serviceName=" + serviceName + ", orderID=" + orderID + ", amount=" + amount + ", serviceStatus=" + serviceStatus + ", servicePrice=" + servicePrice + ", serviceTime=" + serviceTime + '}';
     }
-
+    
 }

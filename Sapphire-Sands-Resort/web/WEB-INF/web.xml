@@ -22,11 +22,11 @@
  
     <context-param>
         <param-name>user</param-name>
-        <param-value>youremail@gmail.com</param-value>
+        <param-value>binnguyen301002@gmail.com</param-value>
     </context-param>
  
     <context-param>
         <param-name>pass</param-name>
-        <param-value>yourpassword</param-value>
+        <param-value>xkwfrpvpdlqfsvdl</param-value>
     </context-param>
 </web-app>

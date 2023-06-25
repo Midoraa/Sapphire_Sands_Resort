@@ -118,7 +118,7 @@
                                                 <a href="admin.jsp" class="dropdown-item">Admin</a>
                                             </c:if>
 
-                                            <a href="cart.jsp" class="dropdown-item">Your cart</a>
+                                            <a href="yourcart" class="dropdown-item">Your cart</a>
                                             <a href="getorderhistory" class="dropdown-item">History order</a>
                                             <a href="logout" class="dropdown-item text-danger">Log out</a>
                                         </div>

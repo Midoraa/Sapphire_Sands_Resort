@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -9,23 +10,33 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.entity.FoodCart;
-import model.service.FoodService;
+import model.entity.ServiceCart;
+import model.service.ServiceDouble;
 
-@WebServlet(name = "ProcessCartController", urlPatterns = {"/processFoodCart"})
-public class ProcessCartController extends HttpServlet {
+@WebServlet(name = "ProcessServiceCartController", urlPatterns = {"/processServiceCart"})
+public class ProcessServiceCartController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ProcessServiceCartController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ProcessServiceCartController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    
-            //        Lấy trạng thái ở client người dùng
+        //        Lấy trạng thái ở client người dùng
         String statusWeb = request.getParameter("statusWeb");
 
 //        Tạo chuỗi txt rỗng
@@ -35,7 +46,7 @@ public class ProcessCartController extends HttpServlet {
         Cookie[] arr = request.getCookies();
         if (arr != null) {
             for (Cookie o : arr) {
-                if (o.getName().equals("cartFood")) {
+                if (o.getName().equals("cartService")) {
                     txt = txt + o.getValue();
                     o.setMaxAge(0);
                     response.addCookie(o);
@@ -46,22 +57,21 @@ public class ProcessCartController extends HttpServlet {
 //        Insert dữ liệu vào Data ServiceDetail
         if(statusWeb.equals(statusWeb == null)){
             
-            response.sendRedirect("foodCart");
+            response.sendRedirect("serviceCart");
         }
         else if(statusWeb.equals("order")){
 //            String orderID = "OD000005";
             String orderID = request.getParameter("orderID");
-            FoodService.insertOrderDetail(txt, orderID);
-            response.sendRedirect("foodCart");  
+            ServiceDouble.insertServiceDetail(txt, orderID);
+            response.sendRedirect("serviceCart");  
         }     
-    
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-    String statusWeb = request.getParameter("statusWeb");
+//        Lấy trạng thái ở client người dùng
+        String statusWeb = request.getParameter("statusWeb");
 
 //        Tạo chuỗi txt rỗng
         String txt = "";
@@ -70,7 +80,7 @@ public class ProcessCartController extends HttpServlet {
         Cookie[] arr = request.getCookies();
         if (arr != null) {
             for (Cookie o : arr) {
-                if (o.getName().equals("cartFood")) {
+                if (o.getName().equals("cartService")) {
                     txt = txt + o.getValue();
                     o.setMaxAge(0);
                     response.addCookie(o);
@@ -80,65 +90,65 @@ public class ProcessCartController extends HttpServlet {
 
 //        Nếu trạng thái trên web rỗng
         if (statusWeb == null) {
-            String foodID = request.getParameter("foodID");
+            String serviceID = request.getParameter("serviceID");
 //        Kiểm tra đầu vào của Service có bị rỗng hay không?
-            if (foodID != null) {
+            if (serviceID != null) {
                 if (txt.isEmpty()) {
-                    txt = foodID + ":" + 1;
+                    txt = serviceID + ":" + 1;
                 } else {
-                    txt = txt + "/" + foodID + ":" + 1;
+                    txt = txt + "/" + serviceID + ":" + 1;
                 }
             }
 //        Sửa lại Cookie cho đúng mãu: ID:Amount
-            String cart = FoodService.resetCookieCart(txt);
+            String cart = ServiceDouble.resetCookieCart(txt);
 
 //        Thiết lập lại giá trị bằng cách tạo ra cookie mới
-            Cookie c = new Cookie("cartFood", cart);
+            Cookie c = new Cookie("cartService", cart);
             c.setMaxAge(24 * 60 * 60);
             response.addCookie(c);
 
 //        Trả về trang Service để người dùng tiếp tục chọn dịch vụ muốn sử dụng
-            response.sendRedirect("food");
+            response.sendRedirect("service");
 //        request.getRequestDispatcher("service").forward(request, response);
         } 
 //        Tăng giảm số lượng của 1 dịch vụ
         else if (statusWeb.equals("quantity")) {
-            String foodID = request.getParameter("foodID");
+            String serviceID = request.getParameter("serviceID");
             int numUpdate = Integer.parseInt(request.getParameter("num"));
 
-            System.out.println("Food ID: " + foodID + " Number Update: " + numUpdate);
+            System.out.println("Service ID: " + serviceID + " Number Update: " + numUpdate);
             
-            List<FoodCart> list = new ArrayList<>();
-            list = FoodService.updateQuantityFood(txt, foodID, numUpdate);
+            List<ServiceCart> list = new ArrayList<>();
+            list = ServiceDouble.updateQuantityService(txt, serviceID, numUpdate);
 
             txt = null;
 
-            for (FoodCart s : list) {
+            for (ServiceCart s : list) {
                 if (txt != null) {
-                    txt = txt + "/" + s.getFoodID() + ":" + s.getAmount();
+                    txt = txt + "/" + s.getServiceID() + ":" + s.getAmount();
                 } else {
-                    txt = s.getFoodID() + ":" + s.getAmount();
+                    txt = s.getServiceID() + ":" + s.getAmount();
                 }
             }
 
-            Cookie c = new Cookie("cartFood", txt);
+            Cookie c = new Cookie("cartService", txt);
             c.setMaxAge(24 * 60 * 60);
             response.addCookie(c);
             
-            response.sendRedirect("foodCart");
+            response.sendRedirect("serviceCart");
         } 
 //        Xóa 1 service khỏi Cart
         else if(statusWeb.equals("delete")){
-            String foodID = request.getParameter("foodID");
-            String cookie = FoodService.deleteFoodCart(txt, foodID);
+            String serviceID = request.getParameter("serviceID");
+            String cookie = ServiceDouble.deleteServiceCart(txt, serviceID);
             
-            Cookie c = new Cookie("cartFood", cookie);
+            Cookie c = new Cookie("cartService", cookie);
             c.setMaxAge(24 * 60 * 60);
             response.addCookie(c);
             
-            response.sendRedirect("foodCart");
+            response.sendRedirect("serviceCart");
         }
-    
+
     }
 
     @Override

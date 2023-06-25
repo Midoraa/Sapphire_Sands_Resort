@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.entity.FoodCart;
+import model.entity.OrderCart;
 import model.entity.RoomCart;
 import model.entity.ServiceCart;
 import model.service.YourCartService;
@@ -25,19 +27,69 @@ public class YourCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String orderID = "OD000004";
-        List<RoomCart> listRoomCart = new ArrayList<>();
-        listRoomCart = YourCartService.getYourCartRoom(orderID);
 
-        List<ServiceCart> listServiceCart = new ArrayList<>();
-        listServiceCart = YourCartService.getYourCartService(orderID);
+        HttpSession session = request.getSession();
+        session.getAttribute("orderID");
 
-        List<FoodCart> listFoodCart = new ArrayList<>();
-        listFoodCart = YourCartService.getYourCartFood(orderID);
+        List<OrderCart> listorderID = (List<OrderCart>) session.getAttribute("orderID");
+
+        String orderID = null;
+        String orderID0 = null;
+        String orderID1 = null;
+        
+        for (OrderCart o : listorderID) {
+            if (orderID != null) {
+                orderID = orderID + "/" + o.getOrderID() + ":" + o.getOrStatus();
+            } else {
+                orderID = o.getOrderID() + ":" + o.getOrStatus();
+            }
+
+            if (o.getOrStatus() == 0) {
+                if (orderID0 != null) {
+                    orderID0 = orderID0 + "/" + o.getOrderID() + ":" + o.getOrStatus();
+                } else {
+                    orderID0 = o.getOrderID() + ":" + o.getOrStatus();
+                }
+            } else {
+                if (orderID1 != null) {
+                    orderID1 = orderID1 + "/" + o.getOrderID() + ":" + o.getOrStatus();
+                } else {
+                    orderID1 = o.getOrderID() + ":" + o.getOrStatus();
+                }
+            }
+        }
+
+//        Đã Đặt
+        List<RoomCart> listRoomCart = YourCartService.getYourCartRoom(orderID);
+        List<ServiceCart> listServiceCart = YourCartService.getYourCartService(orderID);
+        List<FoodCart> listFoodCart = YourCartService.getYourCartFood(orderID);
 
         request.setAttribute("listRoom", listRoomCart);
         request.setAttribute("listService", listServiceCart);
         request.setAttribute("listFood", listFoodCart);
+
+//        Đã Thanh Toán
+        List<RoomCart> listRoomCart1 = YourCartService.getYourCartRoom(orderID1);
+        List<ServiceCart> listServiceCart1 = YourCartService.getYourCartService(orderID1);
+        List<FoodCart> listFoodCart1 = YourCartService.getYourCartFood(orderID1);
+
+        request.setAttribute("listRoom1", listRoomCart1);
+        request.setAttribute("listService1", listServiceCart1);
+        request.setAttribute("listFood1", listFoodCart1);
+
+//        Chưa Thanh Toán
+        List<RoomCart> listRoomCart0 = YourCartService.getYourCartRoom(orderID0);
+        List<ServiceCart> listServiceCart0 = YourCartService.getYourCartService(orderID0);
+        List<FoodCart> listFoodCart0 = YourCartService.getYourCartFood(orderID0);
+
+        request.setAttribute("listRoom0", listRoomCart0);
+        request.setAttribute("listService0", listServiceCart0);
+        request.setAttribute("listFood0", listFoodCart0);
+        
+        double totalPrice = YourCartService.getTotalPrice(orderID0);
+        request.setAttribute("totalPrice", totalPrice);
+        
+        System.out.println("Total Price: " + totalPrice);
 
         request.getRequestDispatcher("customer_ordered.jsp").forward(request, response);
     }

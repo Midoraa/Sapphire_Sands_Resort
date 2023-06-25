@@ -82,7 +82,6 @@ public class ServiceRepository {
                 }
             } catch (Exception ex) {
                 System.out.println(ex);
-                System.err.println("Error: Get List Service Cart Fail!");
             }
         }
         return list;
@@ -109,7 +108,6 @@ public class ServiceRepository {
                 ps.close();
             } catch (Exception e) {
                 System.out.println(e);
-                System.err.println("Error: Insert into table ServiceDetail Fail!");
             }
         }
     }
@@ -146,5 +144,5 @@ public class ServiceRepository {
         
         return cookieCart;
     }
-    
+
 }

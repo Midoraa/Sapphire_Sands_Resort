@@ -203,68 +203,78 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-8">
-                <div class="cart-page-inner">
-                    <div class="table-responsive">
-                        <table class="table table-bordered"> 
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Dịch Vụ</th>
-                                    <th>Giá</th>
-                                    <th>Số Người</th>
-                                    <th>Tổng Tiền</th>
-                                    <th>Hủy Dịch Vụ</th>
-                                </tr>
-                            </thead>
-                            <tbody class="align-middle">
-                            <c:set var="totalItem" value="0"></c:set>
-                            <c:set var="totalPrice" value="0"></c:set>
-
-                            <c:forEach items="${listServiceCart}" var="so">
-
-                                <c:set var="totalItem"> ${totalItem+1}</c:set>
-                                <tr>
-                                    <td>
-                                        <div class="img">   
-                                            <img src="img/Service/${so.serviceID}.jpg" alt="Image">
-                                            <p>${so.serviceName}</p>
-                                        </div>
-                                    </td>
-                                    <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${so.servicePrice}"/> VND</td>
-                                <td>
-                                    <form action="processServiceCart" method="post">
-                                        <input name="statusWeb" value="quantity" hidden=""/>
-                                        <div class="d-flex justify-content-center">
-
-                                            <button class="btn btn-primary px-2 me-1"
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()" name="num" value="-1">
-                                                <i class="fas fa-minus"></i>
-                                            </button>
-
-                                            <div class="form-outline">
-                                                <input class="form-control text-center" id="quantity" min="1" value="${so.amount}" name="quantity" type="number" 
-                                                       onchange="const quantity = document.getElementById('quantity').value;" readonly=""/>
-
-                                            </div>
-
-                                            <button  class="btn btn-primary px-2 ms-2"
-                                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()" name="num" value="1">
-                                                <i class="fas fa-plus"></i>
-                                            </button>
-                                            <input name="serviceID" value="${so.serviceID}" type="text" hidden="" >
-                                        </div>                      
-                                    </form>   
-                                </td>
-                                <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${so.servicePrice*so.amount}"/> VND</td>
-                                <c:set var="totalPrice">${totalPrice + so.servicePrice*so.amount}</c:set>
-                                <td>
-                                    <form action = "processServiceCart" method="post">
-                                        <input name="statusWeb" value="delete" hidden="">
-                                        <input name ="serviceID" value = "${so.serviceID}" type = "hidden">
-                                        <button type = "submit"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                </td>
-                                </tr>                                                                    
+                <div class="notification text-center">
+                    <p>Chọn Phòng:
+                        <select id="mySelect">
+                            <c:forEach items="${listRoom}" var="room">
+                                <option value="${room.orderID}">${room.roomID} : ${room.roomName}</option>
                             </c:forEach>
+                        </select>
+                        <c:out value="${notification}"></c:out>
+                        </p>
+                    </div>
+                    <div class="cart-page-inner">
+                        <div class="table-responsive">
+                            <table class="table table-bordered"> 
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Dịch Vụ</th>
+                                        <th>Giá</th>
+                                        <th>Số Người</th>
+                                        <th>Tổng Tiền</th>
+                                        <th>Hủy Dịch Vụ</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="align-middle">
+                                <c:set var="totalItem" value="0"></c:set>
+                                <c:set var="totalPrice" value="0"></c:set>
+
+                                <c:forEach items="${listServiceCart}" var="so">
+
+                                    <c:set var="totalItem"> ${totalItem+1}</c:set>
+                                        <tr>
+                                            <td>
+                                                <div class="img">   
+                                                    <img src="img/Service/${so.serviceID}.jpg" alt="Image">
+                                                <p>${so.serviceName}</p>
+                                            </div>
+                                        </td>
+                                        <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${so.servicePrice}"/> VND</td>
+                                        <td>
+                                            <form action="processServiceCart" method="post">
+                                                <input name="statusWeb" value="quantity" hidden=""/>
+                                                <div class="d-flex justify-content-center">
+
+                                                    <button class="btn btn-primary px-2 me-1"
+                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()" name="num" value="-1">
+                                                        <i class="fas fa-minus"></i>
+                                                    </button>
+
+                                                    <div class="form-outline">
+                                                        <input class="form-control text-center" id="quantity" min="1" value="${so.amount}" name="quantity" type="number" 
+                                                               onchange="const quantity = document.getElementById('quantity').value;" readonly=""/>
+
+                                                    </div>
+
+                                                    <button  class="btn btn-primary px-2 ms-2"
+                                                             onclick="this.parentNode.querySelector('input[type=number]').stepUp()" name="num" value="1">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                    <input name="serviceID" value="${so.serviceID}" type="text" hidden="" >
+                                                </div>                      
+                                            </form>   
+                                        </td>
+                                        <td><fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${so.servicePrice*so.amount}"/> VND</td>
+                                        <c:set var="totalPrice">${totalPrice + so.servicePrice*so.amount}</c:set>
+                                            <td>
+                                                <form action = "processServiceCart" method="post">
+                                                    <input name="statusWeb" value="delete" hidden="">
+                                                    <input name ="serviceID" value = "${so.serviceID}" type = "hidden">
+                                                <button type = "submit"><i class="fa fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>                                                                    
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -280,6 +290,13 @@
                                     <p class="text-danger">Sau khi đặt dịch vụ sẽ không thể hủy vì nhân viên sẽ setup ngay lập tức. Vui lòng xác nhận lại trước khi đặt dịch vụ</p>
                                     <p>Số Lượng Dịch Vụ: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalItem}"/></p>
                                     <p>Tổng Tiền: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${totalPrice}"/> VND</p>
+                                    <!--                                    <p>Chọn Phòng: 
+                                                                            <select>
+                                    <c:forEach items="${listOrderID}" var="orID">
+                                        <option value="${orID}">${orID}</option>
+                                    </c:forEach>
+                                </select>
+                            </p>-->
                                 </div>
                                 <!--                                <div class="cart-btn">
                                                                     <div class="container-fluid">
@@ -299,8 +316,8 @@
                                                                 </div>-->
                                 <div class="cart-btn">
 
-                                    <button type="submit" name="statusWeb" value="order" onclick="window.location.href = 'processServiceCart?statusWeb=order'">Đặt Dịch Vụ</button>
-
+                                    <!--<button type="submit" name="statusWeb" value="order" onclick="window.location.href = 'processServiceCart?statusWeb=order'">Đặt Dịch Vụ</button>-->
+                                    <button type="submit" name="statusWeb" value="order" onclick="goToPage()">Đặt Dịch Vụ</button>
                                     <button type="submit" name="statusWeb" value="viewService" onclick="window.location.href = 'service'">Xem Dịch Vụ</button>
 
                                 </div>
@@ -313,3 +330,11 @@
     </div>
 
 </div>
+<script>
+    function goToPage() {
+        var e = document.getElementById("mySelect");
+        var selectedValue = e.options[e.selectedIndex].value;
+        var link = "processServiceCart?statusWeb=order&&orderID=" + selectedValue;
+        window.location.href = link;
+    }
+</script>

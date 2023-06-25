@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.entity.Customer;
 import model.entity.Order;
+import model.entity.OrderCart;
 import model.service.CustomerService;
 import model.service.OrderService;
+import model.service.YourCartService;
 
 @WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
@@ -48,7 +50,8 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         Customer cus = CustomerService.login(username, password);
         System.out.println(cus);
-        if (cus != null) {
+         if (cus != null) {
+            
             Cookie userCookies = new Cookie("username", username);
             Cookie passCookies = new Cookie("password", password);
             userCookies.setMaxAge(60 * 60 * 24);    
@@ -57,6 +60,9 @@ public class LoginController extends HttpServlet {
             response.addCookie(passCookies);
             HttpSession session = request.getSession();
             session.setAttribute("customer", cus);
+            
+            List<OrderCart> list = YourCartService.getYourCartOrder(cus.getCusID());
+            session.setAttribute("orderID", list);
             
             List<Order> listOrder = OrderService.getOrderByCustomerID(cus.getCusID());
             session.setAttribute("listOrder", listOrder);
