@@ -29,14 +29,17 @@ public class YourCartController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        session.getAttribute("orderID");
+
+        if (session.getAttribute("orderID").equals(null)) {
+            response.sendRedirect("room");
+        }
 
         List<OrderCart> listorderID = (List<OrderCart>) session.getAttribute("orderID");
 
         String orderID = null;
         String orderID0 = null;
         String orderID1 = null;
-        
+
         for (OrderCart o : listorderID) {
             if (orderID != null) {
                 orderID = orderID + "/" + o.getOrderID() + ":" + o.getOrStatus();
@@ -60,36 +63,42 @@ public class YourCartController extends HttpServlet {
         }
 
 //        Đã Đặt
-        List<RoomCart> listRoomCart = YourCartService.getYourCartRoom(orderID);
-        List<ServiceCart> listServiceCart = YourCartService.getYourCartService(orderID);
-        List<FoodCart> listFoodCart = YourCartService.getYourCartFood(orderID);
+        if (orderID != null) {
+            List<RoomCart> listRoomCart = YourCartService.getYourCartRoom(orderID);
+            List<ServiceCart> listServiceCart = YourCartService.getYourCartService(orderID);
+            List<FoodCart> listFoodCart = YourCartService.getYourCartFood(orderID);
 
-        request.setAttribute("listRoom", listRoomCart);
-        request.setAttribute("listService", listServiceCart);
-        request.setAttribute("listFood", listFoodCart);
+            request.setAttribute("listRoom", listRoomCart);
+            request.setAttribute("listService", listServiceCart);
+            request.setAttribute("listFood", listFoodCart);
+        }
 
 //        Đã Thanh Toán
-        List<RoomCart> listRoomCart1 = YourCartService.getYourCartRoom(orderID1);
-        List<ServiceCart> listServiceCart1 = YourCartService.getYourCartService(orderID1);
-        List<FoodCart> listFoodCart1 = YourCartService.getYourCartFood(orderID1);
+        if (orderID1 != null) {
+            List<RoomCart> listRoomCart1 = YourCartService.getYourCartRoom(orderID1);
+            List<ServiceCart> listServiceCart1 = YourCartService.getYourCartService(orderID1);
+            List<FoodCart> listFoodCart1 = YourCartService.getYourCartFood(orderID1);
 
-        request.setAttribute("listRoom1", listRoomCart1);
-        request.setAttribute("listService1", listServiceCart1);
-        request.setAttribute("listFood1", listFoodCart1);
+            request.setAttribute("listRoom1", listRoomCart1);
+            request.setAttribute("listService1", listServiceCart1);
+            request.setAttribute("listFood1", listFoodCart1);
+        }
 
 //        Chưa Thanh Toán
-        List<RoomCart> listRoomCart0 = YourCartService.getYourCartRoom(orderID0);
-        List<ServiceCart> listServiceCart0 = YourCartService.getYourCartService(orderID0);
-        List<FoodCart> listFoodCart0 = YourCartService.getYourCartFood(orderID0);
+        if (orderID0 != null) {
+            List<RoomCart> listRoomCart0 = YourCartService.getYourCartRoom(orderID0);
+            List<ServiceCart> listServiceCart0 = YourCartService.getYourCartService(orderID0);
+            List<FoodCart> listFoodCart0 = YourCartService.getYourCartFood(orderID0);
 
-        request.setAttribute("listRoom0", listRoomCart0);
-        request.setAttribute("listService0", listServiceCart0);
-        request.setAttribute("listFood0", listFoodCart0);
-        
-        double totalPrice = YourCartService.getTotalPrice(orderID0);
-        request.setAttribute("totalPrice", totalPrice);
-        
-        System.out.println("Total Price: " + totalPrice);
+            request.setAttribute("listRoom0", listRoomCart0);
+            request.setAttribute("listService0", listServiceCart0);
+            request.setAttribute("listFood0", listFoodCart0);
+
+            double totalPrice = YourCartService.getTotalPrice(orderID0);
+            request.setAttribute("totalPrice", totalPrice);
+
+            System.out.println("Total Price: " + totalPrice);
+        }
 
         request.getRequestDispatcher("customer_ordered.jsp").forward(request, response);
     }
