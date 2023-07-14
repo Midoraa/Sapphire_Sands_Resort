@@ -110,10 +110,20 @@ public class RoomRepository {
 
     }
 
-    public static ArrayList<Room> getChoosenRoom(String roomInputType, int maxInputPeople) {
+    public static ArrayList<Room> getChoosenRoom(String roomInputType, int maxInputPeople, String timeIn, String timeOut) {
         ArrayList<Room> listChoosenRoom = new ArrayList<Room>();
         try (Connection conn = DBConnect.getConnection()) {
-            String query = "SELECT * FROM Room WHERE roomStatus = 0 AND roomType = ? AND maxPeople >= ?";
+            String query = "SELECT *\n"
+                    + "FROM Room\n"
+                    + "WHERE Room.roomType = ?\n"
+                    + "    AND Room.maxPeople >= ?\n"
+                    + "    AND Room.roomID NOT IN (\n"
+                    + "        SELECT ContractDetail.roomID\n"
+                    + "        FROM ContractDetail\n"
+                    + "        JOIN `Order` ON ContractDetail.orderID = `Order`.orderID\n"
+                    + "        WHERE ContractDetail.timeOut <= ? AND ContractDetail.timeIn >= ?\n"
+                    + "            AND ContractDetail.status IN (1, 3) AND `Order`.orStatus = 0\n"
+                    + "    );";
             PreparedStatement ps = conn.prepareStatement(query);
             if (roomInputType.equalsIgnoreCase("Phòng nghỉ dưỡng")) {
                 ps.setInt(1, 1);
@@ -121,8 +131,10 @@ public class RoomRepository {
                 ps.setInt(1, 2);
             } else {
                 ps.setInt(1, 3);
-            }       
+            }
             ps.setInt(2, maxInputPeople);
+            ps.setString(3, timeOut);
+            ps.setString(4, timeIn);
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 String roomID = results.getString(1);

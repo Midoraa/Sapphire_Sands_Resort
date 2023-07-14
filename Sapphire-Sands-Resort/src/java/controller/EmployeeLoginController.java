@@ -91,9 +91,11 @@ public class EmployeeLoginController extends HttpServlet {
             session.setAttribute("employee", emp);
             if (emp.getRole()==3) {
                 response.sendRedirect("manager.jsp");
-            }else if(emp.getRole()==2){
+            }
+            if(emp.getRole()==2){
                 response.sendRedirect("admin.jsp");
-            }else{
+            }
+            if(emp.getRole()==1){
                 response.sendRedirect("employee.jsp");
             }
         }else {

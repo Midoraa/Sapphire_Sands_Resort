@@ -190,6 +190,48 @@
                         </div>
                     </div>
                 </div>
+                
+                
+                <div class="container-fluid pt-4 px-4 pb-5" id="contractManager">
+                    <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Hợp đồng thuê phòng yêu cầu hủy</h6>
+                            <!-- <a href="">Show All</a> -->
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                <thead>
+                                    <tr class="text-dark">
+                                        <th scope="col">ID Khách Hàng</th>
+                                        <th scope="col">Thời gian đặt</th>
+                                        <th scope="col">Tên Khách Hàng</th>
+                                        <th scope="col">ID Phòng </th>
+                                        <th scope="col">Ngày thuê</th>
+                                        <th scope="col">Ngày trả</th>
+                                        <th scope="col">Số người</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${show.getAllRequestingCancelContract()}" var="i" >
+                                    <tr id="row${i.orderID}">
+                                        <td>${i.cusID}</td>
+                                        <td>${i.timeRegister}</td>
+                                        <td>${i.cusName}</td>
+                                        <td>${i.roomID}</td>
+                                        <td>${i.timeIn}</td>
+                                        <td>${i.timeOut}</td>
+                                        <td>${i.people}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-primary" href="accept_cancel_room?orderID=${i.orderID}&cusID=${i.cusID}">Chấp nhận hủy</a>
+                                            <a class="btn btn-sm btn-danger" href="not_accept_cancel?orderID=${i.orderID}&cusID=${i.cusID}">Không chấp nhận</a>                        
+                                        </td>
+                                    </tr>   
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div class="container-fluid pt-4 px-4 pb-5" id="contractManager">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
@@ -270,7 +312,7 @@
                     </div>
                 </div>
 
-                <div class="container-fluid pt-4 px-4 pb-5" id="managerService">
+<!--                <div class="container-fluid pt-4 px-4 pb-5" id="managerService">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <h6 class="mb-0">Quản lý dịch vụ</h6>
@@ -307,7 +349,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <!-- Recent Sales End -->
 
             </div>

@@ -94,17 +94,17 @@
                                 <div class="navbar-nav mr-auto py-0">
                                     <a href="home.jsp" class="nav-item nav-link active">Home</a>
                                     <a href="about.jsp" class="nav-item nav-link">About</a>
-                                    <a href="service.jsp" class="nav-item nav-link">Services</a>
+                                    <a href="service" class="nav-item nav-link">Services</a>
                                     <a href="room" class="nav-item nav-link">Rooms</a>
                                     <div class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                                         <div class="dropdown-menu rounded-0 m-0">
                                             <a href="customer_register.jsp" class="dropdown-item">Become our customer</a>
-                                            <a href="team.jsp" class="dropdown-item">Our Team</a>
+                                            <a href="employee_login" class="dropdown-item">Đăng nhập nhân sự</a>
                                             <a href="testimonial.jsp" class="dropdown-item">Testimonial</a>
                                         </div>
                                     </div>
-                                    <a href="contact.jsp" class="nav-item nav-link">Contact</a>
+                                    <a href="food" class="nav-item nav-link">Foods</a>
                                 </div>
                                 <c:if test="${sessionScope.customer==null}">
                                     <a href="login" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Log in <i class="bi bi-arrow-right"></i></a>
@@ -113,13 +113,12 @@
                                     <div class="nav-item dropdown">
                                         <a href="#" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block" data-bs-toggle="dropdown">${sessionScope.customer.username}</a>
                                         <div class="dropdown-menu m-0">
-                                            <a href="inforUser.jsp" class="dropdown-item">Your information</a>
+                                            <a href="infor_user.jsp" class="dropdown-item">Your information</a>
                                             <c:if test="${sessionScope.customer.role == 2}">
                                                 <a href="admin.jsp" class="dropdown-item">Admin</a>
                                             </c:if>
 
-                                            <a href="cart.jsp" class="dropdown-item">Your cart</a>
-                                            <a href="getorderhistory" class="dropdown-item">History order</a>
+                                            <a href="yourcart" class="dropdown-item">Your cart</a>
                                             <a href="logout" class="dropdown-item text-danger">Log out</a>
                                         </div>
                                     </div>

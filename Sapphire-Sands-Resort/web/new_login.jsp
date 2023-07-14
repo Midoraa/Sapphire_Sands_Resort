@@ -30,8 +30,9 @@
                         <input type="password" name="password" required autocomplete="off" onkeyup="Pass(event)"> 
                         <label>Mật khẩu</label>
                     </div>
-                    <div class="remember-forgot">
-                        <a href="#">Quên mật khẩu</a>
+                    <div class="remember-forgot d-flex justify-content-between">
+                        <label><input type="checkbox" name>Remember me</label>
+                        <a href="#">Forgot password</a>
                     </div>
                     <div class="text-warning text-center" id="messText" >${thongbao}</div>
                     <button type="submit" class="btn btn-light" id="loginButton" disabled>Đăng nhập</button>

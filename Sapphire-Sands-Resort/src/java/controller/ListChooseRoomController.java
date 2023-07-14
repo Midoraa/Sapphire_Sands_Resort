@@ -69,7 +69,7 @@ public class ListChooseRoomController extends HttpServlet {
         String roomType = request.getParameter("room_type");
         int maxPeople = Integer.parseInt(request.getParameter("max_people"));
 
-        listRoom = RoomService.getChoosenRoom(roomType, maxPeople);
+        listRoom = RoomService.getChoosenRoom(roomType, maxPeople, timeIn, timeOut);
         request.setAttribute("listChoosenRoom", listRoom);
         request.setAttribute("time_in", timeIn);
         request.setAttribute("time_out", timeOut);

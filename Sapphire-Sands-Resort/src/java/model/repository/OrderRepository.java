@@ -24,8 +24,8 @@ import model.service.Isvalid;
  * @author Admin
  */
 public class OrderRepository {
-    
-    public static String getOrderID(){
+
+    public static String getOrderID() {
         try (Connection conn = DBConnect.getConnection()) {
             String query = "SELECT MAX(SUBSTRING(orderID, 3)) AS maxID FROM `Order`";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -43,23 +43,23 @@ public class OrderRepository {
             conn.close();
             preparedStatement.close();
             rs.close();
-            return newOrderID;           
+            return newOrderID;
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("============Loi generate ID trong OrderRepository!!!=============");
         }
         return null;
     }
-    
-    public static List<Order> getOrderByCustomerID(String cusID){
+
+    public static List<Order> getOrderByCustomerID(String cusID) {
         List<Order> list = new ArrayList<>();
-        try (Connection conn = DBConnect.getConnection()){
+        try (Connection conn = DBConnect.getConnection()) {
             String query = "select * from `Order` where cusID = ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, cusID);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Order(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getBoolean(4)));               
+                list.add(new Order(rs.getString(1), rs.getString(2), rs.getDate(3), rs.getBoolean(4)));
             }
             conn.close();
             ps.close();
@@ -70,9 +70,9 @@ public class OrderRepository {
         }
         return list;
     }
-    
-    public static String makeOrder(Room room, Contract contract, Customer cus){
-        try(Connection conn = DBConnect.getConnection()) {
+
+    public static String makeOrder(Room room, Contract contract, Customer cus) {
+        try (Connection conn = DBConnect.getConnection()) {
             String query = "INSERT INTO `Order`(orderID, cusID, orDate, orStatus) VALUES (?, ?, ?, ?)";
             String orderID = getOrderID();
             PreparedStatement ps = conn.prepareStatement(query);
@@ -82,7 +82,7 @@ public class OrderRepository {
             ps.setBoolean(4, false);
             ps.executeUpdate();
             ps.close();
-            createContractDetail(room, contract,orderID);
+            createContractDetail(room, contract, orderID);
             return orderID;
         } catch (SQLException e) {
             System.out.println(e);
@@ -92,8 +92,8 @@ public class OrderRepository {
     }
 
     private static void createContractDetail(Room room, Contract contract, String orderID) {
-        try (Connection conn = DBConnect.getConnection()){
-            String query = "Insert INTO ContractDetail(roomID, orderID, timeIn, timOut, people, timeRegister, status) VALUES (?, ? , ?, ?, ?, ?, ?)";
+        try (Connection conn = DBConnect.getConnection()) {
+            String query = "Insert INTO ContractDetail(roomID, orderID, timeIn, timeOut, people, timeRegister, status) VALUES (?, ? , ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, room.getRoomID());
             ps.setString(2, orderID);
@@ -111,9 +111,9 @@ public class OrderRepository {
             System.out.println("===========Loi createContractDetail trong OrderRepository===============");
         }
     }
-    
-    private static void setStatusRoom(Room room){
-        try(Connection conn = DBConnect.getConnection()) {
+
+    private static void setStatusRoom(Room room) {
+        try (Connection conn = DBConnect.getConnection()) {
             String query = "UPDATE Room SET roomStatus = 1 WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, room.getRoomID());
@@ -122,6 +122,37 @@ public class OrderRepository {
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("=============SAI setStatusRoom trong OrderRepo===============");
+        }
+    }
+
+    public static void sendRequestCancelRoom(String orderID) {
+        try (Connection conn = DBConnect.getConnection()) {
+            String query = "UPDATE ContractDetail\n"
+                    + "SET status = 3\n"
+                    + "WHERE orderID = ?;";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, orderID);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("==========Loi sendRequestCancelRoom trong OrderRepo==========");
+        }
+    }
+    public static void notAcceptRequestCancelRoom(String orderID) {
+        try (Connection conn = DBConnect.getConnection()) {
+            String query = "UPDATE ContractDetail\n"
+                    + "SET status = 1\n"
+                    + "WHERE orderID = ?;";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, orderID);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("==========Loi notAcceptRequestCancelRoom trong OrderRepo==========");
         }
     }
 //    public static void main(String[] args) {

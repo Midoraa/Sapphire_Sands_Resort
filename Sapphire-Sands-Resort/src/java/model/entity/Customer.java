@@ -24,6 +24,27 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(String username, String password, String cusID, String cusPhone, String cusEmail) {
+        this.username = username;
+        this.password = password;
+        this.cusID = cusID;
+        this.cusPhone = cusPhone;
+        this.cusEmail = cusEmail;
+    }
+
+    public Customer(String accountID, String username, String password, String cusName, Date cusDOB, String cusPhone, String cusEmail, String cusCCCD) {
+        this.accountID = accountID;
+        this.username = username;
+        this.password = password;
+        this.cusName = cusName;
+        this.cusDOB = cusDOB;
+        this.cusPhone = cusPhone;
+        this.cusEmail = cusEmail;
+        this.cusCCCD = cusCCCD;
+    }
+
+    
+    
     public Customer(String accountID, String username, String password, int role, String cusID, String cusName, Date cusDOB, String cusPhone, String cusEmail, String cusCCCD, int cusType) {
         this.accountID = accountID;
         this.username = username;

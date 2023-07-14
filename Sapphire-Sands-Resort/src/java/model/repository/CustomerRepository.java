@@ -53,12 +53,11 @@ public class CustomerRepository {
         return null;
 
     }
-    
 
     public static void registerCustomer(Customer a) {
         System.out.println(a);
         try (Connection conn = DBConnect.getConnection()) {
-            String accountQuery = "INSERT INTO Account(accountID, username, password, role) VALUES (?, ?, ?, ?);";                  
+            String accountQuery = "INSERT INTO Account(accountID, username, password, role) VALUES (?, ?, ?, ?);";
             PreparedStatement psa = conn.prepareStatement(accountQuery);
             psa.setString(1, a.getAccountID());
             psa.setString(2, a.getUsername());
@@ -66,7 +65,7 @@ public class CustomerRepository {
             psa.setInt(4, a.getRole());
             psa.executeUpdate(); // thiếu dòng ni đm mày :)
             psa.close();
-            insertCustomer(a);   
+            insertCustomer(a);
         } catch (Exception e) {
             System.out.println("Loi dang ky Customer trong CustomerRepository");
             System.out.println(e);
@@ -134,14 +133,13 @@ public class CustomerRepository {
         return false;
     }
 
-    public static void main(String[] args) {
-        Customer a = new Customer("1234", "username", "123", 0, "abc", "test", new Date(0), "1243", "acv", "123", 0);
-        CustomerRepository.registerCustomer(a);
-    }
-
+//    public static void main(String[] args) {
+//        Customer a = new Customer("1234", "username", "123", 0, "abc", "test", new Date(0), "1243", "acv", "123", 0);
+//        CustomerRepository.registerCustomer(a);
+//    }
     static void insertCustomer(Customer a) {
-        try(Connection conn = DBConnect.getConnection()) {
-            String customerQuery =  "insert into Customer(cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) values (?,?,?,?,?,?,?);";
+        try (Connection conn = DBConnect.getConnection()) {
+            String customerQuery = "insert into Customer(cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType) values (?,?,?,?,?,?,?);";
             PreparedStatement psc = conn.prepareStatement(customerQuery);
             psc.setString(1, a.getAccountID());
             psc.setString(2, a.getCusName());
@@ -155,6 +153,30 @@ public class CustomerRepository {
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("Loi insert vao bang Customer");
+        }
+    }
+
+    public static void inforUserUpdate(Customer c) {
+        try (Connection conn = DBConnect.getConnection()) {
+            String query = "UPDATE Customer\n"
+                    + "JOIN Account ON Customer.cusID = Account.accountID\n"
+                    + "SET Customer.cusPhone = ?,\n"
+                    + "    Customer.cusEmail = ?,\n"
+                    + "    Account.username = ?,\n"
+                    + "    Account.password = ?\n"
+                    + "WHERE Customer.cusID = ?;";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, c.getCusPhone());
+            ps.setString(2, c.getCusEmail());
+            ps.setString(3, c.getUsername());
+            ps.setString(4, c.getPassword());
+            ps.setString(5, c.getCusID());
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("=========Loi UpdateUser trong CustomerRepo==========");
         }
     }
 }
