@@ -21,41 +21,40 @@
                 <div class="col-md-10">
                     <div class="row g-2">
                         <div class="col-md-3 px-2">
-                            <div class="date" id="date1" data-target-input="nearest">
-                                <input name="time_in" type="date" class="form-control"
-                                       placeholder="Nhận phòng" onchange="checkIn(event)"/>
-                            </div>
-                            <div id="messCheckIn" class="error-text text-center text-warning"></div>
+                        <div class="date" id="date1" data-target-input="nearest">
+                            <input name="time_in" type="date" class="form-control"
+                                   placeholder="Nhận phòng" onchange="checkIn(event)"/>
                         </div>
+                        <div id="messCheckIn" class="error-text text-center text-warning"></div>
+                    </div>
                         
                         <div class="col-md-3 px-2">
-                            <div class="date" id="date2" data-target-input="nearest">
-                                <input name="time_out" type="date" class="form-control"
-                                       placeholder="Trả phòng" onchange="checkOut(event)"/>
-                            </div>
-                            <div id="messCheckOut" class="error-text text-center text-warning"></div>
+                        <div class="date" id="date2" data-target-input="nearest">
+                            <input name="time_out" type="date" class="form-control"
+                                   placeholder="Trả phòng" onchange="checkOut(event)"/>
                         </div>
+                        <div id="messCheckOut" class="error-text text-center text-warning"></div>
+                    </div>
                         
+
                         <div class="col-md-3 px-2">
                             <select class="form-select" name="max_people">
-                                <option selected>Số người</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
+                                <option value="1">1 Người</option>
+                                <option value="2">2 Người</option>
+                                <option value="3">3 Người</option>
+                                <option value="4">4 Người</option>
+                                <option value="5">5 Người</option>
+                                <option value="6">6 Người</option>
+                                <option value="7">7 Người</option>
+                                <option value="8">8 Người</option>
+                                <option value="9">9 Người</option>
+                                <option value="10">10 Người</option>
+                                <option value="11">11 Người</option>
+                                <option value="12">12 Người</option>
                             </select>
                         </div>
                         <div class="col-md-3 px-2">
                             <select class="form-select" name="room_type">
-                                <option selected>Loại phòng</option>
                                 <option value="Phòng nghỉ dưỡng">Phòng nghỉ dưỡng</option>
                                 <option value="Suite">Suite</option>
                                 <option value="PENTHOUSES & VILLAS">PENTHOUSES & VILLAS</option>

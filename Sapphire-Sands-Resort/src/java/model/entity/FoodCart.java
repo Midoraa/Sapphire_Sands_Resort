@@ -11,48 +11,14 @@ public class FoodCart {
     
     public FoodCart() {
     }
-
-    public FoodCart(String foodID, int amount) {
-        this.foodID = foodID;
-        this.amount = amount;
-    }
-
-    public FoodCart(String foodID, String foodName, double foodPrice, int amount) {
+    
+    public FoodCart(String foodID, String foodName, int amount, double foodPrice) {
         this.foodID = foodID;
         this.foodName = foodName;
-        this.foodPrice = foodPrice;
         this.amount = amount;
+        this.foodPrice = foodPrice;
     }
     
-
-    public FoodCart(String foodID, String foodName, String cusID, double foodPrice, Timestamp orTime, int amount) {
-        this.foodID = foodID;
-        this.foodName = foodName;
-        this.cusID = cusID;
-        this.foodPrice = foodPrice;
-        this.orTime = orTime;
-        this.amount = amount;
-    }
-
-    public FoodCart(String orderID, String foodID, String foodName, String cusID, double foodPrice, Timestamp orTime, int amount, int orStatus) {
-        this.orderID = orderID;
-        this.foodID = foodID;
-        this.foodName = foodName;
-        this.cusID = cusID;
-        this.foodPrice = foodPrice;
-        this.orTime = orTime;
-        this.amount = amount;
-        this.orStatus = orStatus;
-    }
-
-    public FoodCart(String orderID, String foodID, Timestamp orTime, int amount, int orStatus) {
-        this.orderID = orderID;
-        this.foodID = foodID;
-        this.orTime = orTime;
-        this.amount = amount;
-        this.orStatus = orStatus;
-    }
-
     public FoodCart(String orderID, String foodID, String foodName, double foodPrice, Timestamp orTime, int amount, int orStatus) {
         this.orderID = orderID;
         this.foodID = foodID;
@@ -62,7 +28,6 @@ public class FoodCart {
         this.amount = amount;
         this.orStatus = orStatus;
     }
-    
 
     public String getOrderID() {
         return orderID;

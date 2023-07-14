@@ -772,36 +772,36 @@ const searchRoom = document.getElementById("searchRoom");
 const messCheckIn = document.getElementById("messCheckIn");
 const messCheckOut = document.getElementById("messCheckOut");
 
-let checkInroom ="", checkOutroom="";
+let checkInroom = "";
+let checkOutroom = "";
 
-function checkIn(event){
+function checkIn(event) {
     checkInroom = event.target.value;
     
-    if(checkInroom.length === 0){
-        messCheckIn.textContent = "Vui lòng không để trống !"
-    }else{
-        messCheckIn.textContent = ""
+    if (checkInroom.length === 0) {
+        messCheckIn.textContent = "Vui lòng không để trống!";
+    } else {
+        messCheckIn.textContent = "";
     }
     checkSearchRoomButton();
 }
 
-function checkOut(event){
-   checkOutroom = event.target.value;
-   
-   if(checkOutroom.length === 0){
-      messCheckOut.textContent = "Vui lòng không để trống !"
-   }else{
-       messCheckOut.textContent = " "
-   }
-   checkSearchRoomButton();
+function checkOut(event) {
+    checkOutroom = event.target.value;
+    
+    if (checkOutroom.length === 0) {
+        messCheckOut.textContent = "Vui lòng không để trống!";
+    } else {
+        messCheckOut.textContent = "";
+    }
+    checkSearchRoomButton();
 }
 
-function checkSearchRoomButton(){
-  if (
-    checkInroom.length !== 0 && checkOutroom.length !== 0
-  ) {
-    searchRoom.disabled = false;
-  } else {
-    searchRoom.disabled = true;
-  }
+function checkSearchRoomButton() {
+    const currentDate = new Date().toISOString().split('T')[0]; 
+    if (checkInroom.length !== 0 && checkOutroom.length !== 0 && checkInroom >= currentDate && checkOutroom >= currentDate && checkInroom <= checkOutroom) {
+        searchRoom.disabled = false;
+    } else {
+        searchRoom.disabled = true;
+    }
 }

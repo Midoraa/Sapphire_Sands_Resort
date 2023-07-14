@@ -57,7 +57,7 @@
 
 
                 <!-- Sidebar Start -->
-                <div class="sidebar pe-4 pb-3">
+                <div class="sidebar pe-3 pb-3">
                     <nav class="navbar bg-light navbar-light">
                         <a href="index.html" class="navbar-brand mx-4 mb-3">
                             <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>ADMIN</h3>
@@ -92,7 +92,7 @@
             <!-- Sidebar End -->
 
             <!-- Popup create account Employee -->
-            <form action="">
+            <form action="create_employee" method="post">
                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelEmployee" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -106,42 +106,42 @@
                                 <div class="">
                                     <div class="container-fluid">
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="usernameEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkUser(event)">
+                                            <input name="username" type="text" class="form-control w-100" id="usernameEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkUser(event)">
                                             <label for="usernameEmployee">Tên Đăng Nhập</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="fullName" placeholder="jhondoe" autocomplete="off" onkeyup="checkName(event)">
+                                            <input name="empName" type="text" class="form-control w-100" id="fullName" placeholder="jhondoe" autocomplete="off" onkeyup="checkName(event)">
                                             <label for="fullName">Họ và tên</label>
                                         </div>
                                         <div class="col-md-12 d-flex pb-4">
                                             <label for="">Giới Tính:</label>
                                             <div class="form-check form-switch mx-3">
-                                                <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhNam" value="false" checked >
+                                                <input class="form-check-input" type="radio" name="empGender" id="gioitinhNam" value="false" checked >
                                                 <label class="form-check-label" for="gioitinhNam">Nam</label>
                                             </div>
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhNu" value="true">
+                                                <input class="form-check-input" type="radio" name="empGender" id="gioitinhNu" value="true">
                                                 <label class="form-check-label" for="gioitinhNu">Nữ</label>
                                             </div>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="date" class="form-control w-100" id="DOBEmployee" placeholder="jhondoe" autocomplete="off" onchange="checkDate(event)" required>
+                                            <input name="empDOB" type="date" class="form-control w-100" id="DOBEmployee" placeholder="jhondoe" autocomplete="off" onchange="checkDate(event)" required>
                                             <label for="DOBEmployee">Ngày sinh</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="addressEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkAddress(event)">
+                                            <input name="empAdress" type="text" class="form-control w-100" id="addressEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkAddress(event)">
                                             <label for="addressEmployee">Địa chỉ</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="telEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkTel(event)">
+                                            <input name="empPhone" type="text" class="form-control w-100" id="telEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkTel(event)">
                                             <label for="telEmployee">Số điện thoại</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="email" class="form-control w-100" id="emailEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkEmail(event)">
+                                            <input name="empEmail" type="email" class="form-control w-100" id="emailEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkEmail(event)">
                                             <label for="emailEmployee">Email</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="password" class="form-control w-100" id="passwordEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkPass(event)">
+                                            <input name="password" type="password" class="form-control w-100" id="passwordEmployee" placeholder="jhondoe" autocomplete="off" onkeyup="checkPass(event)">
                                             <label for="passwordEmployee">Password</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
@@ -164,7 +164,7 @@
             <!-- End Popup create account -->
 
             <!-- popup create account Manager -->
-            <form action="">
+            <form action="create_manager" method="post">
                 <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelManager" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -176,42 +176,42 @@
                                 <div class="">
                                     <div class="container-fluid">
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="usernameManager" placeholder="jhondoe" autocomplete="off" onkeyup="checkUserManager(event)">
+                                            <input name="username" type="text" class="form-control w-100" id="usernameManager" placeholder="jhondoe" autocomplete="off" onkeyup="checkUserManager(event)">
                                             <label for="usernameManager">Tên Đăng Nhập</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="fullName" placeholder="jhondoe" autocomplete="off" onkeyup="checkNameManager(event)">
+                                            <input name="mngName" type="text" class="form-control w-100" id="fullName" placeholder="jhondoe" autocomplete="off" onkeyup="checkNameManager(event)">
                                             <label for="fullName">Họ và tên</label>
                                         </div>
                                         <div class="col-md-12 d-flex pb-4">
                                             <label for="">Giới Tính:</label>
                                             <div class="form-check form-switch mx-3">
-                                                <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhNam" value="false" checked >
+                                                <input class="form-check-input" type="radio" name="mngGender" id="gioitinhNam" value="false" checked >
                                                 <label class="form-check-label" for="gioitinhNam">Nam</label>
                                             </div>
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhNu" value="true">
+                                                <input class="form-check-input" type="radio" name="mngGender" id="gioitinhNu" value="true">
                                                 <label class="form-check-label" for="gioitinhNu">Nữ</label>
                                             </div>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="date" class="form-control w-100" id="DOBManager" placeholder="jhondoe" autocomplete="off" onchange="checkDateManager(event)" required>
+                                            <input name="mngDOB" type="date" class="form-control w-100" id="DOBManager" placeholder="jhondoe" autocomplete="off" onchange="checkDateManager(event)" required>
                                             <label for="DOBManager">Ngày sinh</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="address" placeholder="jhondoe" autocomplete="off" onkeyup="checkAddressManager(event)">
+                                            <input name="mngAdress" type="text" class="form-control w-100" id="address" placeholder="jhondoe" autocomplete="off" onkeyup="checkAddressManager(event)">
                                             <label for="address">Địa chỉ</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="tel" placeholder="jhondoe" autocomplete="off" onkeyup="checkTelManager(event)">
+                                            <input name="mngPhone" type="text" class="form-control w-100" id="tel" placeholder="jhondoe" autocomplete="off" onkeyup="checkTelManager(event)">
                                             <label for="tel">Số điện thoại</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="email" class="form-control w-100" id="email" placeholder="jhondoe" autocomplete="off" onkeyup="checkEmailManager(event)">
+                                            <input name="mngEmail" type="email" class="form-control w-100" id="email" placeholder="jhondoe" autocomplete="off" onkeyup="checkEmailManager(event)">
                                             <label for="email">Email</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="password" class="form-control w-100" id="passwordManager" placeholder="jhondoe" autocomplete="off" onkeyup="checkPassManager(event)">
+                                            <input name="password" type="password" class="form-control w-100" id="passwordManager" placeholder="jhondoe" autocomplete="off" onkeyup="checkPassManager(event)">
                                             <label for="passwordManager">Password</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
@@ -233,37 +233,37 @@
             <!-- end popup create account -->
 
             <!-- popup create account Employee -->
-            <form action="">
-                <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelService" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header bg-light">
-                                <h5 class="modal-title" id="staticBackdropLabelService">Tạo dịch vụ</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">                        
-                                <div class="">
-                                    <div class="container-fluid">
-                                        <div class="form-floating mb-3  ms-auto">
-                                            <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="checkService(event)">
-                                            <label for="floatingText">Tên Dịch Vụ</label>
+            <!--            <form action="">
+                            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelService" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-light">
+                                            <h5 class="modal-title" id="staticBackdropLabelService">Tạo dịch vụ</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="form-floating mb-3  ms-auto">
-                                            <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="checkPriceService(event)">
-                                            <label for="floatingText">Giá Dịch Vụ</label>
+                                        <div class="modal-body">                        
+                                            <div class="">
+                                                <div class="container-fluid">
+                                                    <div class="form-floating mb-3  ms-auto">
+                                                        <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="checkService(event)">
+                                                        <label for="floatingText">Tên Dịch Vụ</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3  ms-auto">
+                                                        <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="checkPriceService(event)">
+                                                        <label for="floatingText">Giá Dịch Vụ</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="errorTextService" class="error-text text-center text-warning"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" id="createButtonService">Create</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="errorTextService" class="error-text text-center text-warning"></div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" id="createButtonService">Create</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+                        </form>-->
             <!-- end popup create account -->
 
             <!-- Content Start -->
@@ -286,122 +286,77 @@
                 <!-- Navbar End -->
 
 
-                <!-- Sale & Revenue Start -->
-                <div class="container-fluid pt-4 px-4">
-                    <div class="row g-4">
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-line fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Today Sale</p>
-                                    <h6 class="mb-0">$1234</h6>
+                <!--                 List Service 
+                                <div class="container-fluid pt-4 px-4 pb-3">
+                                    <div class="bg-light text-center rounded p-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-4">
+                                            <h6 class="mb-0">Danh sách dịch vụ</h6>
+                                             <a href="">Show All</a> 
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                                                <thead>
+                                                    <tr class="text-dark">
+                                                        <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                                                        <th scope="col">Mã Dịch Vụ</th>
+                                                        <th scope="col">Tên Dịch Vụ</th>
+                                                        <th scope="col">Giá</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><input class="form-check-input" type="checkbox"></td>
+                                                        <td>SV000001</td>
+                                                        <td>Dịch vụ Karaoke</td>
+                                                        <td>100000</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                Update
+                                                            </button>
+                                                            <button type="button" class="btn btn-primary">
+                                                                Delete
+                                                            </button>                  
+                                                        </td>
+                                                    </tr>                           
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Sale</p>
-                                    <h6 class="mb-0">$1234</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-area fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Today Revenue</p>
-                                    <h6 class="mb-0">$1234</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-3">
-                            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                                <i class="fa fa-chart-pie fa-3x text-primary"></i>
-                                <div class="ms-3">
-                                    <p class="mb-2">Total Revenue</p>
-                                    <h6 class="mb-0">$1234</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Sale & Revenue End -->
-
-
-
-<!--                 List Service 
-                <div class="container-fluid pt-4 px-4 pb-3">
-                    <div class="bg-light text-center rounded p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h6 class="mb-0">Danh sách dịch vụ</h6>
-                             <a href="">Show All</a> 
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table text-start align-middle table-bordered table-hover mb-0">
-                                <thead>
-                                    <tr class="text-dark">
-                                        <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                        <th scope="col">Mã Dịch Vụ</th>
-                                        <th scope="col">Tên Dịch Vụ</th>
-                                        <th scope="col">Giá</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input class="form-check-input" type="checkbox"></td>
-                                        <td>SV000001</td>
-                                        <td>Dịch vụ Karaoke</td>
-                                        <td>100000</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                Update
-                                            </button>
-                                            <button type="button" class="btn btn-primary">
-                                                Delete
-                                            </button>                  
-                                        </td>
-                                    </tr>                           
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                 Popup update Service 
-                <form action="">
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header bg-info">
-                                    <h5 class="modal-title" id="exampleModalLabel">Cập Nhập Dịch Vụ</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-
-                                    <div class="col-md">
-                                        <div class="container-fluid">
-                                            <div class="form-floating mb-3  ms-auto">
-                                                <input type="text" class="form-control w-100" id="nameService" placeholder="jhondoe" autocomplete="off" onkeyup="updateNameService(event)">
-                                                <label for="nameService">Tên Dịch Vụ</label>
-                                            </div>
-                                            <div class="form-floating mb-3  ms-auto">
-                                                <input type="text" class="form-control w-100" id="price" placeholder="jhondoe" autocomplete="off" onkeyup="priceServiceUpdate(event)">
-                                                <label for="price">Giá</label>
+                                 Popup update Service 
+                                <form action="">
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-info">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cập Nhập Dịch Vụ</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                
+                                                    <div class="col-md">
+                                                        <div class="container-fluid">
+                                                            <div class="form-floating mb-3  ms-auto">
+                                                                <input type="text" class="form-control w-100" id="nameService" placeholder="jhondoe" autocomplete="off" onkeyup="updateNameService(event)">
+                                                                <label for="nameService">Tên Dịch Vụ</label>
+                                                            </div>
+                                                            <div class="form-floating mb-3  ms-auto">
+                                                                <input type="text" class="form-control w-100" id="price" placeholder="jhondoe" autocomplete="off" onkeyup="priceServiceUpdate(event)">
+                                                                <label for="price">Giá</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                
+                                                </div>
+                                                <div id="messageServiceUpdate" class="error-text text-center text-warning"></div>
+                                                <div class="modal-footer">                            
+                                                    <button type="submit" class="btn btn-primary" id="updateButtonService" disabled>Lưu Thay Đổi</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                </div>
-                                <div id="messageServiceUpdate" class="error-text text-center text-warning"></div>
-                                <div class="modal-footer">                            
-                                    <button type="submit" class="btn btn-primary" id="updateButtonService" disabled>Lưu Thay Đổi</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>  
-                 Recent Sales End -->
+                                </form>  
+                                 Recent Sales End -->
 
                 <!-- List nhân sự, khách hàng -->
 
@@ -419,78 +374,83 @@
                                         <th scope="col">Mã Nhân Viên</th>
                                         <th scope="col">Họ Tên</th>
                                         <th scope="col">Giới Tính</th>
-                                        <th scope="col">Ngày Sinh</th>
+                                        <th class="w-25" scope="col">Ngày Sinh</th>
                                         <th scope="col">Số Điện Thoại</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Password</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${show.getAllEmployee()}" var="i" >
                                         <tr id="row${i.empID}">
-                                        <td>${i.empID}</td>
-                                        <td>${i.empNames}</td>
-                                        <td>${i.empGender}</td>
-                                        <td>${i.empDOB}</td>
-                                        <td>${i.empPhone}</td>
-                                        <td>${i.empEmail}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                                Update
-                                            </button>
-                                            <button type="button" class="btn btn-primary">
-                                                Delete
-                                            </button>                        
-                                        </td>
-                                    </tr>   
+                                            <td>${i.empID}</td>
+                                            <td>${i.empNames}</td>
+                                            <td>${i.empGender}</td>
+                                            <td>${i.empDOB}</td>
+                                            <td>${i.empPhone}</td>
+                                            <td>${i.empEmail}</td>
+                                            <td>${i.username}</td>
+                                            <td>${i.password}</td>
+                                            <td class="d-flex flex-column">
+                                                <button type="button" class="btn btn-primary m-1" data-empid="${i.empID}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                                    Update
+                                                </button>
+                                                <button type="button" class="btn btn-danger m-1" onclick="deleteEmp('${i.empID}')">
+                                                    Delete
+                                                </button>                        
+                                            </td>
+                                        </tr>   
                                     </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <!-- Popup update Manager -->
-                <form action="">
+                <!-- Popup update Employee -->
+                <form action="update_employee" method="post">
                     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header bg-primary">
-                                    <h5 class="modal-title" id="exampleModalLabel">Cập Nhập Quản Lý</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Cập Nhập Nhân Viên</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">                             
                                     <div class="col-md">
                                         <div class="container-fluid">
+                                            <input name="empID" type="text" class="form-control w-100" id="empIdInput" placeholder="jhondoe" autocomplete="off" hidden>
                                             <div class="form-floating mb-3  ms-auto">
-                                                <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateManagerName(event)">
+                                                <input name="empName" type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateManagerName(event)">
                                                 <label for="floatingText">Họ và tên</label>
                                             </div>
                                             <div class="col-md-12 d-flex pb-4">
                                                 <label for="">Giới Tính:</label>
                                                 <div class="form-check form-switch mx-3">
-                                                    <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhNam" value="false" v-model="gender" checked>
+                                                    <input class="form-check-input" type="radio" name="empGender" id="gioitinhNam" value="true" v-model="gender" checked>
                                                     <label class="form-check-label" for="gioitinhNam">Nam</label>
                                                 </div>
                                                 <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhNu" v-model="gender" value="true">
+                                                    <input class="form-check-input" type="radio" name="empGender" id="gioitinhNu" v-model="gender" value="false">
                                                     <label class="form-check-label" for="gioitinhNu">Nữ</label>
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3  ms-auto">
-                                                <input type="date" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onchange="checkUpdateDateManager(event)">
+                                                <input name="empDOB" type="date" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onchange="checkUpdateDateManager(event)">
                                                 <label for="floatingText">Ngày sinh</label>
                                             </div>
                                             <div class="form-floating mb-3 ms-auto">
-                                                <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateAddressManager(event)">
+                                                <input name="empAdress" type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateAddressManager(event)">
                                                 <label for="floatingText">Địa chỉ</label>
                                             </div>
                                         </div>
                                         <div class="container-fluid">
                                             <div class="form-floating mb-3 ms-auto">
-                                                <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updatePhoneManager(event)">
+                                                <input name="empPhone" type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updatePhoneManager(event)">
                                                 <label for="floatingText">Số Điện Thoại</label>
                                             </div>
                                             <div class="form-floating mb-3 ms-auto">
-                                                <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmailManager(event)">
+                                                <input name="empEmail" type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmailManager(event)">
                                                 <label for="floatingText">Email</label>
                                             </div>
                                         </div>
@@ -521,6 +481,8 @@
                                         <th scope="col">Ngày Sinh</th>
                                         <th scope="col">Số Điện Thoại</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Password</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -532,11 +494,13 @@
                                             <td>${i.empDOB}</td>
                                             <td>${i.empPhone}</td>
                                             <td>${i.empEmail}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                                            <td>${i.username}</td>
+                                            <td>${i.password}</td>
+                                            <td class="d-flex flex-column">
+                                                <button type="button" class="btn btn-primary m-1" data-manager-id="${i.empID}" data-bs-toggle="modal" data-bs-target="#exampleModal3">
                                                     Update
                                                 </button>
-                                                <button type="button" class="btn btn-primary">
+                                                <button type="button" class="btn btn-danger m-1" onclick="deleteEmp('${i.empID}')">
                                                     Delete
                                                 </button>                        
                                             </td>
@@ -549,47 +513,48 @@
                 </div>
 
                 <!-- Popup cập nhật nhân viên -->
-                <form action="">
+                <form action="update_employee" method="post">
                     <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header bg-warning">
-                                    <h5 class="modal-title" id="exampleModalLabel">Cập Nhật Nhân Viên</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Cập Nhật Quản Lý</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">               
                                     <div class="container-fluid">
+                                        <input name="empID" type="text" class="form-control w-100" id="managerIdInput" placeholder="jhondoe" autocomplete="off" hidden>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmployeeName(event)">
+                                            <input name="empName" type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmployeeName(event)">
                                             <label for="floatingText">Họ và tên</label>
                                         </div>
                                         <div class="col-md-12 d-flex pb-4">
                                             <label for="">Giới Tính:</label>
                                             <div class="form-check form-switch mx-3">
-                                                <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhNam" value="false" checked>
+                                                <input class="form-check-input" type="radio" name="empGender" id="gioitinhNam" value="false" checked>
                                                 <label class="form-check-label" for="gioitinhNam">Nam</label>
                                             </div>
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="radio" name="gioitinh" id="gioitinhNu"  value="true">
+                                                <input class="form-check-input" type="radio" name="empGender" id="gioitinhNu"  value="true">
                                                 <label class="form-check-label" for="gioitinhNu">Nữ</label>
                                             </div>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="date" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onchange="updateEmployeeDate(event)">
+                                            <input name="empDOB" type="date" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onchange="updateEmployeeDate(event)">
                                             <label for="floatingText">Ngày sinh</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmployeeAddress(event)">
+                                            <input name="empAdress" type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmployeeAddress(event)">
                                             <label for="floatingText">Địa chỉ</label>
                                         </div>
                                     </div>
                                     <div class="container-fluid">
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmployeePhone(event)">
+                                            <input name="empPhone" type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmployeePhone(event)">
                                             <label for="floatingText">Số Điện Thoại</label>
                                         </div>
                                         <div class="form-floating mb-3 ms-auto">
-                                            <input type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmployeeEmail(event)">
+                                            <input name="empEmail" type="text" class="form-control w-100" id="floatingText" placeholder="jhondoe" autocomplete="off" onkeyup="updateEmployeeEmail(event)">
                                             <label for="floatingText">Email</label>
                                         </div>
                                     </div>
@@ -632,11 +597,7 @@
                                             <td>${i.cusPhone}</td>
                                             <td>${i.cusEmail}</td>
                                             <td>${i.cusCCCD}</td>
-                                            <td>
-                                                <button type="button" class="btn btn-primary">
-                                                    Delete
-                                                </button>                        
-                                            </td>
+                                            <td>${i.cusCCCD == 1 ? "Nước Ngoài" : "Việt Nam"}</td>
                                         </tr>   
                                     </c:forEach>
                                 </tbody>
@@ -660,6 +621,45 @@
             <!-- Template Javascript -->
             <script src="js/main.js"></script>
             <script src="js/check-all-input.js"></script> 
-    </body>
+            <script>
+                function deleteEmp(id) {
+                    $.ajax({
+                    url: '/sapphire_sands_resort/delete_emp',
+                    type: 'GET',
+                    data: {
+                    id: id,
+                    },
+                    success: function (data) {
+                    document.getElementById("row" + id).remove();
+                    }
+                    });
+                    }
 
+                            // Lấy thẻ modal trong DOM
+                const modal = document.getElementById('exampleModal2');
+
+                // Khi modal hiển thị, lấy giá trị empID từ button và thực hiện các thao tác cần thiết
+                modal.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget; // Button được nhấn để mở modal
+                    const empId = button.getAttribute('data-empid'); // Lấy giá trị empID từ thuộc tính data-empid
+
+                    // Thực hiện các thay đổi cần thiết với empId
+                    // Ví dụ: gán giá trị empId vào một trường input trong modal
+                    const empIdInput = document.getElementById('empIdInput');
+                    empIdInput.value = empId;
+                });    
+                
+                
+                const modall = document.getElementById('exampleModal3');
+                modall.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget; // Button được nhấn để mở modal
+                    const managerId = button.getAttribute('data-manager-id'); // Lấy giá trị empID từ thuộc tính data-empid
+
+                    // Thực hiện các thay đổi cần thiết với empId
+                    // Ví dụ: gán giá trị empId vào một trường input trong modal
+                    const managerIdInput = document.getElementById('managerIdInput');
+                    managerIdInput.value = managerId;
+                });    
+            </script>
+    </body>
 </html>

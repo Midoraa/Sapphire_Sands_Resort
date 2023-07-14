@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.entity.FoodCart;
-import model.service.FoodCartService;
+import model.service.FoodService;
 
-@WebServlet(name = "ProcessCartController", urlPatterns = {"/process"})
+@WebServlet(name = "ProcessCartController", urlPatterns = {"/processFoodCart"})
 public class ProcessCartController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -24,111 +24,121 @@ public class ProcessCartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    
+            //        Lấy trạng thái ở client người dùng
+        String statusWeb = request.getParameter("statusWeb");
 
-//        Perform the function of ordering and saving to the data
-        if (request.getParameter("num") == null || request.getParameter("foodID") == null ) {
-//            If num or foodID is null so the system will perform function Order (It is code perform )
-            
-//          Chờ lấy orderID từ khi đăng nhập
-            String orderID = "OD000005";
-//            Get Cookie Cart and Save it into String txt
-            String txt = "";
-            Cookie[] arr = request.getCookies();
-
-            if (arr != null) {
-                for (Cookie c : arr) {
-                    if (c.getName().equals("cart")) {
-                        txt = c.getValue();
-                        c.setMaxAge(0);
-                        response.addCookie(c);
-                    }
-                    
-                    FoodCartService.insertFoodOrder(orderID, txt);
-                }
-            }
-            
-            request.getRequestDispatcher("food").forward(request, response);
-        }
-        
-//        Update number food change in Food Cart when read from Cookie
-        int numUpdate = Integer.parseInt(request.getParameter("num"));
-        String foodID = request.getParameter("foodID");
-
+//        Tạo chuỗi txt rỗng
         String txt = "";
-        Cookie[] arr = request.getCookies();
 
+//        Lấy giá trị Cookie ở trên Client Khách Hàng rồi gán giá trị vào 1 chuỗi và xóa Cookie đó
+        Cookie[] arr = request.getCookies();
         if (arr != null) {
-            for (Cookie c : arr) {
-                if (c.getName().equals("cart")) {
-                    txt = c.getValue();
-                    c.setMaxAge(0);
-                    response.addCookie(c);
+            for (Cookie o : arr) {
+                if (o.getName().equals("cartFood")) {
+                    txt = txt + o.getValue();
+                    o.setMaxAge(0);
+                    response.addCookie(o);
                 }
             }
         }
-
-//        Function update amount food
-        List<FoodCart> listCart = new ArrayList<>();
-        listCart = FoodCartService.updateAmount(txt, foodID, numUpdate);
-        
-//        After update amount reset String txt to contain new Food Cart after update
-        txt = null;
-
-//        Contain Food Cart update in to txt
-        for (FoodCart f : listCart) {
-            if (txt == null) {
-                txt = f.getFoodID() + ":" + f.getAmount();
-            } else {
-                txt = txt + "/" + f.getFoodID() + ":" + f.getAmount();
-            }
+        System.out.println("Status Website: " + statusWeb);
+//        Insert dữ liệu vào Data ServiceDetail
+        if(statusWeb.equals(statusWeb == null)){
+            
+            response.sendRedirect("foodCart");
         }
-        
-//        Create again Cookie Cart
-        Cookie c = new Cookie("cart", txt);
-        c.setMaxAge(24 * 60 * 60);
-        response.addCookie(c);
-        
-//        Return foodcart to view Food Cart
-        response.sendRedirect("foodcart");
+        else if(statusWeb.equals("order")){
+//            String orderID = "OD000005";
+            String orderID = request.getParameter("orderID");
+            FoodService.insertOrderDetail(txt, orderID);
+            response.sendRedirect("foodCart");  
+        }     
+    
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String foodID = request.getParameter("foodID");
 
+    String statusWeb = request.getParameter("statusWeb");
+
+//        Tạo chuỗi txt rỗng
         String txt = "";
-        Cookie[] arr = request.getCookies();
 
+//        Lấy giá trị Cookie ở trên Client Khách Hàng rồi gán giá trị vào 1 chuỗi và xóa Cookie đó
+        Cookie[] arr = request.getCookies();
         if (arr != null) {
-            for (Cookie c : arr) {
-                if (c.getName().equals("cart")) {
-                    txt = c.getValue();
-                    c.setMaxAge(0);
-                    response.addCookie(c);
+            for (Cookie o : arr) {
+                if (o.getName().equals("cartFood")) {
+                    txt = txt + o.getValue();
+                    o.setMaxAge(0);
+                    response.addCookie(o);
                 }
             }
         }
 
-        List<FoodCart> listCart = new ArrayList<>();
-        listCart = FoodCartService.deleteCart(txt, foodID);
-
-        txt = null;
-
-        for (FoodCart f : listCart) {
-
-            if (txt == null) {
-                txt = f.getFoodID() + ":" + f.getAmount();
-            } else {
-                txt = txt + "/" + f.getFoodID() + ":" + f.getAmount();
+//        Nếu trạng thái trên web rỗng
+        if (statusWeb == null) {
+            String foodID = request.getParameter("foodID");
+//        Kiểm tra đầu vào của Service có bị rỗng hay không?
+            if (foodID != null) {
+                if (txt.isEmpty()) {
+                    txt = foodID + ":" + 1;
+                } else {
+                    txt = txt + "/" + foodID + ":" + 1;
+                }
             }
+//        Sửa lại Cookie cho đúng mãu: ID:Amount
+            String cart = FoodService.resetCookieCart(txt);
+
+//        Thiết lập lại giá trị bằng cách tạo ra cookie mới
+            Cookie c = new Cookie("cartFood", cart);
+            c.setMaxAge(24 * 60 * 60);
+            response.addCookie(c);
+
+//        Trả về trang Service để người dùng tiếp tục chọn dịch vụ muốn sử dụng
+            response.sendRedirect("food");
+//        request.getRequestDispatcher("service").forward(request, response);
+        } 
+//        Tăng giảm số lượng của 1 dịch vụ
+        else if (statusWeb.equals("quantity")) {
+            String foodID = request.getParameter("foodID");
+            int numUpdate = Integer.parseInt(request.getParameter("num"));
+
+            System.out.println("Food ID: " + foodID + " Number Update: " + numUpdate);
+            
+            List<FoodCart> list = new ArrayList<>();
+            list = FoodService.updateQuantityFood(txt, foodID, numUpdate);
+
+            txt = null;
+
+            for (FoodCart s : list) {
+                if (txt != null) {
+                    txt = txt + "/" + s.getFoodID() + ":" + s.getAmount();
+                } else {
+                    txt = s.getFoodID() + ":" + s.getAmount();
+                }
+            }
+
+            Cookie c = new Cookie("cartFood", txt);
+            c.setMaxAge(24 * 60 * 60);
+            response.addCookie(c);
+            
+            response.sendRedirect("foodCart");
+        } 
+//        Xóa 1 service khỏi Cart
+        else if(statusWeb.equals("delete")){
+            String foodID = request.getParameter("foodID");
+            String cookie = FoodService.deleteFoodCart(txt, foodID);
+            
+            Cookie c = new Cookie("cartFood", cookie);
+            c.setMaxAge(24 * 60 * 60);
+            response.addCookie(c);
+            
+            response.sendRedirect("foodCart");
         }
-
-        Cookie c = new Cookie("cart", txt);
-        c.setMaxAge(24 * 60 * 60);
-        response.addCookie(c);
-
-        response.sendRedirect("foodcart");
+    
     }
 
     @Override

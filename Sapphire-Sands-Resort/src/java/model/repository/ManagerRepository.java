@@ -23,7 +23,7 @@ public class ManagerRepository {
     public static List<ContractOrder> getAllPendingContract() {
         ArrayList<ContractOrder> list = null;
         try (Connection conn = DBConnect.getConnection()) {
-            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timOut, cd.people\n"
+            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timeOut, cd.people\n"
                     + "FROM Customer c\n"
                     + "INNER JOIN `Order` o ON c.cusID = o.cusID\n"
                     + "INNER JOIN ContractDetail cd ON o.orderID = cd.orderID\n"
@@ -56,7 +56,7 @@ public class ManagerRepository {
     public static List<ContractOrder> getAllAcceptedContract() {
         ArrayList<ContractOrder> list = null;
         try (Connection conn = DBConnect.getConnection()) {
-            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timOut, cd.people\n"
+            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timeOut, cd.people\n"
                     + "FROM Customer c\n"
                     + "INNER JOIN `Order` o ON c.cusID = o.cusID\n"
                     + "INNER JOIN ContractDetail cd ON o.orderID = cd.orderID\n"
@@ -85,11 +85,45 @@ public class ManagerRepository {
         }
         return list;
     }
+    
+    
+    public static List<ContractOrder> getAllRequestingCancelContract() {
+        ArrayList<ContractOrder> list = null;
+        try (Connection conn = DBConnect.getConnection()) {
+            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timeOut, cd.people\n"
+                    + "FROM Customer c\n"
+                    + "INNER JOIN `Order` o ON c.cusID = o.cusID\n"
+                    + "INNER JOIN ContractDetail cd ON o.orderID = cd.orderID\n"
+                    + "WHERE cd.status = 3 and o.orStatus = 0;";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            list = new ArrayList<>();
+            while (rs.next()) {
+                String orderID = rs.getString(1);
+                String cusID = rs.getString(3);
+                String roomID = rs.getString(5);
+                String cusName = rs.getString(4);
+                String timeRegister = rs.getString(2);
+                Date timeIn = rs.getDate(6);
+                Date timeOut = rs.getDate(7);
+                int people = rs.getInt(8);
+                ContractOrder co = new ContractOrder(orderID, roomID, cusID, cusName, timeRegister, timeIn, timeOut, people);
+                list.add(co);
+            }
+            conn.close();
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("================LOI getAllRequestingCancelContract trong ManagerRepo================");
+        }
+        return list;
+    }
 
     public static List<ContractOrder> getAllPaidContract() {
         ArrayList<ContractOrder> list = null;
         try (Connection conn = DBConnect.getConnection()) {
-            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timOut, cd.people\n"
+            String query = "SELECT cd.orderID, cd.timeRegister, c.cusID, c.cusName, cd.roomID, cd.timeIn, cd.timeOut, cd.people\n"
                     + "FROM Customer c\n"
                     + "INNER JOIN `Order` o ON c.cusID = o.cusID\n"
                     + "INNER JOIN ContractDetail cd ON o.orderID = cd.orderID\n"
@@ -146,7 +180,7 @@ public class ManagerRepository {
             String query = "UPDATE Room\n"
                     + "JOIN ContractDetail ON Room.roomID = ContractDetail.roomID\n"
                     + "SET Room.roomStatus = CASE\n"
-                    + "    WHEN CURDATE() BETWEEN ContractDetail.timeIn AND ContractDetail.timOut THEN 1\n"
+                    + "    WHEN CURDATE() BETWEEN ContractDetail.timeIn AND ContractDetail.timeOut THEN 1\n"
                     + "    ELSE 0\n"
                     + "    END\n"
                     + "WHERE ContractDetail.orderID = ?\n"

@@ -5,7 +5,7 @@
  */
 package model.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -27,6 +27,16 @@ public class Employee {
         this.password = password;
         this.role = role;
         this.empID = empID;
+    }
+
+    public Employee(String empID, String empNames, boolean empGender, Date empDOB, String empAdress, String empPhone, String empEmail) {
+        this.empID = empID;
+        this.empNames = empNames;
+        this.empGender = empGender;
+        this.empDOB = empDOB;
+        this.empAdress = empAdress;
+        this.empPhone = empPhone;
+        this.empEmail = empEmail;
     }
 
     public Employee(String username, String password, int role, String empID, String empNames, boolean empGender, Date empDOB, String empAdress, String empPhone, String empEmail) {

@@ -22,7 +22,7 @@ public class RoomService {
         return RoomRepository.getRoomByID(id);
     }
     
-    public static List<Room> getChoosenRoom(String roomInputType, int roomInputMaxPeole){
-        return RoomRepository.getChoosenRoom(roomInputType, roomInputMaxPeole);
+    public static List<Room> getChoosenRoom(String roomInputType, int roomInputMaxPeole, String timeIn, String timOut){
+        return RoomRepository.getChoosenRoom(roomInputType, roomInputMaxPeole, timeIn, timOut);
     }
 }

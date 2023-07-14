@@ -17,11 +17,20 @@ import model.repository.OrderRepository;
  * @author Admin
  */
 public class OrderService {
-    public static String makeOrder(Room room, Contract contract, Customer cus){
+
+    public static String makeOrder(Room room, Contract contract, Customer cus) {
         return OrderRepository.makeOrder(room, contract, cus);
     }
-    
-    public static List<Order> getOrderByCustomerID(String id){
+
+    public static List<Order> getOrderByCustomerID(String id) {
         return OrderRepository.getOrderByCustomerID(id);
+    }
+
+    public static void sendRequestCancelRoom(String orderID) {
+        OrderRepository.sendRequestCancelRoom(orderID);
+    }
+
+    public static void notAcceptRequestCancelRoom(String orderID) {
+        OrderRepository.notAcceptRequestCancelRoom(orderID);
     }
 }

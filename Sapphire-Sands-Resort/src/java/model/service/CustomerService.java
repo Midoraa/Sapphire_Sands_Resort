@@ -32,4 +32,8 @@ public class CustomerService {
     public static boolean checkUserNameExist(String username){
         return CustomerRepository.checkUserNameExist(username);
     }
+    
+    public static void updateCustomer(Customer c){
+        CustomerRepository.inforUserUpdate(c);
+    }
 }

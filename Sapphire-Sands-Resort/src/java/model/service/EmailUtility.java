@@ -55,7 +55,7 @@ public class EmailUtility {
         msg.setRecipients(Message.RecipientType.TO, toAddresses);
         msg.setSubject(subject, "UTF-8");
         msg.setSentDate(new Date());
-        msg.setText(message, "UTF-8");
+        msg.setText(message, "UTF-8", "html");
 
         // sends the e-mail
         Transport.send(msg);

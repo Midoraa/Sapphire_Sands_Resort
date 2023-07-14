@@ -12,37 +12,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.config.DBConnect;
-import model.entity.ContractOrder;
 import model.entity.Customer;
 import model.entity.Employee;
-import model.entity.Service;
 
 /**
  *
  * @author Admin
  */
 public class AdminRepository {
+
     public static void registerEmployee(Employee emp) {
         System.out.println(emp);
         try (Connection conn = DBConnect.getConnection()) {
-            String accountQuery = "INSERT INTO Account(accountID, username, password, role) VALUES (?, ?, ?, ?);";                  
+            String accountQuery = "INSERT INTO Account(accountID, username, password, role) VALUES (?, ?, ?, ?);";
             PreparedStatement psa = conn.prepareStatement(accountQuery);
             psa.setString(1, emp.getEmpID());
             psa.setString(2, emp.getUsername());
             psa.setString(3, emp.getPassword());
             psa.setInt(4, emp.getRole());
-            psa.executeUpdate(); 
+            psa.executeUpdate();
             psa.close();
-            insertEmployee(emp);   
+            insertEmployee(emp);
         } catch (Exception e) {
-            System.out.println("Loi dang ky Employee trong EmployeeRepository");
+            System.out.println("==========Loi dang ky Employee trong EmployeeRepository==========");
             System.out.println(e);
         }
     }
-    
+
     static void insertEmployee(Employee emp) {
-        try(Connection conn = DBConnect.getConnection()) {
-            String customerQuery =  "insert into Employee(empID, empName, empGender, empDOB, empAdress, empPhone, empEmail) values (?,?,?,?,?,?,?);";
+        try (Connection conn = DBConnect.getConnection()) {
+            String customerQuery = "insert into Employee(empID, empName, empGender, empDOB, empAdress, empPhone, empEmail) values (?,?,?,?,?,?,?);";
             PreparedStatement psc = conn.prepareStatement(customerQuery);
             psc.setString(1, emp.getEmpID());
             psc.setString(2, emp.getEmpNames());
@@ -50,15 +49,15 @@ public class AdminRepository {
             psc.setDate(4, (Date) emp.getEmpDOB());
             psc.setString(5, emp.getEmpAdress());
             psc.setString(6, emp.getEmpPhone());
-            psc.setString(6, emp.getEmpEmail());
+            psc.setString(7, emp.getEmpEmail());
             psc.executeUpdate();
             conn.close();
         } catch (SQLException e) {
             System.out.println(e);
-            System.out.println("Loi insert vao bang Employee");
+            System.out.println("==========Loi insert vao bang Employee===========");
         }
     }
-    
+
     public static String generateNewID() {
         String newID = null;
         try (Connection conn = DBConnect.getConnection()) {
@@ -78,7 +77,63 @@ public class AdminRepository {
         }
         return newID;
     }
-    
+    public static void registerManager(Employee emp) {
+        System.out.println(emp);
+        try (Connection conn = DBConnect.getConnection()) {
+            String accountQuery = "INSERT INTO Account(accountID, username, password, role) VALUES (?, ?, ?, ?);";
+            PreparedStatement psa = conn.prepareStatement(accountQuery);
+            psa.setString(1, emp.getEmpID());
+            psa.setString(2, emp.getUsername());
+            psa.setString(3, emp.getPassword());
+            psa.setInt(4, emp.getRole());
+            psa.executeUpdate();
+            psa.close();
+            insertEmployee(emp);
+        } catch (Exception e) {
+            System.out.println("==========Loi dang ky Manager trong EmployeeRepository==========");
+            System.out.println(e);
+        }
+    }
+
+    static void insertManager(Employee emp) {
+        try (Connection conn = DBConnect.getConnection()) {
+            String customerQuery = "insert into Employee(empID, empName, empGender, empDOB, empAdress, empPhone, empEmail) values (?,?,?,?,?,?,?);";
+            PreparedStatement psc = conn.prepareStatement(customerQuery);
+            psc.setString(1, emp.getEmpID());
+            psc.setString(2, emp.getEmpNames());
+            psc.setBoolean(3, emp.isEmpGender());
+            psc.setDate(4, (Date) emp.getEmpDOB());
+            psc.setString(5, emp.getEmpAdress());
+            psc.setString(6, emp.getEmpPhone());
+            psc.setString(7, emp.getEmpEmail());
+            psc.executeUpdate();
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+            System.out.println("==========Loi insert Manager vao bang Employee===========");
+        }
+    }
+
+    public static String generateNewManagerID() {
+        String newID = null;
+        try (Connection conn = DBConnect.getConnection()) {
+            String selectQuery = "SELECT accountID FROM account WHERE accountID LIKE 'MAN%' ORDER BY accountID DESC LIMIT 1";
+            PreparedStatement preparedStatement = conn.prepareStatement(selectQuery);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                String lastID = resultSet.getString("accountID");
+                int lastNumber = Integer.parseInt(lastID.substring(3));
+                newID = "MAN" + String.format("%06d", lastNumber + 1);
+            } else {
+                newID = "MAN000001";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("========Loi generate Manager ID trong EmployeeRepository!!!========");
+        }
+        return newID;
+    }
+
     public static Employee getEmployeeByID(String id) {
         try (Connection conn = DBConnect.getConnection()) {
             String query = "SELECT * FROM Account JOIN Employee ON accountID = empID WHERE empID = ?";
@@ -96,7 +151,7 @@ public class AdminRepository {
                 String empPhone = rs.getString(8);
                 String empEmail = rs.getString(9);
                 int role = rs.getInt(10);
-                Employee emp = new Employee(username, password, role, empID, empNames, gender, empDOB, empPhone, empAdress, empEmail );
+                Employee emp = new Employee(username, password, role, empID, empNames, gender, empDOB, empPhone, empAdress, empEmail);
                 return emp;
             }
         } catch (Exception e) {
@@ -105,6 +160,7 @@ public class AdminRepository {
         }
         return null;
     }
+
     public static boolean checkUserNameExist(String username) {
         try (Connection con = DBConnect.getConnection()) {
             PreparedStatement stmt = con.prepareStatement("select * from Account  where username =?");
@@ -117,10 +173,10 @@ public class AdminRepository {
         }
         return false;
     }
-    
-    public static ArrayList<Employee> getAllEmployee(){
+
+    public static ArrayList<Employee> getAllEmployee() {
         ArrayList<Employee> list = null;
-        try (Connection conn = DBConnect.getConnection()){
+        try (Connection conn = DBConnect.getConnection()) {
             String query = "SELECT * FROM Account JOIN Employee ON Account.accountID = Employee.empID WHERE Account.role=1";
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -146,9 +202,10 @@ public class AdminRepository {
         }
         return list;
     }
-    public static ArrayList<Employee> getAllManager(){
+
+    public static ArrayList<Employee> getAllManager() {
         ArrayList<Employee> list = null;
-        try (Connection conn = DBConnect.getConnection()){
+        try (Connection conn = DBConnect.getConnection()) {
             String query = "SELECT * FROM Account JOIN Employee ON Account.accountID = Employee.empID WHERE Account.role=3";
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -174,10 +231,10 @@ public class AdminRepository {
         }
         return list;
     }
-    
-    public static ArrayList<Customer> getAllCustomer(){
+
+    public static ArrayList<Customer> getAllCustomer() {
         ArrayList<Customer> list = null;
-        try(Connection conn = DBConnect.getConnection()) {
+        try (Connection conn = DBConnect.getConnection()) {
             String query = "SELECT * FROM Account JOIN Customer ON Account.accountID = Customer.cusID";
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -203,7 +260,40 @@ public class AdminRepository {
         }
         return list;
     }
+
+    public static void deleteEmp(String empID) {
+        try (Connection conn = DBConnect.getConnection()) {
+            String query = "DELETE FROM Employee WHERE empID = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, empID);
+            ps.executeQuery();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("===========LOI DELETEEmp trong AdminRepo==========");
+        }
+    }
     
+    public static void updateEmp(Employee emp){
+        try (Connection conn = DBConnect.getConnection()){
+            String query = "UPDATE Employee SET empName = ?, empGender = ?, empDOB = ?, empAdress = ?, empPhone = ?, empEmail = ? WHERE empID = ?;";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, emp.getEmpNames());
+            ps.setBoolean(2, emp.isEmpGender());
+            ps.setDate(3, emp.getEmpDOB());
+            ps.setString(4, emp.getEmpAdress());
+            ps.setString(5, emp.getEmpPhone());
+            ps.setString(6, emp.getEmpEmail());
+            ps.setString(7, emp.getEmpID());
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("=========Loi UpdateEmp trong AdminRepo========");
+        }
+    }
 //    public static void main(String[] args) {
 //        System.out.println(getAllCustomer());
 //    }

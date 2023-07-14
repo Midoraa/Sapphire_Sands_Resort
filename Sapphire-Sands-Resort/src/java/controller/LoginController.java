@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.entity.Customer;
 import model.entity.Order;
+import model.entity.OrderCart;
 import model.service.CustomerService;
 import model.service.OrderService;
+import model.service.YourCartService;
 
 /**
  *
@@ -65,6 +67,10 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String referer = request.getHeader("Referer");
+        
+        HttpSession session = request.getSession();
+        session.setAttribute("referer", referer);
         request.getRequestDispatcher("new_login.jsp").forward(request, response);
     }
 
@@ -79,6 +85,10 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession();
+        String referer = (String)session.getAttribute("referer");
+        
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         Customer cus = CustomerService.login(username, password);
@@ -90,13 +100,15 @@ public class LoginController extends HttpServlet {
             passCookies.setMaxAge(60 * 60 * 24);
             response.addCookie(userCookies);
             response.addCookie(passCookies);
-            HttpSession session = request.getSession();
             session.setAttribute("customer", cus);
+            
+             List<OrderCart> list = YourCartService.getYourCartOrder(cus.getCusID());
+            session.setAttribute("orderID", list);
             
             List<Order> listOrder = OrderService.getOrderByCustomerID(cus.getCusID());
             session.setAttribute("listOrder", listOrder);
             
-            response.sendRedirect("home.jsp");
+            response.sendRedirect(referer);
         } else {
             System.out.println("Khong the dang nhap");
             request.setAttribute("thongbao", "Thông tin đăng nhập không chính xác");
