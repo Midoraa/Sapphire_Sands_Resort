@@ -1,6 +1,6 @@
 <%-- 
-    Document   : new_login
-    Created on : Jun 8, 2023, 5:22:21 PM
+    Document   : forget_pass
+    Created on : Jul 16, 2023, 9:49:39 AM
     Author     : Admin
 --%>
 
@@ -11,28 +11,29 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Đăng nhập</title>
+        <title>Quên mật khẩu</title>
         <link rel="stylesheet" href="css/login.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
     <body>
         <section>
             <div class="login-box">
-                <form action="employee_login" method="post">
-                    <h3 style="color: white; text-align: center">Đăng nhập nhân sự</h3>
+                <form action="forget_password" method="post">
+                    <h2>Quên mật khẩu</h2>
                     <div class="input-box">
                         <span class="icon"><ion-icon name="person"></ion-icon></span>
                         <input type="text" name="username" required autocomplete="off"> 
                         <label>Tên đăng nhập</label>
                     </div>
                     <div class="input-box">
-                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input type="password" name="password" required autocomplete="off"> 
-                        <label>Mật khẩu</label>
-                    </div>  
-                    <button type="submit">Đăng nhập</button>
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="email" name="email" required autocomplete="off"> 
+                        <label>Email</label>
+                    </div>
+                    <div class="text-warning text-center" id="messText" >${thongbao}</div>
+                    <button type="submit" class="btn btn-light" id="loginButton">Gửi</button>
                     <div class="register-link">
-                        <p><a href="home.jsp">Quay lại trang chủ</a></p>
+                        <p><a href="home.jsp">Quay lại trang chủ và đăng nhập</a></p>
                     </div>
                 </form>
             </div>

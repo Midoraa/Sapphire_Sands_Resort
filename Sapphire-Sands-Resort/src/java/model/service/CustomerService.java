@@ -36,4 +36,8 @@ public class CustomerService {
     public static void updateCustomer(Customer c){
         CustomerRepository.inforUserUpdate(c);
     }
+    
+    public static Customer getCusByUsernameAndEmail(String usernameInput, String emailInput){
+        return CustomerRepository.getCusByUsernameAndEmail(usernameInput, emailInput);
+    }
 }

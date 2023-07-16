@@ -7,27 +7,36 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.entity.Customer;
-import model.entity.Order;
-import model.entity.OrderCart;
 import model.service.CustomerService;
-import model.service.OrderService;
-import model.service.YourCartService;
+import model.service.EmailUtility;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "ForgetPasswordController", urlPatterns = {"/forget_password"})
+public class ForgetPasswordController extends HttpServlet {
+
+    private String host;
+    private String port;
+    private String user;
+    private String pass;
+
+    public void init() {
+        // reads SMTP server setting from web.xml file
+        ServletContext context = getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        user = context.getInitParameter("user");
+        pass = context.getInitParameter("pass");
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +55,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
+            out.println("<title>Servlet ForgetPasswordController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ForgetPasswordController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,11 +76,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String referer = request.getHeader("Referer");
-
-        HttpSession session = request.getSession();
-        session.setAttribute("referer", referer);
-        request.getRequestDispatcher("new_login.jsp").forward(request, response);
+        request.getRequestDispatcher("forget_pass.jsp").forward(request, response);
     }
 
     /**
@@ -85,40 +90,32 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-        String referer = (String) session.getAttribute("referer");
-
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("utf-8");
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        Customer cus = CustomerService.login(username, password);
-        System.out.println(cus);
-        if (cus != null) {
+        String email = request.getParameter("email");
+        Customer c = CustomerService.getCusByUsernameAndEmail(username, email);
+        if (c != null) {
+            String subject = "Quên mật khẩu";
+            String content = "Đây là mật khẩu của bạn: " + c.getPassword();
 
-            String remember = request.getParameter("remember");
-            System.out.println(">>>>>"+remember);
-            if (remember != null && remember.equals("on")) {
-                Cookie userCookies = new Cookie("username", username);
-                Cookie passCookies = new Cookie("password", password);
-                userCookies.setMaxAge(60 * 60 * 24);
-                passCookies.setMaxAge(60 * 60 * 24);
-                response.addCookie(userCookies);
-                response.addCookie(passCookies);
+            try {
+                EmailUtility.sendEmail(host, port, user, pass, email, subject,
+                        content);
+                System.out.println("The e-mail was sent successfully");
+                String thongbao = "Mật khẩu đã được gửi vào email của bạn";
+                request.setAttribute("thongbao", thongbao);
+                request.getRequestDispatcher("forget_pass.jsp").forward(request, response);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.out.println("=======Loi gui email trong ForgetPasswordController========");
             }
-            session.setAttribute("customer", cus);
-
-            List<OrderCart> list = YourCartService.getYourCartOrder(cus.getCusID());
-            session.setAttribute("orderID", list);
-
-            List<Order> listOrder = OrderService.getOrderByCustomerID(cus.getCusID());
-            session.setAttribute("listOrder", listOrder);
-
-            response.sendRedirect(referer);
-        } else {
-            System.out.println("Khong the dang nhap");
-            request.setAttribute("thongbao", "Thông tin đăng nhập không chính xác");
-            request.getRequestDispatcher("new_login.jsp").forward(request, response);
+        }else{
+            String thongbao = "Sai tên đăng nhập hoặc email";
+            request.setAttribute("thongbao", thongbao);
+            request.getRequestDispatcher("forget_pass.jsp").forward(request, response);
         }
+
     }
 
     /**

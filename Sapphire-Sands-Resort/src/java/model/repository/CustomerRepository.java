@@ -179,4 +179,33 @@ public class CustomerRepository {
             System.out.println("=========Loi UpdateUser trong CustomerRepo==========");
         }
     }
+    
+    public static Customer getCusByUsernameAndEmail(String usernameInput, String emailInput){
+        try (Connection conn = DBConnect.getConnection()){
+            String query = "SELECT * FROM Account JOIN Customer ON accountID = cusID WHERE Account.username = ? AND Customer.cusEmail = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, usernameInput);
+            ps.setString(2, emailInput);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String accountID = rs.getString(1);
+                String username = rs.getString(2);
+                String password = rs.getString(3);
+                int role = rs.getInt(4);
+                String cusID = rs.getString(5);
+                String cusName = rs.getString(6);
+                Date cusDOB = rs.getDate(7);
+                String cusPhone = rs.getString(8);
+                String cusEmail = rs.getString(9);
+                String cusCCCD = rs.getString(10);
+                int cusType = rs.getInt(11);
+                Customer cus = new Customer(accountID, username, password, role, cusID, cusName, cusDOB, cusPhone, cusEmail, cusCCCD, cusType);
+                return cus;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("=========Loi getCusByUsernameAndEmail trong CustomerRepo=========");
+        }
+        return null;
+    }
 }

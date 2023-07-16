@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.entity.Customer;
 import model.entity.FoodCart;
 import model.entity.OrderCart;
 import model.entity.RoomCart;
@@ -33,8 +34,8 @@ public class YourCartController extends HttpServlet {
         if (session.getAttribute("orderID").equals(null)) {
             response.sendRedirect("room");
         }
-
-        List<OrderCart> listorderID = (List<OrderCart>) session.getAttribute("orderID");
+        Customer cus = (Customer) session.getAttribute("customer");
+        List<OrderCart> listorderID = YourCartService.getYourCartOrder(cus.getCusID());
 
         String orderID = null;
         String orderID0 = null;

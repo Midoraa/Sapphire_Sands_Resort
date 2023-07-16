@@ -52,8 +52,8 @@ public class YourCartRepository {
         List<String> listOrder = getOrderID(orderID);
 
         String query = "Select b.orderID, a.foodID, a.foodName, a.foodPrice, b.orTime, b.Amount, b.orStatus \n"
-                + "from Food a join OrderDetail b \n"
-                + "on a.foodID = b.foodID\n"
+                + "from Food a join OrderDetail b join ContractDetail c\n"
+                + "on a.foodID = b.foodID and b.orderID = c.orderID and c.status = 1\n"
                 + "where b.orderID = ?";
         for (String s : listOrder) {
 
@@ -87,8 +87,8 @@ public class YourCartRepository {
         List<String> listOrder = getOrderID(orderID);
 
         String query = "Select b.orderID, a.serviceID, a.serviceName, a.servicePrice, b.serviceTime, b.Amount, b.serviceStatus \n"
-                + "from Service a join ServiceDetail b \n"
-                + "on a.serviceID = b.serviceID\n"
+                + "from Service a join ServiceDetail b join ContractDetail c\n"
+                + "on a.serviceID = b.serviceID and b.orderID = c.orderID and c.status = 1\n"
                 + "where b.orderID = ?";
 
         for (String s : listOrder) {
@@ -175,7 +175,7 @@ public class YourCartRepository {
         List<OrderCart> list = new ArrayList<>();
         String query = "Select a.orderID, a.orStatus, b.roomID, c.roomName from `Order` a join ContractDetail b join Room c "
                 + "on a.orderID = b.orderID and b.roomID = c.roomID "
-                + "Where a.cusID = ? and a.orStatus = ? ";
+                + "Where a.cusID = ? and a.orStatus = ? and b.status = 1";
 
         try (Connection conn = DBConnect.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(query);
@@ -248,7 +248,7 @@ public class YourCartRepository {
         }
         return list;
     }
-    
+
     public static ArrayList<RoomShowCustomer> listAcceptedRoomByCusID(String cusID) {
         ArrayList<RoomShowCustomer> list = null;
         try (Connection conn = DBConnect.getConnection()) {
@@ -277,8 +277,7 @@ public class YourCartRepository {
         }
         return list;
     }
-    
-    
+
     public static ArrayList<RoomShowCustomer> listPaidRoomByCusID(String cusID) {
         ArrayList<RoomShowCustomer> list = null;
         try (Connection conn = DBConnect.getConnection()) {

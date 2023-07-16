@@ -10,6 +10,10 @@
         </session-timeout>
     </session-config>
     
+    <welcome-file-list>
+        <welcome-file>home.jsp</welcome-file>
+    </welcome-file-list>
+    
     <context-param>
         <param-name>host</param-name>
         <param-value>smtp.gmail.com</param-value>
