@@ -31,13 +31,16 @@
                         <label>Mật khẩu</label>
                     </div>
                     <div class="remember-forgot d-flex justify-content-between">
-                        <label><input type="checkbox" name>Remember me</label>
-                        <a href="#">Forgot password</a>
+                        <label><input type="checkbox" name="remember">Nhớ mật khẩu</label>
+                        <a href="forget_password">Forgot password</a>
                     </div>
-                    <div class="text-warning text-center" id="messText" >${thongbao}</div>
+                    <div class="text-warning text-center" id="messText">${thongbao}</div>
                     <button type="submit" class="btn btn-light" id="loginButton" disabled>Đăng nhập</button>
                     <div class="register-link">
                         <p>Chưa có tài khoản? <a href="customer_register">Đăng ký</a></p>
+                    </div>
+                    <div class="register-link">
+                        <p><a href="home.jsp">Quay lại trang chủ</a></p>
                     </div>
                 </form>
             </div>
